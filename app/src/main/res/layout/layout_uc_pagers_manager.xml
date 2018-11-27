@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/flPagersManager"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/pureBlack"
+             android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_48dp">
+
+        <ImageView
+            android:layout_width="@dimen/dimen_48dp"
+            android:layout_height="@dimen/dimen_48dp"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_menu_more"/>
+    </RelativeLayout>
+
+    <cn.hzjdemo.hellodiary.widgets.uc.stackview.UCStackView
+        android:id="@+id/ucStackView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+    </cn.hzjdemo.hellodiary.widgets.uc.stackview.UCStackView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_48dp"
+        android:layout_gravity="bottom"
+        android:background="@color/pureBlack">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/dimen_64dp"
+            android:gravity="center"
+            android:text="无痕浏览"
+            android:textColor="@color/windowBg"
+            android:textSize="16dp"/>
+
+        <ImageView
+            android:id="@+id/ivAddPager"
+            android:layout_width="@dimen/dimen_48dp"
+            android:layout_height="@dimen/dimen_48dp"
+            android:layout_centerInParent="true"
+            android:padding="12dp"
+            android:src="@drawable/ic_menu_add"
+            android:tint="@color/windowBg"/>
+
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimen_72dp"
+            android:gravity="center"
+            android:text="返回"
+            android:textColor="@color/windowBg"
+            android:textSize="16dp"/>
+    </RelativeLayout>
+</FrameLayout>

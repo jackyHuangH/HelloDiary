@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.hzjdemo.hellodiary.widgets.uc.layout.UCHeadLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:foreground="@color/lightBlack"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llHeadContain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <cn.hzjdemo.hellodiary.widgets.uc.layout.BezierLayout
+                android:id="@+id/llBezierLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bezier_layout_height"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/llBezierContain"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/layout_head_weather"/>
+
+                    <include layout="@layout/layout_head_search_box"/>
+
+                    <include layout="@layout/layout_head_category"/>
+                </LinearLayout>
+            </cn.hzjdemo.hellodiary.widgets.uc.layout.BezierLayout>
+
+            <include layout="@layout/layout_head_website"/>
+        </LinearLayout>
+
+        <include
+            android:id="@+id/rlUCCoverLayout"
+            layout="@layout/layout_uc_cover_view"
+            android:visibility="gone">
+        </include>
+    </FrameLayout>
+</cn.hzjdemo.hellodiary.widgets.uc.layout.UCHeadLayout>

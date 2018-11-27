@@ -1,0 +1,1 @@
+include ':app', ':deckview', ':picbrowserlib', ':module_support', ':module_api'

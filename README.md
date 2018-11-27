@@ -1,2 +1,4 @@
-# HelloDiary 日常学习小项目
-daily learning project
+# HelloDiary
+learning project
+日常学习的一个小项目
+
