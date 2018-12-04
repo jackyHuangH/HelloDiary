@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.zenchn.apilib.util.Java;
-import com.zenchn.support.kit.Android;
 
 import java.util.ArrayList;
 import java.util.List;

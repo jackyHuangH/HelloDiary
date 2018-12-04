@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
-import com.zenchn.support.kit.Android;
 import com.zenchn.support.widget.dialog.PopupMaster;
 
 import butterknife.BindView;

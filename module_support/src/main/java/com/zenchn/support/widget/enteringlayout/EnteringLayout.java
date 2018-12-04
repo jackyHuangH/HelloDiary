@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zenchn.support.R;
-import com.zenchn.support.kit.Android;
+import com.zenchn.support.kit.AndroidKit;
 import com.zenchn.support.widget.factory.ViewFactory;
 
 import java.util.Arrays;
@@ -97,7 +97,8 @@ public class EnteringLayout extends ViewGroup {
         mAsteriskSize = typedArray.getDimensionPixelOffset(R.styleable.EnteringLayout_asterisk_size, defaultTextSize);
 
 
-        int typeValue = typedArray.getLayoutDimension(R.styleable.EnteringLayout_type, Type.input.ordinal());//（0输入框/1选项卡）
+        //（0输入框/1选项卡）
+        int typeValue = typedArray.getLayoutDimension(R.styleable.EnteringLayout_type, Type.input.ordinal());
         mType = Type.classifyType(typeValue);
 
         boolean isMustItem = typedArray.getBoolean(R.styleable.EnteringLayout_is_must_item, false);
@@ -174,7 +175,7 @@ public class EnteringLayout extends ViewGroup {
                     MeasureSpec.makeMeasureSpec(measuredHeight, MeasureSpec.EXACTLY));
         }
         if (mCustomView != null) {
-            int contentWidth = Android.Dimens.getScreenWidth() - getPaddingLeft() - getPaddingRight();
+            int contentWidth = AndroidKit.Dimens.getScreenWidth() - getPaddingLeft() - getPaddingRight();
             int measuredCustomViewMaxWidth = contentWidth - (measuredItemTextViewWidth + measuredAsteriskTextViewWidth + measuredNextIconViewWidth)
                     - (mAsteriskLeftPadding + mAsteriskRightPadding + mNextIconLeftPadding);
             int measuredCustomViewWidth = Math.min(mCustomView.getMeasuredWidth(), measuredCustomViewMaxWidth);
@@ -193,12 +194,14 @@ public class EnteringLayout extends ViewGroup {
         switch (specMode) {
 
             case MeasureSpec.EXACTLY:
-                result = Math.min(specSize, Android.Dimens.getScreenWidth());
+                result = Math.min(specSize, AndroidKit.Dimens.getScreenWidth());
                 break;
 
             case MeasureSpec.AT_MOST:
             case MeasureSpec.UNSPECIFIED:
-                result = Android.Dimens.getScreenWidth();
+                result = AndroidKit.Dimens.getScreenWidth();
+                break;
+            default:
                 break;
         }
         return result;
@@ -212,12 +215,14 @@ public class EnteringLayout extends ViewGroup {
         switch (specMode) {
 
             case MeasureSpec.EXACTLY:
-                result = Math.min(specSize, Android.Dimens.getScreenHeight());
+                result = Math.min(specSize, AndroidKit.Dimens.getScreenHeight());
                 break;
 
             case MeasureSpec.AT_MOST:
             case MeasureSpec.UNSPECIFIED:
                 result = getViewMaxHeight();
+                break;
+            default:
                 break;
         }
         return result;
@@ -321,7 +326,7 @@ public class EnteringLayout extends ViewGroup {
         if (hasNextIcon) {
             if (mNextIconView == null) {
                 Context context = getContext();
-                Drawable drawable = context.getResources().getDrawable(R.drawable.widget_ic_next);
+                Drawable drawable = ContextCompat.getDrawable(context, R.drawable.widget_ic_next);
                 mNextIconView = ViewFactory.getImageView(context, drawable);
             }
             addView(mNextIconView);
@@ -357,6 +362,8 @@ public class EnteringLayout extends ViewGroup {
 //        return !mIsMustItem || !TextUtils.isEmpty(value);
 //    }
 
+
+    /**********************选项值相关***********************/
 
     private String[] mOptionKeys;
     private String[] mOptionValues;
@@ -403,6 +410,8 @@ public class EnteringLayout extends ViewGroup {
         return mOptionValues;
     }
 
+    //----------------------------------------建造器模式------------------------------------
+
     public static class Builder {
 
         private Context mContext;
@@ -435,16 +444,16 @@ public class EnteringLayout extends ViewGroup {
         public Builder(Context context, Type type) {
             this.mContext = context;
             Resources resources = context.getResources();
-            this.mItemTextColor = resources.getColor(R.color.color_282828);
+            this.mItemTextColor = ContextCompat.getColor(context, R.color.color_282828);
             this.mItemTextSize = resources.getDimensionPixelSize(R.dimen.entering_layout_default_item_text_size);
             this.mDefaultLeftPadding = resources.getDimensionPixelSize(R.dimen.entering_layout_default_left_padding);
             this.mDefaultRightPadding = resources.getDimensionPixelSize(R.dimen.entering_layout_default_right_padding);
             this.mAsteriskSize = resources.getDimensionPixelSize(R.dimen.entering_layout_default_item_text_size);
-            this.mAsteriskColor = resources.getColor(R.color.color_fb5656);
+            this.mAsteriskColor = ContextCompat.getColor(context, R.color.color_fb5656);
             this.mAsteriskLeftPadding = resources.getDimensionPixelSize(R.dimen.entering_layout_default_asterisk_left_padding);
             this.mAsteriskRightPadding = resources.getDimensionPixelSize(R.dimen.entering_layout_default_asterisk_right_padding);
             this.mNextIconLeftPadding = resources.getDimensionPixelSize(R.dimen.entering_layout_default_next_icon_left_padding);
-            this.mDefaultBgColor = resources.getColor(R.color.entering_layout_default_bg);
+            this.mDefaultBgColor = ContextCompat.getColor(context, R.color.entering_layout_default_bg);
             this.mDefaultHeight = resources.getDimensionPixelSize(R.dimen.entering_layout_default_height);
             this.mType = type;
         }
@@ -584,12 +593,16 @@ public class EnteringLayout extends ViewGroup {
     }
 
     public enum Type {
-        input, option;
+        /***输入类型***/
+        input,
+        /***选项类型***/
+        option;
 
         public static Type classifyType(int styleValue) {
             for (Type type : values()) {
-                if (type.ordinal() == styleValue)
+                if (type.ordinal() == styleValue) {
                     return type;
+                }
             }
             return input;
         }

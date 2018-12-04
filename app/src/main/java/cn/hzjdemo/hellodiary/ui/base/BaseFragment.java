@@ -9,7 +9,6 @@ import android.view.WindowManager;
 import com.gyf.barlibrary.ImmersionBar;
 import com.gyf.barlibrary.OnKeyboardListener;
 import com.zenchn.support.base.AbstractFragment;
-import com.zenchn.support.kit.Android;
 import com.zenchn.support.utils.StringUtils;
 import com.zenchn.support.widget.TitleBar;
 

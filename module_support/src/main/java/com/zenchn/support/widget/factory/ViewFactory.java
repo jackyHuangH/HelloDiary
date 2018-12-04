@@ -70,7 +70,15 @@ public class ViewFactory {
     public static ImageButton getImageButton(@NonNull Context context, @NonNull Drawable nextIcon) {
         ImageButton ib = new ImageButton(context);
         ib.setImageDrawable(nextIcon);
-        ib.setBackgroundDrawable(null);
+        ib.setBackground(null);
+        ib.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        return ib;
+    }
+
+    public static ImageButton getImageButton(@NonNull Context context, @NonNull Drawable nextIcon, @NonNull Drawable background) {
+        ImageButton ib = new ImageButton(context);
+        ib.setBackground(background);
+        ib.setImageDrawable(nextIcon);
         ib.setScaleType(ImageView.ScaleType.FIT_CENTER);
         return ib;
     }

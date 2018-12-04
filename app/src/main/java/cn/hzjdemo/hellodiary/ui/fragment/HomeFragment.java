@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.gyf.barlibrary.ImmersionBar;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
-import com.zenchn.support.kit.Android;
 
 import net.lucode.hackware.magicindicator.FragmentContainerHelper;
 import net.lucode.hackware.magicindicator.MagicIndicator;

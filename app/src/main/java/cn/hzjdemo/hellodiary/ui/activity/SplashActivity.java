@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
-import com.zenchn.support.kit.Android;
 import com.zenchn.support.widget.dialog.DialogMaster;
 
 import java.util.Calendar;

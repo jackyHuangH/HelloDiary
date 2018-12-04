@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zenchn.support.R;
-import com.zenchn.support.kit.Android;
 import com.zenchn.support.widget.factory.ViewFactory;
 
 /**

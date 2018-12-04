@@ -13,7 +13,6 @@ import java.util.List;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.util.glide.GlideApp;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.entity.PhotoInfo;
-import com.zenchn.support.kit.Android;
 
 /**
  * @author shoyu

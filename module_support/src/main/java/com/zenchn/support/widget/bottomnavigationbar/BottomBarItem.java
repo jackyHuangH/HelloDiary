@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zenchn.support.R;
-import com.zenchn.support.kit.Android;
 
 import java.util.Locale;
 

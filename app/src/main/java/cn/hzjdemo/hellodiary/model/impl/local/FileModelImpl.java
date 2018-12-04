@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import com.zenchn.apilib.util.Codec;
 import com.zenchn.apilib.util.GZIPUtils;
 import com.zenchn.apilib.util.Java;
-import com.zenchn.support.kit.Android;
 import com.zenchn.support.utils.StringUtils;
 
 import java.io.File;

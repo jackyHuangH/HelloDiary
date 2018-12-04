@@ -13,7 +13,6 @@ import com.zenchn.support.base.AbstractAppCompatActivity;
 import com.zenchn.support.base.IActivityLifecycle;
 import com.zenchn.support.base.IUiController;
 import com.zenchn.support.dafault.DefaultActivityLifecycle;
-import com.zenchn.support.kit.Android;
 import com.zenchn.support.utils.StringUtils;
 import com.zenchn.support.widget.TitleBar;
 

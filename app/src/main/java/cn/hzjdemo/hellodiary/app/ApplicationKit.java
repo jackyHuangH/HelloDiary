@@ -20,7 +20,6 @@ import com.zenchn.support.base.AbstractApplicationKit;
 import com.zenchn.support.base.ActivityLifecycleCallback;
 import com.zenchn.support.cache.ACache;
 import com.zenchn.support.dafault.DefaultActivityLifecycle;
-import com.zenchn.support.kit.Android;
 import com.zenchn.support.widget.tips.SuperToast;
 
 import javax.inject.Inject;

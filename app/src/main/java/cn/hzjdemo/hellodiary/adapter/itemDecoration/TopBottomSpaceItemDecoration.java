@@ -5,8 +5,6 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.zenchn.support.kit.Android;
-
 /**
  * Created by Administrator on 2016/11/2.
  * recyclerview item 头部或底部加间距
