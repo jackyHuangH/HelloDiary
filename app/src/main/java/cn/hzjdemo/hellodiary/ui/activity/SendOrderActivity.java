@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.zenchn.support.kit.AndroidKit;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 
 import java.util.ArrayList;
@@ -67,10 +68,10 @@ public class SendOrderActivity extends BaseActivity {
         //添加图片列表
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         rlvAddPic.setLayoutManager(gridLayoutManager);
-        int space = Android.Dimens.dp2px(7);
+        int space = AndroidKit.Dimens.dp2px(7);
         rlvAddPic.addItemDecoration(new GridSpaceItemDecoration(3, addPicList.size(), space));
 
-        int windowWidth = Android.Dimens.getScreenWidth();
+        int windowWidth = AndroidKit.Dimens.getScreenWidth();
         addPicAdapter = new AddPicAdapter(this, R.layout.item_plus_img, windowWidth, addPicList);
         rlvAddPic.setAdapter(addPicAdapter);
         //添加默认的加号至末尾

@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.zenchn.support.kit.AndroidKit;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -34,8 +35,8 @@ public class AddPicAdapter extends CommonAdapter<PhotoInfo> {
         ImageView ivImg = holder.getView(R.id.iv_img);//显示的图片
         String s = imageInfo.url;//加号
 
-        int space = Android.Dimens.dp2px( 7);
-        int marginSide = Android.Dimens.dp2px(15);
+        int space = AndroidKit.Dimens.dp2px( 7);
+        int marginSide = AndroidKit.Dimens.dp2px(15);
         int imgWidth = (screenWidth - marginSide * 2 - space * 2) / 3;
         ViewGroup.LayoutParams layoutParams_root= rlRoot.getLayoutParams();
         layoutParams_root.width=imgWidth;

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
+import com.zenchn.support.kit.AndroidKit;
 import com.zenchn.support.widget.dialog.PopupMaster;
 
 import butterknife.BindView;
@@ -123,7 +124,7 @@ public class UserInfoActivity extends BaseActivity {
         if (null != nickPop) {
             nickPop.show(llRoot);
             nickPop.backgroundAlpha(UserInfoActivity.this, 0.6f);
-            Android.Keyboard.showSoftInput(UserInfoActivity.this);
+            AndroidKit.Keyboard.showSoftInput(UserInfoActivity.this);
         } else {
             nickPop = new PopupMaster.Builder()
                     .setContext(UserInfoActivity.this)
@@ -164,13 +165,13 @@ public class UserInfoActivity extends BaseActivity {
                         @Override
                         public void onDismiss() {
                             nickPop.backgroundAlpha(UserInfoActivity.this, 1.0f);
-                            Android.Keyboard.hideSoftInput(UserInfoActivity.this);
+                            AndroidKit.Keyboard.hideSoftInput(UserInfoActivity.this);
                         }
                     })
                     .create();
             nickPop.show(llRoot);
             nickPop.backgroundAlpha(UserInfoActivity.this, 0.6f);
-            Android.Keyboard.showSoftInput(UserInfoActivity.this);
+            AndroidKit.Keyboard.showSoftInput(UserInfoActivity.this);
         }
 
     }

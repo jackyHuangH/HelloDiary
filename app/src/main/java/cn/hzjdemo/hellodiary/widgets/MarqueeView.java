@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.zenchn.apilib.util.Java;
+import com.zenchn.support.kit.AndroidKit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +70,7 @@ public class MarqueeView extends ViewFlipper {
         singleLine = typedArray.getBoolean(R.styleable.MarqueeViewStyle_mvSingleLine, false);
         if (typedArray.hasValue(R.styleable.MarqueeViewStyle_mvTextSize)) {
             textSize = (int) typedArray.getDimension(R.styleable.MarqueeViewStyle_mvTextSize, textSize);
-            textSize = Android.Dimens.px2sp(textSize);
+            textSize = AndroidKit.Dimens.px2sp(textSize);
         }
         textColor = typedArray.getColor(R.styleable.MarqueeViewStyle_mvTextColor, textColor);
 
@@ -157,7 +158,7 @@ public class MarqueeView extends ViewFlipper {
      */
     private void startWithFixedWidth(String notice, @AnimRes int inAnimResId, @AnimRes int outAnimResID) {
         int noticeLength = notice.length();
-        int width = Android.Dimens.px2dp(getWidth());
+        int width = AndroidKit.Dimens.px2dp(getWidth());
         if (width == 0) {
             throw new RuntimeException("Please set the width of MarqueeView !");
         }

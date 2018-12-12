@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zenchn.support.R;
+import com.zenchn.support.kit.AndroidKit;
 
 import java.util.Locale;
 
@@ -87,12 +88,12 @@ public class BottomBarItem extends LinearLayout {
         mIconSelectedResourceId = ta.getResourceId(R.styleable.BottomBarItem_iconSelected, -1);
 
         mText = ta.getString(R.styleable.BottomBarItem_itemText);
-        mTextSize = ta.getDimensionPixelSize(R.styleable.BottomBarItem_itemTextSize, Android.Dimens.sp2px(mTextSize));
+        mTextSize = ta.getDimensionPixelSize(R.styleable.BottomBarItem_itemTextSize, AndroidKit.Dimens.sp2px(mTextSize));
 
         mTextColorNormal = ta.getColor(R.styleable.BottomBarItem_textColorNormal, mTextColorNormal);
         mTextColorSelected = ta.getColor(R.styleable.BottomBarItem_textColorSelected, mTextColorSelected);
 
-        mMarginTop = ta.getDimensionPixelSize(R.styleable.BottomBarItem_itemMarginTop, Android.Dimens.dp2px(mMarginTop));
+        mMarginTop = ta.getDimensionPixelSize(R.styleable.BottomBarItem_itemMarginTop, AndroidKit.Dimens.dp2px(mMarginTop));
 
         mOpenTouchBg = ta.getBoolean(R.styleable.BottomBarItem_openTouchBg, mOpenTouchBg);
         mTouchDrawable = ta.getDrawable(R.styleable.BottomBarItem_touchDrawable);
@@ -101,11 +102,11 @@ public class BottomBarItem extends LinearLayout {
         mIconHeight = ta.getDimensionPixelSize(R.styleable.BottomBarItem_iconHeight, 0);
         mItemPadding = ta.getDimensionPixelSize(R.styleable.BottomBarItem_itemPadding, 0);
 
-        mUnreadTextSize = ta.getDimensionPixelSize(R.styleable.BottomBarItem_unreadTextSize, Android.Dimens.sp2px(mUnreadTextSize));
+        mUnreadTextSize = ta.getDimensionPixelSize(R.styleable.BottomBarItem_unreadTextSize, AndroidKit.Dimens.sp2px(mUnreadTextSize));
         mUnreadTextColor = ta.getColor(R.styleable.BottomBarItem_unreadTextColor, 0xFFFFFFFF);
         mUnreadTextBg = ta.getDrawable(R.styleable.BottomBarItem_unreadTextBg);
 
-        mMsgTextSize = ta.getDimensionPixelSize(R.styleable.BottomBarItem_msgTextSize, Android.Dimens.sp2px(mMsgTextSize));
+        mMsgTextSize = ta.getDimensionPixelSize(R.styleable.BottomBarItem_msgTextSize, AndroidKit.Dimens.sp2px(mMsgTextSize));
         mMsgTextColor = ta.getColor(R.styleable.BottomBarItem_msgTextColor, 0xFFFFFFFF);
         mMsgTextBg = ta.getDrawable(R.styleable.BottomBarItem_msgTextBg);
 

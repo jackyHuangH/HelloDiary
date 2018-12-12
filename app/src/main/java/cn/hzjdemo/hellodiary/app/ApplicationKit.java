@@ -20,6 +20,7 @@ import com.zenchn.support.base.AbstractApplicationKit;
 import com.zenchn.support.base.ActivityLifecycleCallback;
 import com.zenchn.support.cache.ACache;
 import com.zenchn.support.dafault.DefaultActivityLifecycle;
+import com.zenchn.support.kit.AndroidKit;
 import com.zenchn.support.widget.tips.SuperToast;
 
 import javax.inject.Inject;
@@ -114,8 +115,8 @@ public class ApplicationKit extends AbstractApplicationKit implements ActivityLi
     }
 
     private void initUpdatePlugin() {
-        String curVersionName = Android.Package.getVersionName(getApplication());
-        int curVersionCode = Android.Package.getVersionCode(getApplication());
+        String curVersionName = AndroidKit.Package.getVersionName(getApplication());
+        int curVersionCode = AndroidKit.Package.getVersionCode(getApplication());
         //创建更新配置类：
 //        UpdateConfig.getConfig()
 //                // 配置检查更新的API接口

@@ -5,6 +5,8 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.zenchn.support.kit.AndroidKit;
+
 /**
  * Created by Administrator on 2016/11/2.
  * recyclerview item 头部或底部加间距
@@ -27,9 +29,9 @@ public class TopBottomSpaceItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         if (isTopDecoration) {
-            outRect.top = (int) (space * Android.Dimens.DENSITY);
+            outRect.top = (int) (space * AndroidKit.Dimens.DENSITY);
         } else {
-            outRect.bottom = (int) (space * Android.Dimens.DENSITY);
+            outRect.bottom = (int) (space * AndroidKit.Dimens.DENSITY);
         }
     }
 

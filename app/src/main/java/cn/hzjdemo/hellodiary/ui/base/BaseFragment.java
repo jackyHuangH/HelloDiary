@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import com.gyf.barlibrary.ImmersionBar;
 import com.gyf.barlibrary.OnKeyboardListener;
 import com.zenchn.support.base.AbstractFragment;
+import com.zenchn.support.kit.AndroidKit;
 import com.zenchn.support.utils.StringUtils;
 import com.zenchn.support.widget.TitleBar;
 
@@ -123,7 +124,7 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
 
     @Override
     public void onApiFailure() {
-        showResMessage(Android.NetWork.isNetworkAvailable(getActivity()) ? R.string.common_error_service : R.string.common_error_network);
+        showResMessage(AndroidKit.NetWork.isNetworkAvailable(getActivity()) ? R.string.common_error_service : R.string.common_error_network);
     }
 
 

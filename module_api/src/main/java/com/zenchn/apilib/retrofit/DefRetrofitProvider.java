@@ -2,8 +2,8 @@ package com.zenchn.apilib.retrofit;
 
 import android.support.annotation.NonNull;
 
+import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
 import com.zenchn.apilib.BuildConfig;
-import com.zenchn.apilib.retrofit.converter.FastJsonConverterFactory;
 import com.zenchn.apilib.retrofit.interceptor.TokenHeaderInterceptor;
 
 import java.util.concurrent.TimeUnit;
@@ -65,7 +65,7 @@ final class DefRetrofitProvider implements IRetrofitProvider {
                     .baseUrl(BASE_URL)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(ScalarsConverterFactory.create())
-                    .addConverterFactory(FastJsonConverterFactory.create())
+                    .addConverterFactory(new Retrofit2ConverterFactory())
                     .client(okHttpClient)
                     .build();
 

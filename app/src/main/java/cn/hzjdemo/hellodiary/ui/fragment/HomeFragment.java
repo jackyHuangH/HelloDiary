@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.gyf.barlibrary.ImmersionBar;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
+import com.zenchn.support.kit.AndroidKit;
 
 import net.lucode.hackware.magicindicator.FragmentContainerHelper;
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -184,7 +185,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     protected void initData() {
-        final int windowWidth = Android.Dimens.getScreenWidth();
+        final int windowWidth = AndroidKit.Dimens.getScreenWidth();
 
         //TODO 轮播图
         List<String> imgs = new ArrayList<>();
@@ -294,7 +295,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(context);
                 indicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
-                indicator.setLineHeight(Android.Dimens.dp2px(1));
+                indicator.setLineHeight(AndroidKit.Dimens.dp2px(1));
                 indicator.setColors(mangoColor);
                 return indicator;
             }

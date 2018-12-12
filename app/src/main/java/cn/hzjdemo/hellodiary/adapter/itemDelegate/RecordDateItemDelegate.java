@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zenchn.support.kit.AndroidKit;
 import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -37,13 +38,13 @@ public class RecordDateItemDelegate implements ItemViewDelegate<JoinRecordBean> 
             holder.setAlpha(R.id.top_line, 0);
             View topLine = holder.getView(R.id.top_line);
             ViewGroup.LayoutParams layoutParams = topLine.getLayoutParams();
-            layoutParams.height= Android.Dimens.dp2px(20);
+            layoutParams.height= AndroidKit.Dimens.dp2px(20);
             topLine.setLayoutParams(layoutParams);
         }else {
             holder.setAlpha(R.id.top_line, 1);
             View topLine = holder.getView(R.id.top_line);
             ViewGroup.LayoutParams layoutParams = topLine.getLayoutParams();
-            layoutParams.height= Android.Dimens.dp2px(6);
+            layoutParams.height= AndroidKit.Dimens.dp2px(6);
             topLine.setLayoutParams(layoutParams);
         }
         holder.setText(R.id.record_date_tip, joinRecordBean.getDate());

@@ -13,6 +13,7 @@ import com.zenchn.support.base.AbstractAppCompatActivity;
 import com.zenchn.support.base.IActivityLifecycle;
 import com.zenchn.support.base.IUiController;
 import com.zenchn.support.dafault.DefaultActivityLifecycle;
+import com.zenchn.support.kit.AndroidKit;
 import com.zenchn.support.utils.StringUtils;
 import com.zenchn.support.widget.TitleBar;
 
@@ -111,7 +112,7 @@ public abstract class BaseActivity<P extends BasePresenterImpl> extends Abstract
 
     @Override
     public void onApiFailure() {
-        showResMessage(Android.NetWork.isNetworkAvailable(this) ? R.string.common_error_service : R.string.common_error_network);
+        showResMessage(AndroidKit.NetWork.isNetworkAvailable(this) ? R.string.common_error_service : R.string.common_error_network);
     }
 
     @Override
@@ -133,7 +134,7 @@ public abstract class BaseActivity<P extends BasePresenterImpl> extends Abstract
 
     @Override
     protected void onPause() {
-        Android.Keyboard.hideSoftInput(this);
+        AndroidKit.Keyboard.hideSoftInput(this);
         super.onPause();
     }
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
+import com.zenchn.support.kit.AndroidKit;
 import com.zenchn.support.widget.dialog.DialogMaster;
 
 import java.util.Calendar;
@@ -45,7 +46,6 @@ public class SplashActivity extends BaseActivity implements DatePickerDialog.OnD
 
     @Override
     public void initWidget() {
-        //        flowable();
     }
 
     @OnClick(R.id.bt_goto_diary)
@@ -109,8 +109,8 @@ public class SplashActivity extends BaseActivity implements DatePickerDialog.OnD
 
 
     private void showDialog() {
-        int screenWidth = Android.Dimens.getScreenWidth();
-        int screenHeight = Android.Dimens.getScreenHeight();
+        int screenWidth = AndroidKit.Dimens.getScreenWidth();
+        int screenHeight = AndroidKit.Dimens.getScreenHeight();
 
         new DialogMaster.Builder()
                 .setLayout(R.layout.dialog_choose_building_type)

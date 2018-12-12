@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import com.zenchn.apilib.util.Codec;
 import com.zenchn.apilib.util.GZIPUtils;
 import com.zenchn.apilib.util.Java;
+import com.zenchn.support.kit.AndroidKit;
 import com.zenchn.support.utils.StringUtils;
 
 import java.io.File;
@@ -48,7 +49,7 @@ public class FileModelImpl implements FileModel {
                         String DB_DIR = "/data/data/" + packageName + "/databases/";
                         File dbFile = new File(DB_DIR, Constants.AREA_DB_NAME);
                         //文件已存在就不用再复制，这里加上版本号判断条件
-                        PackageInfo packageInfo = Android.Package.getPackageInfo(application);
+                        PackageInfo packageInfo = AndroidKit.Package.getPackageInfo(application);
                         int currentVersion = packageInfo.versionCode;
                         int preVersion = ACacheModelImpl.getAppVersionCode();
                         if (currentVersion == preVersion && Java.File.isFileExist(dbFile)) {
