@@ -2,7 +2,7 @@ package cn.hzjdemo.hellodiary.model.impl.local;
 
 import android.support.annotation.NonNull;
 
-import com.zenchn.apilib.util.Codec;
+import com.zenchn.apilib.util.CodecKit;
 
 
 /**
@@ -18,10 +18,10 @@ public class EncryptModelImpl {
 
 
     public static String encryptPwdSHA256(@NonNull String text) {
-        return Codec.SHA256.encrypt(text);
+        return CodecKit.SHA256.encrypt(text);
     }
 
     public static String encryptPwdMD5(@NonNull String text) {
-        return Codec.MD5.encrypt(text);
+        return CodecKit.MD5.encrypt(text);
     }
 }

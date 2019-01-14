@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Gravity;
@@ -31,6 +30,7 @@ import android.widget.Toast;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.youth.banner.Banner;
+import com.zenchn.support.widget.TitleBar;
 import com.zenchn.support.widget.dialog.PopupMaster;
 import com.zenchn.support.widget.tips.SuperToast;
 
@@ -47,11 +47,9 @@ import cn.hzjdemo.hellodiary.adapter.SysMessageAdapter;
 import cn.hzjdemo.hellodiary.adapter.itemDecoration.TopBottomSpaceItemDecoration;
 import cn.hzjdemo.hellodiary.bean.MessageEntity;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
-import cn.hzjdemo.hellodiary.presenter.base.IView;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
 import cn.hzjdemo.hellodiary.util.StatusBarUtil;
-import cn.hzjdemo.hellodiary.util.TitleBarBuilder;
-import cn.hzjdemo.hellodiary.util.glide.BannerImageLoader;
+import cn.hzjdemo.hellodiary.wrapper.glide.BannerImageLoader;
 import cn.hzjdemo.hellodiary.widgets.BottomSheetDialog.BottomSheetDialogListView;
 import cn.hzjdemo.hellodiary.widgets.BottomSheetDialog.BottomSheetRecyclerView;
 import cn.hzjdemo.hellodiary.widgets.BottomSheetDialog.SpringBackBottomSheetDialog;
@@ -101,9 +99,8 @@ public class RaidDetailActivity extends BaseActivity {
     @BindColor(R.color.orangeRedTwo)
     int redTwo;
     @BindView(R.id.title_bar)
-    RelativeLayout mTitleBar;
+    TitleBar mTitleBar;
 
-    private TextView title;
     private int bannerHeight = 0;
 
     private Handler handler = new Handler() {
@@ -126,30 +123,19 @@ public class RaidDetailActivity extends BaseActivity {
 
     @Override
     public void initWidget() {
-        TitleBarBuilder titleBarBuilder = new TitleBarBuilder(this, swipeRefreshDetail);
-        titleBarBuilder.setTitleText("详情")
-                .setLeftIconDrawable(R.drawable.common_back_drawable)
-                .setLeftIcoListening(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                })
-                .setRightIco(R.drawable.top_share)
-                .setRightIcoListening(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //todo 分享
-                        CommonSharePop sharePop = new CommonSharePop.Builder(RaidDetailActivity.this, v, handler)
-                                .create();
-                        sharePop.showPopWin();
+        mTitleBar.titleText("详情")
+                .setOnLeftClickListener(this)
+                .rightIcon(R.drawable.top_share)
+                .setOnRightClickListener(v -> {
+                    //todo 分享
+                    CommonSharePop sharePop = new CommonSharePop.Builder(RaidDetailActivity.this, v, handler)
+                            .create();
+                    sharePop.showPopWin();
 
 //                        showBottomDialog();
-                    }
                 });
-        title = titleBarBuilder.getTitle();
         //初始透明度为0
-        title.setAlpha(0);
+        mTitleBar.setAlpha(0);
         bannerHomeDetail.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -413,17 +399,17 @@ public class RaidDetailActivity extends BaseActivity {
         @Override
         public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
             if (y <= 0) {
-                title.setAlpha(0);
+                mTitleBar.setAlpha(0);
                 statusbarTransparent = true;
                 initStatusBar();
             } else if (y > 0 && y <= bannerHeight) {
                 float alpha = (float) y / (bannerHeight / 3);
                 //设置标题透明度
-                title.setAlpha(alpha);
+                mTitleBar.setAlpha(alpha);
                 statusbarTransparent = false;
                 initStatusBar();
             } else {
-                title.setAlpha(1);
+                mTitleBar.setAlpha(1);
             }
         }
     };

@@ -10,7 +10,6 @@ import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.util.Log;
@@ -32,6 +31,7 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zenchn.support.router.Router;
+import com.zenchn.support.widget.TitleBar;
 
 import butterknife.BindColor;
 import butterknife.BindView;
@@ -39,12 +39,11 @@ import butterknife.OnClick;
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
-import cn.hzjdemo.hellodiary.presenter.base.IView;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
-import cn.hzjdemo.hellodiary.util.TitleBarBuilder;
-import cn.hzjdemo.hellodiary.util.glide.GlideApp;
-import cn.hzjdemo.hellodiary.util.glide.glideprogress.ProgressInterceptor;
 import cn.hzjdemo.hellodiary.widgets.test.SquareImageView;
+import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
+import cn.hzjdemo.hellodiary.wrapper.glide.glideprogress.ProgressInterceptor;
+import cn.hzjdemo.hellodiary.wrapper.glide.glideprogress.ProgressListener;
 
 /**
  * 登录界面
@@ -78,11 +77,13 @@ public class LoginActivity extends BaseActivity {
     LinearLayout mLlShare;
     @BindView(R.id.sqiv)
     SquareImageView mSquareImageView;
-
     @BindColor(R.color.pastelOrange)
     int orangeColor;
     @BindColor(R.color.greyishFour)
     int greyColor;
+    @BindView(R.id.title_bar)
+    TitleBar mTitleBar;
+
     private MyCountDownTimer myCountDownTimer;
     private ObjectAnimator mRotateAnimator;
     private ViewPropertyAnimator mViewPropertyAnimator;
@@ -101,15 +102,8 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initWidget() {
-        TitleBarBuilder titleBarBuilder = new TitleBarBuilder(LoginActivity.this, llRoot);
-        titleBarBuilder.setTitleText(getString(R.string.login_str))
-                .setLeftIco(R.drawable.top_back)
-                .setLeftIcoListening(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
+        mTitleBar.titleText(getString(R.string.login_str))
+                .setOnLeftClickListener(this);
 
         //view补间动画
         // false代表里面的子animation不共用一个插值器
@@ -224,7 +218,7 @@ public class LoginActivity extends BaseActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 
-        ProgressInterceptor.addListener(mImgUrl, new cn.hzjdemo.hellodiary.util.glide.glideprogress.ProgressListener() {
+        ProgressInterceptor.addListener(mImgUrl, new ProgressListener() {
             @Override
             public void onProgress(int progress) {
                 progressDialog.setProgress(progress);

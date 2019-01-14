@@ -4,9 +4,9 @@ import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.support.annotation.Nullable;
 
-import com.zenchn.apilib.util.Codec;
+import com.zenchn.apilib.util.CodecKit;
 import com.zenchn.apilib.util.GZIPUtils;
-import com.zenchn.apilib.util.Java;
+import com.zenchn.apilib.util.JavaKit;
 import com.zenchn.support.kit.AndroidKit;
 import com.zenchn.support.utils.StringUtils;
 
@@ -52,8 +52,8 @@ public class FileModelImpl implements FileModel {
                         PackageInfo packageInfo = AndroidKit.Package.getPackageInfo(application);
                         int currentVersion = packageInfo.versionCode;
                         int preVersion = ACacheModelImpl.getAppVersionCode();
-                        if (currentVersion == preVersion && Java.File.isFileExist(dbFile)) {
-                            String encrypt = Codec.MD5.encrypt(dbFile);
+                        if (currentVersion == preVersion && JavaKit.File.isFileExist(dbFile)) {
+                            String encrypt = CodecKit.MD5.encrypt(dbFile);
                             String areaDbMD5Code = ACacheModelImpl.getAreaDbMD5Code();
                             if (StringUtils.equals(encrypt, areaDbMD5Code)) {
                                 return true;
@@ -68,8 +68,8 @@ public class FileModelImpl implements FileModel {
                         }
                         boolean isUpZipSuccess = GZIPUtils.unZipDB(open, packageName, Constants.AREA_DB_NAME);
                         if (isUpZipSuccess) {
-                            if (Java.File.isFileExist(dbFile)) {
-                                String encrypt = Codec.MD5.encrypt(dbFile);
+                            if (JavaKit.File.isFileExist(dbFile)) {
+                                String encrypt = CodecKit.MD5.encrypt(dbFile);
                                 ACacheModelImpl.saveAreaDbMD5Code(encrypt);
                                 ACacheModelImpl.saveAppVersionCode(currentVersion);
                             }

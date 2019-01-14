@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -133,15 +134,15 @@ public class BottomBarItem extends LinearLayout {
         }
 
         if (mUnreadTextBg == null) {
-            mUnreadTextBg = getResources().getDrawable(R.drawable.shape_unread);
+            mUnreadTextBg = ContextCompat.getDrawable(mContext,R.drawable.shape_unread);
         }
 
         if (mMsgTextBg == null) {
-            mMsgTextBg = getResources().getDrawable(R.drawable.shape_msg);
+            mMsgTextBg = ContextCompat.getDrawable(mContext,R.drawable.shape_msg);
         }
 
         if (mNotifyPointBg == null) {
-            mNotifyPointBg = getResources().getDrawable(R.drawable.shape_notify_point);
+            mNotifyPointBg = ContextCompat.getDrawable(mContext,R.drawable.shape_notify_point);
         }
     }
 
@@ -220,7 +221,7 @@ public class BottomBarItem extends LinearLayout {
     }
 
     public void setStatus(boolean isSelected) {
-        mImageView.setImageDrawable(getResources().getDrawable(isSelected ? mIconSelectedResourceId : mIconNormalResourceId));
+        mImageView.setImageDrawable(ContextCompat.getDrawable(mContext,isSelected ? mIconSelectedResourceId : mIconNormalResourceId));
         mTextView.setTextColor(isSelected ? mTextColorSelected : mTextColorNormal);
     }
 

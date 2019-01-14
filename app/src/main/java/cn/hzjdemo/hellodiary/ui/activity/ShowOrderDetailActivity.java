@@ -12,8 +12,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
-import com.zenchn.picbrowserlib.entity.ImageSourceInfo;
+import com.zenchn.picbrowserlib.pojo.ImageSourceInfo;
 import com.zenchn.picbrowserlib.ui.PictureBrowseActivity;
+import com.zenchn.support.widget.TitleBar;
 import com.zenchn.support.widget.tips.SuperToast;
 
 import java.util.ArrayList;
@@ -25,12 +26,11 @@ import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
-import cn.hzjdemo.hellodiary.util.TitleBarBuilder;
-import cn.hzjdemo.hellodiary.util.glide.CircleTransform;
-import cn.hzjdemo.hellodiary.util.glide.GlideApp;
 import cn.hzjdemo.hellodiary.widgets.CommonSharePop;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.MultiImageView;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.entity.PhotoInfo;
+import cn.hzjdemo.hellodiary.wrapper.glide.CircleTransform;
+import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * Created by Hzj on 2017/8/21.
@@ -60,6 +60,8 @@ public class ShowOrderDetailActivity extends BaseActivity {
     LinearLayout rootView;
     @BindView(R.id.bt_delete_detail)
     TextView btDelete;
+    @BindView(R.id.title_bar)
+    TitleBar mTitleBar;
 
     private boolean can_delete = false;
     public static final String CAN_DELETE_EXTRA = "can_delete";
@@ -77,18 +79,12 @@ public class ShowOrderDetailActivity extends BaseActivity {
 
     @Override
     public void initWidget() {
-        TitleBarBuilder titleBarBuilder = new TitleBarBuilder(this, rootView);
-        titleBarBuilder.setTitleText(getString(R.string.show_order_detail))
-                .setLeftIco(R.drawable.top_back)
-                .setLeftIcoListening(new View.OnClickListener() {
+        mTitleBar.titleText(getString(R.string.show_order_detail))
+                .setOnLeftClickListener(this)
+                .rightIcon(R.drawable.top_share)
+                .setOnRightClickListener(new TitleBar.OnRightClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                }).setRightIco(R.drawable.top_share)
-                .setRightIcoListening(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                    public void onRightViewClick(View v) {
                         //TODO 分享
                         CommonSharePop sharePop = new CommonSharePop.Builder(ShowOrderDetailActivity.this, v, handler)
                                 .setShareTitle("")
@@ -125,11 +121,11 @@ public class ShowOrderDetailActivity extends BaseActivity {
         String[] mUrls = Constants.imgUrls;
 
         List<PhotoInfo> imageInfoList = new ArrayList<>();
-        final ArrayList<String> imageUrls=new ArrayList<>();
-        final ArrayList<ImageSourceInfo> imageSourceInfoArrayList=new ArrayList<>();
+        final ArrayList<String> imageUrls = new ArrayList<>();
+        final ArrayList<ImageSourceInfo> imageSourceInfoArrayList = new ArrayList<>();
         for (int i = 0; i < mUrls.length; i++) {
             PhotoInfo imageInfo = new PhotoInfo();
-            imageInfo.url=Constants.imgUrls[i];
+            imageInfo.url = Constants.imgUrls[i];
             imageInfoList.add(imageInfo);
             imageUrls.add(imageInfo.url);
             ImageSourceInfo imageSourceInfo = new ImageSourceInfo(Constants.imgUrls[i], true);
@@ -145,7 +141,7 @@ public class ShowOrderDetailActivity extends BaseActivity {
 //                intent.putStringArrayListExtra(ShowPictureActivity.IMAGE_URLS, imageUrls);
 //                intent.putExtra(ShowPictureActivity.CURRENT_POSITION, position);
 //                startActivity(intent);
-                PictureBrowseActivity.launch(ShowOrderDetailActivity.this,imageSourceInfoArrayList,position);
+                PictureBrowseActivity.launch(ShowOrderDetailActivity.this, imageSourceInfoArrayList, position);
             }
         });
 
@@ -155,13 +151,13 @@ public class ShowOrderDetailActivity extends BaseActivity {
     @OnClick(R.id.ll_give_praise)
     public void givePraise() {
         //todo 点赞
-        SuperToast.showDefaultMessage(this,"点了赞👍");
+        SuperToast.showDefaultMessage(this, "点了赞👍");
     }
 
     @OnClick(R.id.bt_delete_detail)
     public void doDelete() {
         //TODO 删除
-        SuperToast.showDefaultMessage(this,"删了除");
+        SuperToast.showDefaultMessage(this, "删了除");
     }
 
     @Override

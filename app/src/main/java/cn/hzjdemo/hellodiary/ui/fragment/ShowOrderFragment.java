@@ -26,7 +26,7 @@ import java.util.List;
 
 import butterknife.BindColor;
 import butterknife.BindView;
-import butterknife.Unbinder;
+import butterknife.OnClick;
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.adapter.ShowOrderAdapter;
@@ -37,8 +37,7 @@ import cn.hzjdemo.hellodiary.ui.activity.ShowOrderDetailActivity;
 import cn.hzjdemo.hellodiary.ui.base.BaseFragment;
 import cn.hzjdemo.hellodiary.util.ItemClickSupport;
 import cn.hzjdemo.hellodiary.util.StatusBarUtil;
-import cn.hzjdemo.hellodiary.util.TitleBarBuilder;
-import cn.hzjdemo.hellodiary.util.glide.BannerImageLoader;
+import cn.hzjdemo.hellodiary.wrapper.glide.BannerImageLoader;
 
 /**
  * 首页晒单
@@ -57,17 +56,20 @@ public class ShowOrderFragment extends BaseFragment {
     int whiteColor;
     @BindColor(R.color.dark)
     int darkColor;
+    @BindView(R.id.title_text)
+    TextView mTitleText;
+    @BindView(R.id.tv_right)
+    TextView mTvRightTitle;
     @BindView(R.id.title_bar)
     RelativeLayout mTitleBar;
-    Unbinder unbinder;
 
-    private TextView tvTitle;
-    private TextView tvRightTitle;
     private List<ShowOrderBean> datas = new ArrayList<>();
 
     private static ShowOrderFragment mFragment;
     private Banner headBanner;
     private int bannerHeight = 0;
+    //状态栏是否透明
+    private boolean statusbarTransparent = true;
 
     //累加滑动的距离,解决滑动一般dy=0;
     private int overScrollY = 0;
@@ -75,8 +77,9 @@ public class ShowOrderFragment extends BaseFragment {
     private EmptyWrapper emptyWrapper;
 
     public static ShowOrderFragment getInstance() {
-        if (null == mFragment)
+        if (null == mFragment) {
             mFragment = new ShowOrderFragment();
+        }
 
         return mFragment;
     }
@@ -90,20 +93,13 @@ public class ShowOrderFragment extends BaseFragment {
 
     @Override
     public void initWidget() {
-        TitleBarBuilder titleBarBuilder = new TitleBarBuilder(getActivity(), llRoot);
-        titleBarBuilder.setTitleText(getString(R.string.show_order))
-                .setRightText(getString(R.string.show_something))
-                .setRightTitleListening(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(getActivity(), SendOrderActivity.class));
-                    }
-                });
-        tvTitle = titleBarBuilder.getTitle();
-        tvRightTitle = titleBarBuilder.getRight_Title();
+        mTitleText.setText(getString(R.string.show_order));
+        mTvRightTitle.setText(getString(R.string.show_something));
+        mTvRightTitle.setVisibility(View.VISIBLE);
+
         //初始透明度
-        tvTitle.setAlpha(0);
-        tvRightTitle.setTextColor(whiteColor);
+        mTitleText.setAlpha(0);
+        mTvRightTitle.setTextColor(whiteColor);
 
         resetTiltleBar();
         initRecyclerView();
@@ -134,6 +130,11 @@ public class ShowOrderFragment extends BaseFragment {
                 .setImageLoader(new BannerImageLoader())
                 .start();
 
+        initSwipeRefresh();
+        initData();
+    }
+
+    private void initSwipeRefresh() {
         swipeRefreshOrder.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
@@ -175,8 +176,11 @@ public class ShowOrderFragment extends BaseFragment {
                 }, 2000);
             }
         });
+    }
 
-        initData();
+    @OnClick(R.id.tv_right)
+    public void onViewClicked() {
+        startActivity(new Intent(getActivity(), SendOrderActivity.class));
     }
 
     private void initRecyclerView() {
@@ -234,35 +238,38 @@ public class ShowOrderFragment extends BaseFragment {
             float statusBarAlpha = 0;
             if (overScrollY <= 0) {
                 statusBarAlpha = 0;
-                tvRightTitle.setTextColor(whiteColor);
-                changeStatusBar(true, statusBarAlpha);
+                mTvRightTitle.setTextColor(whiteColor);
+                statusbarTransparent=true;
+                initStatusBar();
             } else if (overScrollY > 0) {
                 statusBarAlpha = (float) overScrollY / bannerHeight;
                 if (statusBarAlpha > 1) {
                     statusBarAlpha = 1;
                 }
-                tvRightTitle.setTextColor(darkColor);
-                changeStatusBar(false, statusBarAlpha);
+                mTvRightTitle.setTextColor(darkColor);
+                statusbarTransparent=false;
+                initStatusBar();
             }
             Log.d(TAG, "overScrollY: " + overScrollY);
             Log.d(TAG, "initStatusBar透明度: " + statusBarAlpha);
             //设置标题透明度
-            tvTitle.setAlpha(statusBarAlpha);
+            mTitleText.setAlpha(statusBarAlpha);
         }
     };
 
-    private void changeStatusBar(boolean statusbarTransparent, float alpha) {
+    @Override
+    protected void initStatusBar() {
         mImmersionBar = ImmersionBar.with(this);
         if (statusbarTransparent) {
-            mImmersionBar.transparentStatusBar()
-                    .statusBarDarkFont(false)
-                    .init();
+            mImmersionBar
+                    .transparentStatusBar()
+                    .statusBarDarkFont(false);
         } else {
-            mImmersionBar.statusBarColor(R.color.white)
-                    .statusBarAlpha(alpha)
-                    .statusBarDarkFont(true, alpha)
-                    .init();
+            mImmersionBar
+                    .statusBarColor(android.R.color.white)
+                    .statusBarDarkFont(true, 0.2f);
         }
+        mImmersionBar.init();
     }
 
     protected void initData() {

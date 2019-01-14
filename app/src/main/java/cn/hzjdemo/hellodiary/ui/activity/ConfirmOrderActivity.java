@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.zenchn.support.widget.TitleBar;
 import com.zenchn.support.widget.tips.SuperToast;
 
 import butterknife.BindView;
@@ -15,7 +16,6 @@ import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.bean.TakeAddressBean;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
-import cn.hzjdemo.hellodiary.util.TitleBarBuilder;
 import cn.hzjdemo.hellodiary.widgets.CommonPayWayPop;
 
 /**
@@ -43,6 +43,8 @@ public class ConfirmOrderActivity extends BaseActivity {
     LinearLayout btnPayNow;
     @BindView(R.id.ll_root)
     LinearLayout llRoot;
+    @BindView(R.id.title_bar)
+    TitleBar mTitleBar;
 
     public static final String EXTRA_PAY_WAY = "pay_way";
     public static final int REQUEST_EDIT_ADDRESS = 0x01;
@@ -60,15 +62,8 @@ public class ConfirmOrderActivity extends BaseActivity {
 
     @Override
     public void initWidget() {
-        final TitleBarBuilder titleBarBuilder = new TitleBarBuilder(this, llRoot)
-                .setTitleText(getString(R.string.confirm_order_str))
-                .setLeftIco(R.drawable.top_back)
-                .setLeftIcoListening(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
+        mTitleBar.titleText(getString(R.string.confirm_order_str))
+                .setOnLeftClickListener(this);
 
         initData();
     }

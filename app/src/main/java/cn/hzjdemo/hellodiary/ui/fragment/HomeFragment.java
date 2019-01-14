@@ -2,8 +2,6 @@ package cn.hzjdemo.hellodiary.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +32,6 @@ import java.util.List;
 
 import butterknife.BindColor;
 import butterknife.BindView;
-import butterknife.Unbinder;
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.adapter.HomeHotGridAdaper;
@@ -45,12 +42,12 @@ import cn.hzjdemo.hellodiary.presenter.impl.HomePresenterImpl;
 import cn.hzjdemo.hellodiary.ui.activity.RaidDetailActivity;
 import cn.hzjdemo.hellodiary.ui.base.BaseFragment;
 import cn.hzjdemo.hellodiary.util.StatusBarUtil;
-import cn.hzjdemo.hellodiary.util.glide.BannerImageLoader;
-import cn.hzjdemo.hellodiary.util.glide.GlideApp;
 import cn.hzjdemo.hellodiary.widgets.AutoSizeTextView;
 import cn.hzjdemo.hellodiary.widgets.GridViewForScrollView;
 import cn.hzjdemo.hellodiary.widgets.MarqueeView;
 import cn.hzjdemo.hellodiary.widgets.ObservableScrollView;
+import cn.hzjdemo.hellodiary.wrapper.glide.BannerImageLoader;
+import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * 首页
@@ -79,28 +76,22 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @BindColor(R.color.dark)
     int darkColor;
     @BindView(R.id.title_text)
-    TextView title;
+    TextView mTitleText;
     @BindView(R.id.title_bar)
     RelativeLayout mTitleBar;
-    Unbinder unbinder;
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-        }
-    };
     private int bannerHeight = 0;
 
     private static HomeFragment mHomeFragment;
     //处理magicIndicator单独使用时的点击事件
     private FragmentContainerHelper mFragmentContainerHelper = new FragmentContainerHelper();
 
-    private HomePresenterImpl homePresenter=new HomePresenterImpl(this);
+    private HomePresenterImpl homePresenter = new HomePresenterImpl(this);
     // 列表顶部和title底部重合时，列表的滑动距离。
     private float deltaY;
 
-    private boolean statusbarTransparent = true;//状态栏是否透明
+    //状态栏是否透明
+    private boolean statusbarTransparent = true;
 
     public static HomeFragment getInstance() {
         if (null == mHomeFragment) {
@@ -112,10 +103,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void initWidget() {
-        title.setText("首页");
-        title.setAlpha(0);
+        mTitleText.setText("首页");
 
+        mTitleBar.setAlpha(0);
         resetTiltleBar();
+
         bannerHome.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -145,17 +137,17 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         @Override
         public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
             if (y <= 0) {
-                title.setAlpha(0);
+                mTitleBar.setAlpha(0);
                 statusbarTransparent = true;
                 initStatusBar();
             } else if (y > 0 && y <= bannerHeight) {
                 float alpha = (float) y / bannerHeight;
                 //设置标题透明度
-                title.setAlpha(alpha);
+                mTitleBar.setAlpha(alpha);
                 statusbarTransparent = false;
                 initStatusBar();
             } else {
-                title.setAlpha(1);
+                mTitleBar.setAlpha(1);
             }
         }
     };
@@ -178,10 +170,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                     .statusBarColor(android.R.color.white)     //状态栏颜色，不写默认透明色
                     .statusBarDarkFont(true, 0.2f);   //状态栏字体是深色，不写默认为亮色
         }
-        mImmersionBar.navigationBarColor(R.color.black) //导航栏颜色，不写默认黑色
-                .navigationBarEnable(true)   //是否可以修改导航栏颜色，默认为true
-                .navigationBarWithKitkatEnable(true)//是否可以修改安卓4.4和emui3.1手机导航栏颜色，默认为true
-                .init();
+        mImmersionBar.init();
     }
 
     protected void initData() {
@@ -209,7 +198,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         marqueeHome.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
             @Override
             public void onItemClick(int position, TextView textView) {
-                showMessage( "点击了" + position);
+                showMessage("点击了" + position);
             }
         });
 
@@ -346,5 +335,4 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         // 在代码里设置自己的动画
         marqueeHome.startWithList(list, R.anim.anim_bottom_in, R.anim.anim_top_out);
     }
-
 }

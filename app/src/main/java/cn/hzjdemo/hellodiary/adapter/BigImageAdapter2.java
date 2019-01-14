@@ -21,8 +21,8 @@ import com.luck.picture.lib.photoview.PhotoView;
 import java.util.List;
 
 import cn.hzjdemo.hellodiary.R;
-import cn.hzjdemo.hellodiary.util.glide.GlideApp;
 import cn.hzjdemo.hellodiary.widgets.RingProgressBar;
+import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 import me.jessyan.progressmanager.ProgressManager;
 import me.jessyan.progressmanager.body.ProgressInfo;
 

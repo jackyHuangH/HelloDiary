@@ -8,14 +8,13 @@ import static com.zenchn.picbrowserlib.annotation.ImageSourceType.PATH;
 import static com.zenchn.picbrowserlib.annotation.ImageSourceType.RES_ID;
 import static com.zenchn.picbrowserlib.annotation.ImageSourceType.URI;
 import static com.zenchn.picbrowserlib.annotation.ImageSourceType.URL;
-
 /**
  * @author:Hzj
- * @date :2018/7/24/024
+ * @date :2018/9/11/011
  * desc  ：图片资源类型
  * record：
  */
-@IntDef({INVALID,RES_ID,PATH,URL,FILE,URI})
+@IntDef({INVALID, RES_ID, PATH, URL, FILE, URI})
 public @interface ImageSourceType {
     int INVALID = 0;//无效资源
     int RES_ID = 1;// Res资源

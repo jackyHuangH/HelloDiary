@@ -2,9 +2,9 @@ package com.zenchn.apilib.base;
 
 import android.support.annotation.NonNull;
 
-import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
 import com.zenchn.apilib.BuildConfig;
 import com.zenchn.apilib.retrofit.IRetrofitProvider;
+import com.zenchn.apilib.retrofit.interceptor.AddParamsInterceptor;
 import com.zenchn.apilib.retrofit.interceptor.TokenHeaderInterceptor;
 
 import java.util.concurrent.TimeUnit;
@@ -13,6 +13,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
@@ -60,14 +61,16 @@ public class CustomRetrofitProvider implements IRetrofitProvider {
             }
 
             builder.addInterceptor(loggingInterceptor)
-                    .addNetworkInterceptor(new TokenHeaderInterceptor());
+                    .addNetworkInterceptor(new TokenHeaderInterceptor())
+                    .addNetworkInterceptor(new AddParamsInterceptor());
 
             OkHttpClient okHttpClient = builder.build();
             return (new Retrofit.Builder())
                     .baseUrl(CustomRetrofitProvider.BASE_URL)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(ScalarsConverterFactory.create())
-                    .addConverterFactory(new Retrofit2ConverterFactory())
+                    .addConverterFactory(GsonConverterFactory.create())
+//                    .addConverterFactory(FastJsonConverterFactory.create())
                     .client(okHttpClient)
                     .build();
         }

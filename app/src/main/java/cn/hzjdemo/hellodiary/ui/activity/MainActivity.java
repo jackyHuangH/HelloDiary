@@ -3,7 +3,7 @@ package cn.hzjdemo.hellodiary.ui.activity;
 import android.widget.FrameLayout;
 
 import com.gyf.barlibrary.ImmersionBar;
-import com.zenchn.support.managers.FragmentManagerHelper;
+import com.zenchn.support.managers.HFragmentManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initWidget() {
-        FragmentManagerHelper fragmentManagerHelper = new FragmentManagerHelper(getSupportFragmentManager(), R.id.fl_home_container);
+        HFragmentManager fragmentManagerHelper = new HFragmentManager(getSupportFragmentManager(), R.id.fl_home_container);
         //默认显示首页
         fragmentManagerHelper.add(HomeFragment.getInstance());
 

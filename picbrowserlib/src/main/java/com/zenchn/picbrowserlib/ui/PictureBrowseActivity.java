@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.zenchn.picbrowserlib.R;
 import com.zenchn.picbrowserlib.adapter.BigImageBrowserAdapter;
-import com.zenchn.picbrowserlib.entity.ImageSourceInfo;
+import com.zenchn.picbrowserlib.pojo.ImageSourceInfo;
 import com.zenchn.picbrowserlib.widget.BaseViewPager;
 
 import java.util.ArrayList;

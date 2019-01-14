@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.zenchn.support.kit.AndroidKit;
+import com.zenchn.support.widget.TitleBar;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 
 import java.util.ArrayList;
@@ -23,7 +24,6 @@ import cn.hzjdemo.hellodiary.adapter.itemDecoration.GridSpaceItemDecoration;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
 import cn.hzjdemo.hellodiary.ui.fragment.PromptDialogFragment;
-import cn.hzjdemo.hellodiary.util.TitleBarBuilder;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.entity.PhotoInfo;
 
 /**
@@ -40,6 +40,8 @@ public class SendOrderActivity extends BaseActivity {
     Button btSendNow;
     @BindView(R.id.ll_root)
     LinearLayout llRoot;
+    @BindView(R.id.title_bar)
+    TitleBar mTitleBar;
 
     public static final int IMAGE_PICKER = 0x100;
     public static final int IMAGE_PREVIEW = 0x101;
@@ -54,16 +56,8 @@ public class SendOrderActivity extends BaseActivity {
 
     @Override
     public void initWidget() {
-        TitleBarBuilder titleBarBuilder = new TitleBarBuilder(this, llRoot);
-        titleBarBuilder.setTitleText(getString(R.string.show_something))
-                .setLeftIco(R.drawable.top_back)
-                .setLeftIcoListening(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
-
+        mTitleBar.titleText(getString(R.string.show_something))
+                .setOnLeftClickListener(this);
 
         //添加图片列表
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);

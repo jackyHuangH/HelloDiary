@@ -1,7 +1,7 @@
 ext {
     android = [
             compileSdkVersion: 26,
-            buildToolsVersion: '27.0.3',
+            buildToolsVersion: '28.0.3',
 
             minSdkVersion    : 19,
             targetSdkVersion : 26,
@@ -12,9 +12,18 @@ ext {
             supportLibVersion: '27.1.1'
     ]
 
+    kotlin = [
+            kotlin_version: '1.3.11',
+            anko_version  : '0.8.2'
+    ]
+
     dependencies = [
             //工具类
             "multidex"                  : "com.android.support:multidex:1.0.2",
+            //kotlin
+            "anko"                      : "org.jetbrains.anko:anko-common:${kotlin.anko_version}",
+            //解决fastjson解析data class 出错
+            "kotlin_reflect"            : "org.jetbrains.kotlin:kotlin-reflect:$kotlin.kotlin_version",
             //android support
             "annotations"               : "com.android.support:support-annotations:${android["supportLibVersion"]}",
             "appcompat-v7"              : "com.android.support:appcompat-v7:${android["supportLibVersion"]}",
@@ -37,8 +46,11 @@ ext {
             //banner轮播图控件
             "banner"                    : 'com.youth.banner:banner:1.4.10',
 
+            //smart_table表格
+            'smart_table'               : 'com.github.huangyanbin:SmartTable:2.2.0',
+
             //今日头条屏幕适配方案
-            "headline_autosize"         : 'me.jessyan:autosize:1.0.0',
+            "headline_autosize"         : 'me.jessyan:autosize:1.1.2',
             //仿微信图片选择库
             "pictureSelector"           : 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.2',
             //图片加载glide
@@ -56,7 +68,7 @@ ext {
             //上下刷新
             "smart_refresh"             : 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5-alpha-3',
             //immersionbar
-            "barlibrary"                : 'com.gyf.immersionbar:immersionbar:2.3.2-beta01',
+            "barlibrary"                : 'com.gyf.immersionbar:immersionbar:2.3.3-beta15',
             //logger
             "logger"                    : 'com.orhanobut:logger:2.1.1',
 
@@ -79,6 +91,7 @@ ext {
             "retrofit"                  : 'com.squareup.retrofit2:retrofit:2.3.0',
             "retrofit_converter_scalars": 'com.squareup.retrofit2:converter-scalars:2.3.0',
             "retrofit_rxjava2_adapter"  : 'com.squareup.retrofit2:adapter-rxjava2:2.3.0',
+            retrofitConverterGson       : "com.squareup.retrofit2:converter-gson:2.3.0",
             //rxlifecycle2
             "rxlifecycle2"              : 'com.trello.rxlifecycle2:rxlifecycle:2.2.2',
             "rxlifecycle2_android"      : 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.2',
@@ -103,8 +116,8 @@ ext {
             // Your EventBus's version
             "eventbus"                  : 'org.greenrobot:eventbus:3.1.1',
 
-            "photoview-smooth"          : "com.bm.photoview:library:1.4.1",
-            "pickerview"                : "com.contrarywind:Android-PickerView:4.1.6",
+            "photoview_smooth"          : "com.bm.photoview:library:1.4.1",
+            "Android_Pickerview"        : 'com.contrarywind:Android-PickerView:4.1.6',
             //结合rxjava2使用
             "rxpermissions"             : "com.github.tbruyelle:rxpermissions:0.10.2",
             //bugly升级

@@ -56,7 +56,7 @@ public abstract class BasePresenterImpl<V extends BaseView> implements IPresente
     public void onApiFailure(String err_msg) {
         if (null != mView) {
             mView.hideProgress();
-            mView.showMessage(err_msg);
+            mView.onApiFailure(err_msg);
         }
     }
 

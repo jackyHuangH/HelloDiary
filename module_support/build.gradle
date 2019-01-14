@@ -40,17 +40,12 @@ dependencies {
     })
 
     implementation rootProject.ext.dependencies["appcompat-v7"]
-    api rootProject.ext.dependencies["butterknife"]
-    annotationProcessor rootProject.ext.dependencies["butterknife_compiler"]
     api rootProject.ext.dependencies["design"]
+
+    implementation rootProject.ext.dependencies["butterknife"]
+    annotationProcessor rootProject.ext.dependencies["butterknife_compiler"]
     //material dialog
     api rootProject.ext.dependencies["material-dialogs"]
-    testImplementation rootProject.ext.dependencies["junit"]
 
-    //rxlifecycle2
-    implementation rootProject.ext.dependencies["rxlifecycle2"]
-    implementation rootProject.ext.dependencies["rxlifecycle2_android"]
-    implementation rootProject.ext.dependencies["rxlifecycle_components"]
-
-    implementation rootProject.ext.dependencies["pickerview"]
+    api rootProject.ext.dependencies["Android_Pickerview"]
 }

@@ -12,9 +12,9 @@ import android.support.annotation.Nullable;
 import java.io.File;
 
 /**
- * 作    者：wangr on 2017/9/3 20:23
  * 描    述：获取本地图片真实路径工具类
  * 修订记录：
+ * @author HZJ
  */
 
 public class UriUtils {

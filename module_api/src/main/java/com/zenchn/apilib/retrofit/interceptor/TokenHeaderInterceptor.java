@@ -18,7 +18,7 @@ public class TokenHeaderInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        //TODO get token
+        // get token
         String token = "";
         Request originRequest = chain.request();
         //get new request,add header

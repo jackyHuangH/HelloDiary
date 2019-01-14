@@ -10,7 +10,7 @@ import com.zenchn.support.base.IActivity;
  */
 
 public interface BaseView extends IActivity {
-    void onApiFailure();
+    void onApiFailure(String msg);
 
     void onApiGrantRefuse();
 }

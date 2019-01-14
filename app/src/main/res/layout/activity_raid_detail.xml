@@ -45,8 +45,8 @@
                         android:id="@+id/tv_home_detail_tip"
                         android:layout_width="wrap_content"
                         android:layout_height="17.5dp"
-                        android:layout_alignParentBottom="true"
                         android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
                         android:background="@drawable/triangle_dark"
                         android:gravity="center"
                         android:paddingLeft="6dp"
@@ -60,10 +60,10 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:orientation="vertical"
-                    android:paddingBottom="15dp"
                     android:paddingLeft="15dp"
+                    android:paddingTop="17dp"
                     android:paddingRight="15dp"
-                    android:paddingTop="17dp">
+                    android:paddingBottom="15dp">
 
                     <!--标题-->
                     <TextView
@@ -328,10 +328,12 @@
 
         </cn.hzjdemo.hellodiary.widgets.ObservableScrollView>
 
-        <include
-            layout="@layout/title_bar"
-            app:layout_behavior="@string/translateBehavior"/>
 
+        <com.zenchn.support.widget.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/translateBehavior"/>
 
         <!--预约订购-->
         <LinearLayout

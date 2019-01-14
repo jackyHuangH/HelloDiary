@@ -12,11 +12,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
+import com.gyf.barlibrary.ImmersionBar;
 import com.zenchn.support.utils.TimeUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.activity.BuyRecordActivity;
@@ -27,8 +27,8 @@ import cn.hzjdemo.hellodiary.ui.activity.SysMessageActivity;
 import cn.hzjdemo.hellodiary.ui.activity.UserInfoActivity;
 import cn.hzjdemo.hellodiary.ui.activity.WebDetailActivity;
 import cn.hzjdemo.hellodiary.ui.base.BaseFragment;
-import cn.hzjdemo.hellodiary.util.glide.CircleTransform;
-import cn.hzjdemo.hellodiary.util.glide.GlideApp;
+import cn.hzjdemo.hellodiary.wrapper.glide.CircleTransform;
+import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * 我的
@@ -59,13 +59,21 @@ public class MineFragment extends BaseFragment {
     RelativeLayout rlMineBg;//我的信息背景
     @BindView(R.id.bt_go_login)
     Button mBtGoLogin;
-    Unbinder unbinder;
 
     public static MineFragment getInstance() {
         if (null == mFragment)
             mFragment = new MineFragment();
 
         return mFragment;
+    }
+
+    @Override
+    protected void initStatusBar() {
+        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar
+                .transparentStatusBar()
+                .statusBarDarkFont(false)
+                .init();
     }
 
     @Override
@@ -102,48 +110,50 @@ public class MineFragment extends BaseFragment {
             R.id.ll_my_prize_record, R.id.ll_mine_introduce, R.id.ll_raid_rules})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_user_head://用户资料
-            {
+            case R.id.iv_user_head: {
+                //用户资料
                 Intent intent = new Intent(getActivity(), UserInfoActivity.class);
                 startActivity(intent);
             }
             break;
-            case R.id.btn_message://消息
-            {
+            case R.id.btn_message: {
+                //消息
                 Intent intent = new Intent(getActivity(), SysMessageActivity.class);
                 startActivity(intent);
             }
             break;
-            case R.id.ll_my_show_order://我的晒单
-            {
+            case R.id.ll_my_show_order: {
+                //我的晒单
                 Intent intent = new Intent(getActivity(), MyShowOrderActivity.class);
                 startActivity(intent);
             }
             break;
-            case R.id.ll_my_raid_record://夺宝记录
-            {
+            case R.id.ll_my_raid_record: {
+                //夺宝记录
                 Intent intent = new Intent(getActivity(), GroupBuyRecordActivity.class);
                 startActivity(intent);
             }
             break;
-            case R.id.ll_my_prize_record://中奖记录
-            {
+            case R.id.ll_my_prize_record: {
+                //中奖记录
                 Intent intent = new Intent(getActivity(), BuyRecordActivity.class);
                 startActivity(intent);
             }
             break;
-            case R.id.ll_mine_introduce://可伸缩列表
-            {
+            case R.id.ll_mine_introduce: {
+                //表格
 
             }
             break;
-            case R.id.ll_raid_rules://夺宝规则
-            {
+            case R.id.ll_raid_rules: {
+                //夺宝规则
                 Intent intent = new Intent(getActivity(), WebDetailActivity.class);
                 intent.putExtra("title", getString(R.string.group_buy_rule_str));
                 startActivity(intent);
             }
             break;
+            default:
+                break;
         }
     }
 
@@ -158,12 +168,4 @@ public class MineFragment extends BaseFragment {
     protected void componentInject(AppComponent appComponent) {
 
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-
 }

@@ -9,16 +9,15 @@ import android.view.WindowManager;
 import com.gyf.barlibrary.ImmersionBar;
 import com.gyf.barlibrary.OnKeyboardListener;
 import com.zenchn.support.base.AbstractFragment;
-import com.zenchn.support.kit.AndroidKit;
 import com.zenchn.support.utils.StringUtils;
 import com.zenchn.support.widget.TitleBar;
 
 import javax.inject.Inject;
 
-import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.app.ApplicationKit;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.basepresenter.BasePresenterImpl;
+import me.jessyan.autosize.AutoSizeConfig;
 
 
 /**
@@ -47,7 +46,7 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
         componentInject(applicationComponent);
 
         //今日头条屏幕适配方案配置
-//        AutoSizeConfig.getInstance().setCustomFragment(true);
+        AutoSizeConfig.getInstance().setCustomFragment(true);
     }
 
     @Override
@@ -109,6 +108,10 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
         getActivity().onBackPressed();
     }
 
+    @Override
+    protected void onSupportVisible() {
+        //Fragment对用户可见时
+    }
 
     @Override
     public void onApiGrantRefuse() {
@@ -123,8 +126,8 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
     }
 
     @Override
-    public void onApiFailure() {
-        showResMessage(AndroidKit.NetWork.isNetworkAvailable(getActivity()) ? R.string.common_error_service : R.string.common_error_network);
+    public void onApiFailure(String msg) {
+        showMessage(msg);
     }
 
 

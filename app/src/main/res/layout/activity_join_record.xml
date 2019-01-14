@@ -6,7 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/title_bar" />
+    <com.zenchn.support.widget.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/swipe_refresh_join_record"

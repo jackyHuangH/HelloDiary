@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.zenchn.picbrowserlib.R;
-import com.zenchn.picbrowserlib.entity.ImageSourceInfo;
+import com.zenchn.picbrowserlib.pojo.ImageSourceInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ import java.util.List;
  * 作   者： by Hzj on 2017/12/18/018.
  * 描   述：大图浏览
  * 修订记录：
+ * @author HZJ
  */
 
 public class BigImageBrowserAdapter extends PagerAdapter {
@@ -50,8 +52,9 @@ public class BigImageBrowserAdapter extends PagerAdapter {
         return arg0 == arg1;
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, final int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, final int position) {
         Context context = container.getContext();
         ImageSourceInfo imageSourceInfo = mImageUrls.get(position);
 
@@ -67,8 +70,10 @@ public class BigImageBrowserAdapter extends PagerAdapter {
                 .dontAnimate()
                 .error(R.drawable.photo_default)
                 .placeholder(R.drawable.photo_default)
-                .skipMemoryCache(true)//禁用内存缓存，避免oom
-                .diskCacheStrategy(DiskCacheStrategy.NONE);//跳过磁盘缓存
+                //禁用内存缓存，避免oom
+                .skipMemoryCache(true)
+                //跳过磁盘缓存
+                .diskCacheStrategy(DiskCacheStrategy.NONE);
         Glide
                 .with(mContext)
                 .load(imageSourceInfo.getSource())
@@ -94,7 +99,7 @@ public class BigImageBrowserAdapter extends PagerAdapter {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NonNull ViewGroup container, int position, Object object) {
         PhotoView photoView = (PhotoView) object;
         if (photoView == null) {
             return;
@@ -125,7 +130,7 @@ public class BigImageBrowserAdapter extends PagerAdapter {
     }
 
     @Override
-    public int getItemPosition(Object object) {
+    public int getItemPosition(@NonNull Object object) {
         // 重写getItemPosition,保证每次获取时都强制重绘UI
         if (mChildCount > 0) {
             mChildCount--;

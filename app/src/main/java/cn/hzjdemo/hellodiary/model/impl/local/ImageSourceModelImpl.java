@@ -5,8 +5,8 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.zenchn.support.annotation.ImageSourceType;
-import com.zenchn.support.pojo.ImageSourceInfo;
+import com.zenchn.picbrowserlib.annotation.ImageSourceType;
+import com.zenchn.picbrowserlib.pojo.ImageSourceInfo;
 import com.zenchn.support.utils.UriUtils;
 
 import java.io.File;

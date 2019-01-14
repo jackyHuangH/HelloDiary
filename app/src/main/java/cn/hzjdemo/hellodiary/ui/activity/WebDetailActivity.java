@@ -3,7 +3,6 @@ package cn.hzjdemo.hellodiary.ui.activity;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
@@ -12,13 +11,13 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import com.zenchn.support.widget.TitleBar;
 
 import butterknife.BindView;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
-import cn.hzjdemo.hellodiary.util.TitleBarBuilder;
 
 /**
  * 网页详情
@@ -30,10 +29,8 @@ public class WebDetailActivity extends BaseActivity {
     WebView webView;
     @BindView(R.id.ll_root)
     LinearLayout llRoot;
-    @BindView(R.id.title_text)
-    TextView mTitleText;
-
-    private TextView title;
+    @BindView(R.id.title_bar)
+    TitleBar mTitleBar;
 
     @Override
     public int getLayoutRes() {
@@ -44,15 +41,7 @@ public class WebDetailActivity extends BaseActivity {
     public void initWidget() {
         initData();
 
-        TitleBarBuilder titleBarBuilder = new TitleBarBuilder(this, llRoot);
-        title = titleBarBuilder.getTitle();
-        titleBarBuilder.setLeftIco(R.drawable.top_back)
-                .setLeftIcoListening(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
+        mTitleBar.setOnLeftClickListener(this);
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -100,9 +89,7 @@ public class WebDetailActivity extends BaseActivity {
 
             @Override
             public void onReceivedTitle(WebView view, String title) {
-                if (mTitleText != null) {
-                    mTitleText.setText("获取标题：" + title);
-                }
+                mTitleBar.titleText("获取标题：" + title);
             }
 
 
@@ -139,7 +126,7 @@ public class WebDetailActivity extends BaseActivity {
     protected void initData() {
         if (getIntent() != null) {
             if (getIntent().hasExtra("title")) {
-                title.setText(getIntent().getStringExtra("title"));
+                mTitleBar.titleText(getIntent().getStringExtra("title"));
             }
         }
         webView.loadUrl("https://www.baidu.com/");
@@ -161,7 +148,6 @@ public class WebDetailActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         //销毁webview，释放内存
         if (webView != null) {
             webView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
@@ -170,5 +156,6 @@ public class WebDetailActivity extends BaseActivity {
             webView.destroy();
             webView = null;
         }
+        super.onDestroy();
     }
 }

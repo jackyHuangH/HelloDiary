@@ -27,7 +27,7 @@ import java.util.Arrays;
 /**
  * 作    者：wangr on 2017/6/12 18:46
  * 描    述：专注于表单数据登记 封装的控件
- * 修订记录：
+ * 修订记录：修正多行内容显示不全by Hzj
  */
 public class EnteringLayout extends ViewGroup {
 
@@ -129,6 +129,7 @@ public class EnteringLayout extends ViewGroup {
             if (mAsteriskView != null) {
                 removeView(mAsteriskView);
             }
+            mAsteriskView = null;
         }
         mIsMustItem = isMustItem;
     }
@@ -180,9 +181,8 @@ public class EnteringLayout extends ViewGroup {
                     - (mAsteriskLeftPadding + mAsteriskRightPadding + mNextIconLeftPadding);
             int measuredCustomViewWidth = Math.min(mCustomView.getMeasuredWidth(), measuredCustomViewMaxWidth);
 
-            int measuredCustomViewHeight = mCustomView.getMeasuredHeight();
             mCustomView.measure(MeasureSpec.makeMeasureSpec(measuredCustomViewWidth, MeasureSpec.EXACTLY),
-                    MeasureSpec.makeMeasureSpec(measuredCustomViewHeight, MeasureSpec.EXACTLY));
+                    MeasureSpec.makeMeasureSpec(measuredHeight, MeasureSpec.EXACTLY));
         }
     }
 
@@ -246,26 +246,31 @@ public class EnteringLayout extends ViewGroup {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int commonViewTop = getPaddingTop();
         int commonViewRight = (r - l) - getPaddingRight();
+        //取最高的子View高度作为bottom值
+        int commonViewBottom = commonViewTop + getViewMaxHeight() + getPaddingBottom();
 
         int itemTextViewLeft = getPaddingLeft();
         int itemTextViewRight = itemTextViewLeft + mItemTextView.getMeasuredWidth();
-        mItemTextView.layout(itemTextViewLeft, commonViewTop, itemTextViewRight, commonViewTop + mItemTextView.getMeasuredHeight());
+        mItemTextView.layout(itemTextViewLeft, commonViewTop, itemTextViewRight, commonViewBottom);
 
         if (mAsteriskView != null) {
             int asteriskViewLeft = itemTextViewRight + mAsteriskLeftPadding;
-            mAsteriskView.layout(asteriskViewLeft, commonViewTop, asteriskViewLeft + mAsteriskView.getMeasuredWidth(), commonViewTop + mAsteriskView.getMeasuredHeight());
+            mAsteriskView.layout(asteriskViewLeft, commonViewTop, asteriskViewLeft + mAsteriskView.getMeasuredWidth(),
+                    commonViewBottom);
         }
 
         if (mNextIconView != null) {
             int measuredWidth = mNextIconView.getMeasuredWidth();
-            mNextIconView.layout(commonViewRight - measuredWidth, commonViewTop, commonViewRight, commonViewTop + mNextIconView.getMeasuredHeight());
+            mNextIconView.layout(commonViewRight - measuredWidth, commonViewTop, commonViewRight,
+                    commonViewBottom);
         }
 
         if (mCustomView != null) {
             int measuredWidth = mCustomView.getMeasuredWidth();
             int customViewTop = (getMeasuredHeight() - mCustomView.getMeasuredHeight()) / 2;
             int customViewRight = commonViewRight - (mNextIconView == null ? 0 : (mNextIconView.getMeasuredWidth() + mNextIconLeftPadding));
-            mCustomView.layout(customViewRight - measuredWidth, customViewTop, customViewRight, customViewTop + mCustomView.getMeasuredHeight());
+            mCustomView.layout(customViewRight - measuredWidth, customViewTop, customViewRight,
+                    commonViewBottom);
         }
 
     }
@@ -334,6 +339,7 @@ public class EnteringLayout extends ViewGroup {
             if (mNextIconView != null) {
                 removeView(mNextIconView);
             }
+            mNextIconView = null;
         }
         mHasNextIcon = hasNextIcon;
     }
@@ -408,6 +414,22 @@ public class EnteringLayout extends ViewGroup {
 
     public String[] getOptionValues() {
         return mOptionValues;
+    }
+
+    public enum Type {
+        /***输入类型***/
+        input,
+        /***选项类型***/
+        option;
+
+        public static Type classifyType(int styleValue) {
+            for (Type type : values()) {
+                if (type.ordinal() == styleValue) {
+                    return type;
+                }
+            }
+            return input;
+        }
     }
 
     //----------------------------------------建造器模式------------------------------------
@@ -591,21 +613,4 @@ public class EnteringLayout extends ViewGroup {
             return enteringLayout;
         }
     }
-
-    public enum Type {
-        /***输入类型***/
-        input,
-        /***选项类型***/
-        option;
-
-        public static Type classifyType(int styleValue) {
-            for (Type type : values()) {
-                if (type.ordinal() == styleValue) {
-                    return type;
-                }
-            }
-            return input;
-        }
-    }
-
 }

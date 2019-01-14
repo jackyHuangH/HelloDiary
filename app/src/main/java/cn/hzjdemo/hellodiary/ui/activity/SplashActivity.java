@@ -51,6 +51,7 @@ public class SplashActivity extends BaseActivity implements DatePickerDialog.OnD
     @OnClick(R.id.bt_goto_diary)
     public void onMBtGotoDiaryClicked() {
         startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        finish();
     }
 
     @OnClick(R.id.bt_multi_select)

@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'//扩展插件，无需findViewById,直接引用布局文件的id即可
+//apply plugin: 'kotlin-kapt'  //kapt3插件
 apply from: 'dependence.gradle'
 
 android {

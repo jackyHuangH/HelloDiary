@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.zenchn.support.widget.TitleBar;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,6 @@ import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.presenter.contract.MineContract;
 import cn.hzjdemo.hellodiary.presenter.impl.MinePresenterImpl;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
-import cn.hzjdemo.hellodiary.util.TitleBarBuilder;
 import cn.hzjdemo.hellodiary.widgets.pickerview.popwindow.SinglePickerPopWin;
 
 /**
@@ -44,13 +45,15 @@ public class SetAddressActivity extends BaseActivity implements MineContract.Vie
     EditText etAddressDetail;
     @BindView(R.id.ll_root)
     LinearLayout llRoot;
+    @BindView(R.id.title_bar)
+    TitleBar mTitleBar;
 
     public static final String EXTRA_ADDRESS = "address";
     private List<String> provinces = new ArrayList<>();
     private List<String> cites = new ArrayList<>();
     private List<PCABean> pcaBeanList = new ArrayList<>();
     private String select_province = "";//选择的省份,不能为空
-    private MinePresenterImpl minePresenter=new MinePresenterImpl(this);
+    private MinePresenterImpl minePresenter = new MinePresenterImpl(this);
 
     private Handler handler = new Handler() {
         @Override
@@ -95,12 +98,11 @@ public class SetAddressActivity extends BaseActivity implements MineContract.Vie
 
     @Override
     public void initWidget() {
-        TitleBarBuilder titleBarBuilder = new TitleBarBuilder(SetAddressActivity.this, llRoot);
-        titleBarBuilder.setTitleText(getString(R.string.edit_address_str))
-                .setRightText(getString(R.string.confirm_str))
-                .setRightTitleListening(new View.OnClickListener() {
+        mTitleBar.titleText(getString(R.string.edit_address_str))
+                .rightText(getString(R.string.confirm_str))
+                .setOnRightClickListener(new TitleBar.OnRightClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onRightViewClick(View v) {
                         //TODO 确认
                         if (checkDataEmpty()) {
                             String detail_address = etAddressDetail.getText().toString();
@@ -118,13 +120,7 @@ public class SetAddressActivity extends BaseActivity implements MineContract.Vie
                         }
                     }
                 })
-                .setLeftIco(R.drawable.top_back)
-                .setLeftIcoListening(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
+                .setOnLeftClickListener(this);
 
         initData();
     }

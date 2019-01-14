@@ -6,16 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/title_bar"/>
-
-    <RelativeLayout
+    <com.zenchn.support.widget.TitleBar
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"/>
 
-        <WebView
-            android:id="@+id/web_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-    </RelativeLayout>
 </LinearLayout>

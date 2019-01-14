@@ -4,12 +4,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.LinearLayout;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+import com.zenchn.support.widget.TitleBar;
 import com.zhy.adapter.recyclerview.wrapper.EmptyWrapper;
 
 import java.util.ArrayList;
@@ -21,7 +21,6 @@ import cn.hzjdemo.hellodiary.adapter.JoinRecordAdapter;
 import cn.hzjdemo.hellodiary.bean.JoinRecordBean;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
-import cn.hzjdemo.hellodiary.util.TitleBarBuilder;
 
 /**
  * 参与记录
@@ -35,6 +34,8 @@ public class JoinRecordActivity extends BaseActivity {
     SmartRefreshLayout swipeRefreshJoinRecord;
     @BindView(R.id.ll_root)
     LinearLayout llRoot;
+    @BindView(R.id.title_bar)
+    TitleBar mTitleBar;
 
     private int count = 0;
     private List<JoinRecordBean> listDatas = new ArrayList<>();
@@ -54,15 +55,8 @@ public class JoinRecordActivity extends BaseActivity {
 
     @Override
     public void initWidget() {
-        TitleBarBuilder titleBarBuilder = new TitleBarBuilder(this, llRoot);
-        titleBarBuilder.setTitleText("参与记录")
-                .setLeftIco(R.drawable.top_back)
-                .setLeftIcoListening(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
+        mTitleBar.titleText("参与记录")
+                .setOnLeftClickListener(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rlvRecord.setLayoutManager(linearLayoutManager);

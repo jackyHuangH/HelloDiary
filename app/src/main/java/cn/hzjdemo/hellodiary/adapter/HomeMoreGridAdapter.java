@@ -13,8 +13,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;
-import cn.hzjdemo.hellodiary.util.glide.GlideApp;
 import cn.hzjdemo.hellodiary.widgets.AutoSizeTextView;
+import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * Created by Hzj on 2017/8/15.

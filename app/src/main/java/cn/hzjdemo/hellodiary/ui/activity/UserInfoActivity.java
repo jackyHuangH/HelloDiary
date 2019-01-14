@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
 import com.zenchn.support.kit.AndroidKit;
+import com.zenchn.support.widget.TitleBar;
 import com.zenchn.support.widget.dialog.PopupMaster;
 
 import butterknife.BindView;
@@ -25,9 +26,8 @@ import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.bean.TakeAddressBean;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
-import cn.hzjdemo.hellodiary.util.TitleBarBuilder;
-import cn.hzjdemo.hellodiary.util.glide.CircleTransform;
-import cn.hzjdemo.hellodiary.util.glide.GlideApp;
+import cn.hzjdemo.hellodiary.wrapper.glide.CircleTransform;
+import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * 我的资料
@@ -48,6 +48,8 @@ public class UserInfoActivity extends BaseActivity {
     LinearLayout llEditAddress;
     @BindView(R.id.ll_root)
     LinearLayout llRoot;
+    @BindView(R.id.title_bar)
+    TitleBar mTitleBar;
 
     public static final int IMAGE_PICKER = 0x01;
     public static final int SET_ADDRESS = 0x02;
@@ -72,15 +74,8 @@ public class UserInfoActivity extends BaseActivity {
 
     @Override
     public void initWidget() {
-        TitleBarBuilder titleBarBuilder = new TitleBarBuilder(UserInfoActivity.this, llRoot);
-        titleBarBuilder.setTitleText(getString(R.string.my_info_str))
-                .setLeftIco(R.drawable.top_back)
-                .setLeftIcoListening(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
+        mTitleBar.titleText(getString(R.string.my_info_str))
+                .setOnLeftClickListener(this);
 
         RequestBuilder<Bitmap> requestBuilder = GlideApp.with(UserInfoActivity.this)
                 .asBitmap()

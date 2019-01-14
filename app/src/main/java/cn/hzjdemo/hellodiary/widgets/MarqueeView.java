@@ -14,7 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import com.zenchn.apilib.util.Java;
+import com.zenchn.apilib.util.JavaKit;
 import com.zenchn.support.kit.AndroidKit;
 
 import java.util.ArrayList;
@@ -199,7 +199,7 @@ public class MarqueeView extends ViewFlipper {
      * @param outAnimResID 离开动画的resID
      */
     public void startWithList(List<? extends CharSequence> notices, @AnimRes int inAnimResId, @AnimRes int outAnimResID) {
-        if (Java.isEmpty(notices)) {
+        if (JavaKit.isEmpty(notices)) {
             return;
         }
         setNotices(notices);

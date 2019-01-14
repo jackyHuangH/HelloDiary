@@ -16,9 +16,9 @@ import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.bean.ShowOrderBean;
 import cn.hzjdemo.hellodiary.ui.activity.ShowPictureActivity;
-import cn.hzjdemo.hellodiary.util.glide.GlideApp;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.MultiImageView;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.entity.PhotoInfo;
+import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * Created by Hzj on 2017/8/18.

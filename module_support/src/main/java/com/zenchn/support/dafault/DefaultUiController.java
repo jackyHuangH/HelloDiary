@@ -13,9 +13,10 @@ import com.zenchn.support.widget.tips.SuperToast;
 
 
 /**
- * 作    者：wangr on 2017/4/27 14:56
  * 描    述：
- * 修订记录：
+ * 修订记录:
+ *
+ * @author HZJ
  */
 
 public class DefaultUiController implements IUiController {
@@ -33,21 +34,12 @@ public class DefaultUiController implements IUiController {
      */
     @Override
     public void showProgress() {
-        if (mMaterialDialog == null) {
-            mMaterialDialog = new MaterialDialog.Builder(mContext)
-                    .content(R.string.common_library_loading)
-                    .progress(true, 0)
-                    .progressIndeterminateStyle(false)
-                    .cancelable(false)
-                    .canceledOnTouchOutside(false)
-                    .autoDismiss(false)
-                    .build();
-        }
-        DialogHandler.safeShowDialog(mMaterialDialog);
+        showProgress(mContext.getString(R.string.common_library_loading));
     }
 
     /**
      * 显示自定义内容加载条
+     *
      * @param msg
      */
     @Override
@@ -61,6 +53,8 @@ public class DefaultUiController implements IUiController {
                     .canceledOnTouchOutside(false)
                     .autoDismiss(false)
                     .build();
+        } else {
+            mMaterialDialog.setContent(msg);
         }
         DialogHandler.safeShowDialog(mMaterialDialog);
     }

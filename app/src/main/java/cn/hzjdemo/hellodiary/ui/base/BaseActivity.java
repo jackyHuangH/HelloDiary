@@ -19,7 +19,6 @@ import com.zenchn.support.widget.TitleBar;
 
 import javax.inject.Inject;
 
-import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.app.ApplicationKit;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.basepresenter.BasePresenterImpl;
@@ -111,8 +110,8 @@ public abstract class BaseActivity<P extends BasePresenterImpl> extends Abstract
     }
 
     @Override
-    public void onApiFailure() {
-        showResMessage(AndroidKit.NetWork.isNetworkAvailable(this) ? R.string.common_error_service : R.string.common_error_network);
+    public void onApiFailure(String msg) {
+        showMessage(msg);
     }
 
     @Override

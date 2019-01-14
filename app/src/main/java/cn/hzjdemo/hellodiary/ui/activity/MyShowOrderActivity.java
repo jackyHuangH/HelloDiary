@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+import com.zenchn.support.widget.TitleBar;
 import com.zenchn.support.widget.tips.SuperToast;
 import com.zhy.adapter.recyclerview.wrapper.EmptyWrapper;
 
@@ -25,7 +26,6 @@ import cn.hzjdemo.hellodiary.bean.ShowOrderBean;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
 import cn.hzjdemo.hellodiary.util.ItemClickSupport;
-import cn.hzjdemo.hellodiary.util.TitleBarBuilder;
 
 /**
  * 我的晒单
@@ -38,6 +38,8 @@ public class MyShowOrderActivity extends BaseActivity {
     SmartRefreshLayout swipeRefreshMyOrder;
     @BindView(R.id.ll_root)
     LinearLayout llRoot;
+    @BindView(R.id.title_bar)
+    TitleBar mTitleBar;
 
     private List<ShowOrderBean> datas = new ArrayList<>();
 
@@ -51,15 +53,8 @@ public class MyShowOrderActivity extends BaseActivity {
 
     @Override
     public void initWidget() {
-        TitleBarBuilder titleBarBuilder = new TitleBarBuilder(this, llRoot);
-        titleBarBuilder.setTitleText(getString(R.string.my_show_order))
-                .setLeftIco(R.drawable.top_back)
-                .setLeftIcoListening(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
+        mTitleBar.titleText(getString(R.string.my_show_order))
+                .setOnLeftClickListener(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rlvMyOrder.setLayoutManager(linearLayoutManager);
