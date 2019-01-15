@@ -1,5 +1,6 @@
 package cn.hzjdemo.hellodiary.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -7,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.zenchn.support.router.Router;
 import com.zenchn.support.widget.TitleBar;
 import com.zenchn.support.widget.tips.SuperToast;
 
@@ -117,5 +119,13 @@ public class ConfirmOrderActivity extends BaseActivity {
                 }
             }
         }
+    }
+
+    public static void launch(Activity from) {
+        Router
+                .newInstance()
+                .from(from)
+                .to(ConfirmOrderActivity.class)
+                .launch();
     }
 }

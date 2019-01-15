@@ -1,10 +1,12 @@
 package cn.hzjdemo.hellodiary.ui.activity;
 
 import android.animation.Animator;
+import android.app.Activity;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -19,18 +21,18 @@ import android.view.ViewTreeObserver;
 import android.view.animation.BounceInterpolator;
 import android.widget.AbsListView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.youth.banner.Banner;
-import com.zenchn.support.widget.TitleBar;
+import com.zenchn.support.router.Router;
 import com.zenchn.support.widget.dialog.PopupMaster;
 import com.zenchn.support.widget.tips.SuperToast;
 
@@ -40,6 +42,7 @@ import java.util.Locale;
 
 import butterknife.BindColor;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;
@@ -49,18 +52,19 @@ import cn.hzjdemo.hellodiary.bean.MessageEntity;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
 import cn.hzjdemo.hellodiary.util.StatusBarUtil;
-import cn.hzjdemo.hellodiary.wrapper.glide.BannerImageLoader;
 import cn.hzjdemo.hellodiary.widgets.BottomSheetDialog.BottomSheetDialogListView;
 import cn.hzjdemo.hellodiary.widgets.BottomSheetDialog.BottomSheetRecyclerView;
 import cn.hzjdemo.hellodiary.widgets.BottomSheetDialog.SpringBackBottomSheetDialog;
 import cn.hzjdemo.hellodiary.widgets.CommonSharePop;
 import cn.hzjdemo.hellodiary.widgets.ObservableScrollView;
+import cn.hzjdemo.hellodiary.wrapper.glide.BannerImageLoader;
 
 /**
  * 主页夺宝详情
  */
 public class RaidDetailActivity extends BaseActivity {
 
+    public static final String EXTRA_HAS_START_GROUP = "has_start_group";
     @BindView(R.id.banner_home_detail)
     Banner bannerHomeDetail;
     @BindView(R.id.tv_home_detail_tip)
@@ -98,8 +102,12 @@ public class RaidDetailActivity extends BaseActivity {
 
     @BindColor(R.color.orangeRedTwo)
     int redTwo;
-    @BindView(R.id.title_bar)
-    TitleBar mTitleBar;
+    @BindView(R.id.title_text)
+    TextView mtvTitle;
+    @BindView(R.id.ibt_back)
+    ImageButton mIbtBack;
+    @BindView(R.id.ibt_right)
+    ImageButton mIbtRight;
 
     private int bannerHeight = 0;
 
@@ -119,23 +127,27 @@ public class RaidDetailActivity extends BaseActivity {
     private double pay_sum_price = 0;//购买总价
     private double single_price = 10;//购买单价
     private boolean has_start_group = false;//是否已开团,
-    private boolean statusbarTransparent = true;//状态栏是否透明
+    private boolean mStatusBarWhiteFont = true;//状态栏是否亮色字体
+
+    @OnClick(R.id.ibt_back)
+    public void onViewClicked() {
+        onBackPressed();
+    }
 
     @Override
     public void initWidget() {
-        mTitleBar.titleText("详情")
-                .setOnLeftClickListener(this)
-                .rightIcon(R.drawable.top_share)
-                .setOnRightClickListener(v -> {
-                    //todo 分享
-                    CommonSharePop sharePop = new CommonSharePop.Builder(RaidDetailActivity.this, v, handler)
-                            .create();
-                    sharePop.showPopWin();
+        mIbtRight.setOnClickListener(v -> {
+            //todo 分享
+            CommonSharePop sharePop = new CommonSharePop.Builder(RaidDetailActivity.this, v, handler)
+                    .create();
+            sharePop.showPopWin();
 
 //                        showBottomDialog();
-                });
+        });
         //初始透明度为0
-        mTitleBar.setAlpha(0);
+        mtvTitle.setAlpha(0);
+        StatusBarUtil.setSmartPadding(this, mtvTitle);
+
         bannerHomeDetail.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -158,9 +170,6 @@ public class RaidDetailActivity extends BaseActivity {
         }
 
         initRaidDialog();
-
-        resetTiltleBar();
-
         initData();
     }
 
@@ -256,13 +265,13 @@ public class RaidDetailActivity extends BaseActivity {
                     }
 
                     @Override
-                    public View getView(final int position, View convertView,final ViewGroup parent) {
-                        if(convertView == null){
+                    public View getView(final int position, View convertView, final ViewGroup parent) {
+                        if (convertView == null) {
                             convertView = new TextView(parent.getContext());
                             convertView.setLayoutParams(
                                     new AbsListView.LayoutParams(
                                             ViewGroup.LayoutParams.MATCH_PARENT,
-                                            40*3 // 40dp
+                                            40 * 3 // 40dp
                                     )
                             );
                         }
@@ -275,7 +284,7 @@ public class RaidDetailActivity extends BaseActivity {
                                 new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        Toast.makeText(parent.getContext(),""+position,Toast.LENGTH_LONG).show();
+                                        Toast.makeText(parent.getContext(), "" + position, Toast.LENGTH_LONG).show();
                                     }
                                 }
                         );
@@ -283,7 +292,7 @@ public class RaidDetailActivity extends BaseActivity {
                                 new View.OnTouchListener() {
                                     @Override
                                     public boolean onTouch(View v, MotionEvent event) {
-                                        if(event.getAction() == MotionEvent.ACTION_DOWN){
+                                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
                                             bottomSheetDialogListView.setCoordinatorDisallow();
                                         }
                                         return false;
@@ -309,18 +318,6 @@ public class RaidDetailActivity extends BaseActivity {
                     }
                 }
         );
-    }
-
-    /**
-     * 获取状态栏高度并重新设置标题栏位置
-     */
-    private void resetTiltleBar() {
-        int statusBarHeight = StatusBarUtil.getStatusBarHeight(this);
-        RelativeLayout.LayoutParams layoutParams1 = (RelativeLayout.LayoutParams) mTitleBar.getLayoutParams();
-        layoutParams1.setMargins(0, statusBarHeight, 0, 0);
-
-        mTitleBar.setLayoutParams(layoutParams1);
-
     }
 
     /**
@@ -375,8 +372,7 @@ public class RaidDetailActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         //todo 立即支付
-                        Intent intent = new Intent(RaidDetailActivity.this, ConfirmOrderActivity.class);
-                        startActivity(intent);
+                        ConfirmOrderActivity.launch(RaidDetailActivity.this);
                         raidPopMaster.close();
                     }
                 })
@@ -398,19 +394,26 @@ public class RaidDetailActivity extends BaseActivity {
     private ObservableScrollView.ScrollViewListener scrollViewListener = new ObservableScrollView.ScrollViewListener() {
         @Override
         public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
+            float alpha;
             if (y <= 0) {
-                mTitleBar.setAlpha(0);
-                statusbarTransparent = true;
+                alpha = 0;
+                mStatusBarWhiteFont = true;
+                mIbtBack.setImageResource(R.drawable.ic_back_white);
+                mIbtRight.setImageResource(R.drawable.top_share_white);
                 initStatusBar();
-            } else if (y > 0 && y <= bannerHeight) {
-                float alpha = (float) y / (bannerHeight / 3);
-                //设置标题透明度
-                mTitleBar.setAlpha(alpha);
-                statusbarTransparent = false;
-                initStatusBar();
+            } else if (y <= bannerHeight) {
+                alpha = (float) y / (bannerHeight / 3);
+                if (alpha>=0.8F){
+                    mStatusBarWhiteFont = false;
+                    mIbtBack.setImageResource(R.drawable.ic_back_black);
+                    mIbtRight.setImageResource(R.drawable.top_share_black);
+                    initStatusBar();
+                }
             } else {
-                mTitleBar.setAlpha(1);
+                alpha = 1;
             }
+            //设置标题透明度
+            mtvTitle.setAlpha(alpha);
         }
     };
 
@@ -422,19 +425,16 @@ public class RaidDetailActivity extends BaseActivity {
     @Override
     protected void initStatusBar() {
         mImmersionBar = ImmersionBar.with(this);
-        if (statusbarTransparent) {
+        if (mStatusBarWhiteFont) {
             mImmersionBar
-                    .transparentStatusBar() //状态栏透明，不写默认透明
-                    .statusBarDarkFont(false); //状态栏字体深色，不写默认亮色（白色）
+                    .transparentStatusBar()
+                    .statusBarDarkFont(false);
         } else {
             mImmersionBar
-                    .statusBarColor(android.R.color.white)     //状态栏颜色，不写默认透明色
-                    .statusBarDarkFont(true, 0.2f);   //状态栏字体是深色，不写默认为亮色
+                    .transparentStatusBar()
+                    .statusBarDarkFont(true, 0.2f);
         }
-        mImmersionBar.navigationBarColor(R.color.black) //导航栏颜色，不写默认黑色
-                .navigationBarEnable(true)   //是否可以修改导航栏颜色，默认为true
-                .navigationBarWithKitkatEnable(true)//是否可以修改安卓4.4和emui3.1手机导航栏颜色，默认为true
-                .init();
+        mImmersionBar.init();
     }
 
     @Override
@@ -445,8 +445,8 @@ public class RaidDetailActivity extends BaseActivity {
     protected void initData() {
         if (getIntent() != null) {
             Intent intentFrom = getIntent();
-            if (intentFrom.hasExtra("has_start_group")) {
-                has_start_group = intentFrom.getBooleanExtra("has_start_group", false);
+            if (intentFrom.hasExtra(EXTRA_HAS_START_GROUP)) {
+                has_start_group = intentFrom.getBooleanExtra(EXTRA_HAS_START_GROUP, false);
             }
         }
 
@@ -538,8 +538,7 @@ public class RaidDetailActivity extends BaseActivity {
             break;
             case R.id.ll_pass_publish://往期揭晓
             {
-                Intent intent = new Intent(RaidDetailActivity.this, PassAnnounceActivity.class);
-                startActivity(intent);
+                PassAnnounceActivity.launch(this);
             }
             break;
             case R.id.ll_raid_rule://夺宝规则
@@ -550,8 +549,7 @@ public class RaidDetailActivity extends BaseActivity {
             }
             break;
             case R.id.bt_look_all_record: {
-                Intent intent = new Intent(RaidDetailActivity.this, JoinRecordActivity.class);
-                startActivity(intent);
+                JoinRecordActivity.launch(this);
             }
             break;
             case R.id.bt_raid_now://立即夺宝
@@ -596,5 +594,14 @@ public class RaidDetailActivity extends BaseActivity {
         super.onStop();
         if (null != bannerHomeDetail)
             bannerHomeDetail.stopAutoPlay();
+    }
+
+    public static void launch(Activity from, boolean hasStartGroup) {
+        Router
+                .newInstance()
+                .from(from)
+                .putBoolean(EXTRA_HAS_START_GROUP, hasStartGroup)
+                .to(RaidDetailActivity.class)
+                .launch();
     }
 }

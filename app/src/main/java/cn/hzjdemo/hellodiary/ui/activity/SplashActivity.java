@@ -1,6 +1,5 @@
 package cn.hzjdemo.hellodiary.ui.activity;
 
-import android.content.Intent;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -50,8 +49,7 @@ public class SplashActivity extends BaseActivity implements DatePickerDialog.OnD
 
     @OnClick(R.id.bt_goto_diary)
     public void onMBtGotoDiaryClicked() {
-        startActivity(new Intent(SplashActivity.this, MainActivity.class));
-        finish();
+        MainActivity.launch(this);
     }
 
     @OnClick(R.id.bt_multi_select)

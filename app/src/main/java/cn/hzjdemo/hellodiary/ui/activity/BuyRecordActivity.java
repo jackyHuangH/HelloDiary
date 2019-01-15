@@ -1,5 +1,6 @@
 package cn.hzjdemo.hellodiary.ui.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+import com.zenchn.support.router.Router;
 import com.zenchn.support.widget.TitleBar;
 import com.zenchn.support.widget.dialog.PopupMaster;
 import com.zenchn.support.widget.tips.SuperToast;
@@ -193,5 +195,13 @@ public class BuyRecordActivity extends BaseActivity {
     @Override
     protected void componentInject(AppComponent appComponent) {
 
+    }
+
+    public static void launch(Activity from) {
+        Router
+                .newInstance()
+                .from(from)
+                .to(BuyRecordActivity.class)
+                .launch();
     }
 }

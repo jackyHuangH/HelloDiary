@@ -1,5 +1,6 @@
 package cn.hzjdemo.hellodiary.ui.activity;
 
+import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+import com.zenchn.support.router.Router;
 import com.zenchn.support.widget.TitleBar;
 import com.zhy.adapter.recyclerview.wrapper.EmptyWrapper;
 
@@ -111,5 +113,13 @@ public class GroupBuyRecordActivity extends BaseActivity {
     @Override
     protected void componentInject(AppComponent appComponent) {
 
+    }
+
+    public static void launch(Activity from) {
+        Router
+                .newInstance()
+                .from(from)
+                .to(GroupBuyRecordActivity.class)
+                .launch();
     }
 }

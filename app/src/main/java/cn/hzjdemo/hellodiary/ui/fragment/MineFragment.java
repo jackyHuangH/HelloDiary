@@ -2,6 +2,7 @@ package cn.hzjdemo.hellodiary.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import cn.hzjdemo.hellodiary.ui.activity.GroupBuyRecordActivity;
 import cn.hzjdemo.hellodiary.ui.activity.LoginActivity;
 import cn.hzjdemo.hellodiary.ui.activity.MyShowOrderActivity;
 import cn.hzjdemo.hellodiary.ui.activity.SysMessageActivity;
+import cn.hzjdemo.hellodiary.ui.activity.TableActivity;
 import cn.hzjdemo.hellodiary.ui.activity.UserInfoActivity;
 import cn.hzjdemo.hellodiary.ui.activity.WebDetailActivity;
 import cn.hzjdemo.hellodiary.ui.base.BaseFragment;
@@ -37,8 +39,6 @@ import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 public class MineFragment extends BaseFragment {
     @BindView(R.id.ll_root)
     LinearLayout llRoot;
-
-    private static MineFragment mFragment;
     @BindView(R.id.iv_user_head)
     ImageView ivUserHead;
     @BindView(R.id.tv_user_name)
@@ -61,10 +61,10 @@ public class MineFragment extends BaseFragment {
     Button mBtGoLogin;
 
     public static MineFragment getInstance() {
-        if (null == mFragment)
-            mFragment = new MineFragment();
-
-        return mFragment;
+        MineFragment fragment = new MineFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -101,6 +101,11 @@ public class MineFragment extends BaseFragment {
     }
 
     @Override
+    protected void lazyLoad() {
+
+    }
+
+    @Override
     public int getLayoutRes() {
         return R.layout.frag_mine;
     }
@@ -124,25 +129,22 @@ public class MineFragment extends BaseFragment {
             break;
             case R.id.ll_my_show_order: {
                 //我的晒单
-                Intent intent = new Intent(getActivity(), MyShowOrderActivity.class);
-                startActivity(intent);
+                MyShowOrderActivity.launch(getActivity());
             }
             break;
             case R.id.ll_my_raid_record: {
                 //夺宝记录
-                Intent intent = new Intent(getActivity(), GroupBuyRecordActivity.class);
-                startActivity(intent);
+                GroupBuyRecordActivity.launch(getActivity());
             }
             break;
             case R.id.ll_my_prize_record: {
                 //中奖记录
-                Intent intent = new Intent(getActivity(), BuyRecordActivity.class);
-                startActivity(intent);
+                BuyRecordActivity.launch(getActivity());
             }
             break;
             case R.id.ll_mine_introduce: {
                 //表格
-
+                TableActivity.launch(getActivity());
             }
             break;
             case R.id.ll_raid_rules: {

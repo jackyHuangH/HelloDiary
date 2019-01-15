@@ -1,5 +1,6 @@
 package cn.hzjdemo.hellodiary.bean;
 
+import com.bin.david.form.annotation.SmartColumn;
 import com.bin.david.form.annotation.SmartTable;
 
 /**
@@ -8,11 +9,15 @@ import com.bin.david.form.annotation.SmartTable;
  * desc  ：表格 数据实体
  * record：
  */
-@SmartTable(name = "")
-public class TableEntity {
+@SmartTable(name = "测试表格")
+public class TableInspectEntity {
+    @SmartColumn(id = 0,name = "数据时间")
     private String date;
+    @SmartColumn(id = 1,name = "数值1")
     private Double num1;
+    @SmartColumn(id = 2,name = "数值2")
     private Double num2;
+    @SmartColumn(id = 3,name = "数值3")
     private Double num3;
 
     public String getDate() {
@@ -49,7 +54,7 @@ public class TableEntity {
 
     @Override
     public String toString() {
-        return "TableEntity{" +
+        return "TableInspectEntity{" +
                 "date='" + date + '\'' +
                 ", num1=" + num1 +
                 ", num2=" + num2 +

@@ -1,5 +1,6 @@
 package cn.hzjdemo.hellodiary.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.zenchn.support.kit.AndroidKit;
+import com.zenchn.support.router.Router;
 import com.zenchn.support.widget.TitleBar;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 
@@ -128,5 +130,13 @@ public class SendOrderActivity extends BaseActivity {
     @Override
     protected void componentInject(AppComponent appComponent) {
 
+    }
+
+    public static void launch(Activity from) {
+        Router
+                .newInstance()
+                .from(from)
+                .to(SendOrderActivity.class)
+                .launch();
     }
 }

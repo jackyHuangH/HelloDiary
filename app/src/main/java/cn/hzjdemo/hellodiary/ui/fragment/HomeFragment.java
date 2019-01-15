@@ -1,15 +1,15 @@
 package cn.hzjdemo.hellodiary.ui.fragment;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
@@ -54,8 +54,8 @@ import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
  */
 
 public class HomeFragment extends BaseFragment implements HomeContract.View {
-    @BindView(R.id.rl_root)
-    RelativeLayout mRoot;
+    @BindView(R.id.fl_root)
+    FrameLayout mRoot;
     @BindView(R.id.scrollview_home)
     ObservableScrollView scrollView;
     @BindView(R.id.banner_home)
@@ -77,12 +77,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     int darkColor;
     @BindView(R.id.title_text)
     TextView mTitleText;
-    @BindView(R.id.title_bar)
-    RelativeLayout mTitleBar;
 
     private int bannerHeight = 0;
 
-    private static HomeFragment mHomeFragment;
     //处理magicIndicator单独使用时的点击事件
     private FragmentContainerHelper mFragmentContainerHelper = new FragmentContainerHelper();
 
@@ -90,23 +87,22 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     // 列表顶部和title底部重合时，列表的滑动距离。
     private float deltaY;
 
-    //状态栏是否透明
-    private boolean statusbarTransparent = true;
+    //状态栏是否亮色字体
+    private boolean mStatusbarWhiteFont = true;
 
     public static HomeFragment getInstance() {
-        if (null == mHomeFragment) {
-            mHomeFragment = new HomeFragment();
-        }
-
-        return mHomeFragment;
+        HomeFragment fragment = new HomeFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public void initWidget() {
         mTitleText.setText("首页");
 
-        mTitleBar.setAlpha(0);
-        resetTiltleBar();
+        mTitleText.setAlpha(0);
+        StatusBarUtil.setSmartPadding(getActivity(), mTitleText);
 
         bannerHome.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -116,39 +112,30 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                 scrollView.setScrollViewListener(scrollViewListener);
             }
         });
-
-        initData();
-
     }
 
-    /**
-     * 获取状态栏高度并重新设置标题栏位置
-     */
-    private void resetTiltleBar() {
-        int statusBarHeight = StatusBarUtil.getStatusBarHeight(getActivity());
-        RelativeLayout.LayoutParams layoutParam = (RelativeLayout.LayoutParams) mTitleBar.getLayoutParams();
-        layoutParam.setMargins(0, statusBarHeight, 0, 0);
-
-        mTitleBar.setLayoutParams(layoutParam);
-
+    @Override
+    protected void lazyLoad() {
+        initData();
     }
 
     private ObservableScrollView.ScrollViewListener scrollViewListener = new ObservableScrollView.ScrollViewListener() {
         @Override
         public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
+            float alpha;
             if (y <= 0) {
-                mTitleBar.setAlpha(0);
-                statusbarTransparent = true;
+                alpha = 0;
+                mStatusbarWhiteFont = true;
                 initStatusBar();
-            } else if (y > 0 && y <= bannerHeight) {
-                float alpha = (float) y / bannerHeight;
-                //设置标题透明度
-                mTitleBar.setAlpha(alpha);
-                statusbarTransparent = false;
-                initStatusBar();
+            } else if (y <= bannerHeight) {
+                alpha = (float) y / bannerHeight;
             } else {
-                mTitleBar.setAlpha(1);
+                alpha = 1;
+                mStatusbarWhiteFont = false;
+                initStatusBar();
             }
+            //设置标题透明度
+            mTitleText.setAlpha(alpha);
         }
     };
 
@@ -161,17 +148,18 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Override
     protected void initStatusBar() {
         mImmersionBar = ImmersionBar.with(this);
-        if (statusbarTransparent) {
+        if (mStatusbarWhiteFont) {
             mImmersionBar
-                    .transparentStatusBar() //状态栏透明，不写默认透明
-                    .statusBarDarkFont(false); //状态栏字体深色，不写默认亮色（白色）
+                    .transparentStatusBar()
+                    .statusBarDarkFont(false);
         } else {
             mImmersionBar
-                    .statusBarColor(android.R.color.white)     //状态栏颜色，不写默认透明色
-                    .statusBarDarkFont(true, 0.2f);   //状态栏字体是深色，不写默认为亮色
+                    .transparentStatusBar()
+                    .statusBarDarkFont(true, 0.2f);
         }
         mImmersionBar.init();
     }
+
 
     protected void initData() {
         final int windowWidth = AndroidKit.Dimens.getScreenWidth();
@@ -208,8 +196,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         gvHotHome.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), RaidDetailActivity.class);
-                startActivity(intent);
+                RaidDetailActivity.launch(getActivity(), false);
             }
         });
 
@@ -231,9 +218,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             quickView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), RaidDetailActivity.class);
-                    intent.putExtra("has_start_group", true);
-                    startActivity(intent);
+                    RaidDetailActivity.launch(getActivity(), true);
                 }
             });
 
@@ -297,8 +282,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         gvMoreIntroduceHome.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), RaidDetailActivity.class);
-                startActivity(intent);
+                RaidDetailActivity.launch(getActivity(), false);
             }
         });
     }

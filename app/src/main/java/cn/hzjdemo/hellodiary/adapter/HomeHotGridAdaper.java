@@ -53,7 +53,7 @@ public class HomeHotGridAdaper extends BaseAdapter {
         }
 
         GlideApp.with(mContext)
-                .load(Constants.imgUrls[1])
+                .load(Constants.imgUrls[position%5])
                 .centerCrop()
                 .into(holder.ivHomeHot);
         holder.tvHomeHotTip.setText("剩余2"+position);

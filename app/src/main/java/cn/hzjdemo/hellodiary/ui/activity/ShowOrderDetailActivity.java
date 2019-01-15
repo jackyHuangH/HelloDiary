@@ -81,7 +81,7 @@ public class ShowOrderDetailActivity extends BaseActivity {
     public void initWidget() {
         mTitleBar.titleText(getString(R.string.show_order_detail))
                 .setOnLeftClickListener(this)
-                .rightIcon(R.drawable.top_share)
+                .rightIcon(R.drawable.top_share_black)
                 .setOnRightClickListener(new TitleBar.OnRightClickListener() {
                     @Override
                     public void onRightViewClick(View v) {

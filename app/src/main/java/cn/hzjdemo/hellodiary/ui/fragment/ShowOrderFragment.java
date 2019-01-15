@@ -1,6 +1,7 @@
 package cn.hzjdemo.hellodiary.ui.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -9,8 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
@@ -50,26 +50,23 @@ public class ShowOrderFragment extends BaseFragment {
     RecyclerView rlvShowOrder;
     @BindView(R.id.swipe_refresh_order)
     SmartRefreshLayout swipeRefreshOrder;
-    @BindView(R.id.ll_root)
-    LinearLayout llRoot;
+    @BindView(R.id.fl_root)
+    FrameLayout mRootLayout;
     @BindColor(R.color.white)
     int whiteColor;
     @BindColor(R.color.dark)
     int darkColor;
     @BindView(R.id.title_text)
     TextView mTitleText;
-    @BindView(R.id.tv_right)
+    @BindView(R.id.title_right)
     TextView mTvRightTitle;
-    @BindView(R.id.title_bar)
-    RelativeLayout mTitleBar;
 
     private List<ShowOrderBean> datas = new ArrayList<>();
 
-    private static ShowOrderFragment mFragment;
     private Banner headBanner;
     private int bannerHeight = 0;
-    //状态栏是否透明
-    private boolean statusbarTransparent = true;
+    //状态栏是否亮色字体
+    private boolean mStatusbarWhiteFont = true;
 
     //累加滑动的距离,解决滑动一般dy=0;
     private int overScrollY = 0;
@@ -77,11 +74,10 @@ public class ShowOrderFragment extends BaseFragment {
     private EmptyWrapper emptyWrapper;
 
     public static ShowOrderFragment getInstance() {
-        if (null == mFragment) {
-            mFragment = new ShowOrderFragment();
-        }
-
-        return mFragment;
+        ShowOrderFragment fragment = new ShowOrderFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     private Handler handler = new Handler() {
@@ -100,10 +96,8 @@ public class ShowOrderFragment extends BaseFragment {
         //初始透明度
         mTitleText.setAlpha(0);
         mTvRightTitle.setTextColor(whiteColor);
-
-        resetTiltleBar();
+        StatusBarUtil.setSmartPadding(getActivity(), mTitleText);
         initRecyclerView();
-
 //        headBanner.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 //            @Override
 //            public void onGlobalLayout() {
@@ -131,7 +125,6 @@ public class ShowOrderFragment extends BaseFragment {
                 .start();
 
         initSwipeRefresh();
-        initData();
     }
 
     private void initSwipeRefresh() {
@@ -178,14 +171,14 @@ public class ShowOrderFragment extends BaseFragment {
         });
     }
 
-    @OnClick(R.id.tv_right)
+    @OnClick(R.id.title_right)
     public void onViewClicked() {
-        startActivity(new Intent(getActivity(), SendOrderActivity.class));
+        SendOrderActivity.launch(getActivity());
     }
 
     private void initRecyclerView() {
         //头部轮播图
-        View head_banner = LayoutInflater.from(getActivity()).inflate(R.layout.header_show_order, llRoot, false);
+        View head_banner = LayoutInflater.from(getActivity()).inflate(R.layout.header_show_order, mRootLayout, false);
         headBanner = (Banner) head_banner.findViewById(R.id.banner_show_order);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -216,18 +209,6 @@ public class ShowOrderFragment extends BaseFragment {
                 });
     }
 
-    /**
-     * 获取状态栏高度并重新设置标题栏位置
-     */
-    private void resetTiltleBar() {
-        int statusBarHeight = StatusBarUtil.getStatusBarHeight(getActivity());
-        RelativeLayout.LayoutParams layoutParam = (RelativeLayout.LayoutParams) mTitleBar.getLayoutParams();
-        layoutParam.setMargins(0, statusBarHeight, 0, 0);
-
-        mTitleBar.setLayoutParams(layoutParam);
-
-    }
-
     private RecyclerView.OnScrollListener recyclerViewScrollListener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -239,7 +220,7 @@ public class ShowOrderFragment extends BaseFragment {
             if (overScrollY <= 0) {
                 statusBarAlpha = 0;
                 mTvRightTitle.setTextColor(whiteColor);
-                statusbarTransparent=true;
+                mStatusbarWhiteFont = true;
                 initStatusBar();
             } else if (overScrollY > 0) {
                 statusBarAlpha = (float) overScrollY / bannerHeight;
@@ -247,7 +228,7 @@ public class ShowOrderFragment extends BaseFragment {
                     statusBarAlpha = 1;
                 }
                 mTvRightTitle.setTextColor(darkColor);
-                statusbarTransparent=false;
+                mStatusbarWhiteFont = false;
                 initStatusBar();
             }
             Log.d(TAG, "overScrollY: " + overScrollY);
@@ -260,16 +241,21 @@ public class ShowOrderFragment extends BaseFragment {
     @Override
     protected void initStatusBar() {
         mImmersionBar = ImmersionBar.with(this);
-        if (statusbarTransparent) {
+        if (mStatusbarWhiteFont) {
             mImmersionBar
                     .transparentStatusBar()
                     .statusBarDarkFont(false);
         } else {
             mImmersionBar
-                    .statusBarColor(android.R.color.white)
+                    .transparentStatusBar()
                     .statusBarDarkFont(true, 0.2f);
         }
         mImmersionBar.init();
+    }
+
+    @Override
+    protected void lazyLoad() {
+        initData();
     }
 
     protected void initData() {

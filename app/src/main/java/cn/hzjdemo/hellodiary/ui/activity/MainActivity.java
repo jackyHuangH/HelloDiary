@@ -1,9 +1,11 @@
 package cn.hzjdemo.hellodiary.ui.activity;
 
+import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.widget.FrameLayout;
 
-import com.gyf.barlibrary.ImmersionBar;
 import com.zenchn.support.managers.HFragmentManager;
+import com.zenchn.support.router.Router;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +36,16 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initWidget() {
         HFragmentManager fragmentManagerHelper = new HFragmentManager(getSupportFragmentManager(), R.id.fl_home_container);
+        //初始化所有fragment，
+        // 注意：这里切换fragment时要保证每个fragment只有唯一一个实例，不能重复创建！！！
+        Fragment[] fragments = {
+                HomeFragment.getInstance(),
+                ShowOrderFragment.getInstance(),
+                MineFragment.getInstance()
+        };
+
         //默认显示首页
-        fragmentManagerHelper.add(HomeFragment.getInstance());
+        fragmentManagerHelper.add(fragments[0]);
 
         //初始化底部tab
         List<BottomTabView.TabItemView> tabItemViews = new ArrayList<>();
@@ -47,14 +57,15 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onTabItemSelect(int position) {
                 switch (position) {
+                    //注意：这里切换fragment时要保证每个fragment只有唯一一个实例，不能重复创建！！！！
                     case 0:
-                        fragmentManagerHelper.switchFragment(HomeFragment.getInstance());
+                        fragmentManagerHelper.switchFragment(fragments[0]);
                         break;
                     case 1:
-                        fragmentManagerHelper.switchFragment(ShowOrderFragment.getInstance());
+                        fragmentManagerHelper.switchFragment(fragments[1]);
                         break;
                     case 2:
-                        fragmentManagerHelper.switchFragment(MineFragment.getInstance());
+                        fragmentManagerHelper.switchFragment(fragments[2]);
                         break;
                     default:
                         break;
@@ -68,15 +79,11 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void initStatusBar() {
-        mImmersionBar = ImmersionBar.with(this);
-        mImmersionBar
-                .transparentStatusBar() //状态栏透明，不写默认透明
-                .statusBarDarkFont(false) //状态栏字体深色，不写默认亮色（白色）
-                .navigationBarColor(R.color.black) //导航栏颜色，不写默认黑色
-                .navigationBarEnable(true)   //是否可以修改导航栏颜色，默认为true
-                .navigationBarWithKitkatEnable(true)//是否可以修改安卓4.4和emui3.1手机导航栏颜色，默认为true
-                .init();
+    public static void launch(Activity from) {
+        Router
+                .newInstance()
+                .from(from)
+                .to(MainActivity.class)
+                .launch();
     }
 }

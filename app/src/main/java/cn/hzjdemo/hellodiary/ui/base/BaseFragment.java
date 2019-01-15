@@ -30,6 +30,15 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
 
     protected ImmersionBar mImmersionBar;
 
+    /**
+     * 视图是否加载完毕
+     */
+    private boolean mIsViewPrepare = false;
+    /**
+     * 视图是否第一次展现
+     */
+    private boolean mFirstTimeVisible = false;
+
     @Inject
     protected P mPresenter;
 
@@ -94,6 +103,40 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
         return null;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mIsViewPrepare = true;
+        lazyLoadDataIfPrepared();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            lazyLoadDataIfPrepared();
+        }
+    }
+
+    private void lazyLoadDataIfPrepared() {
+        if (getUserVisibleHint() && mIsViewPrepare && !mFirstTimeVisible) {
+            lazyLoad();
+            mFirstTimeVisible = true;
+        }
+    }
+
+    /**
+     * 懒加载
+     */
+    protected abstract void lazyLoad();
+
+    /**
+     * Viewpager+Fragment 每次对用户可见时，可调用此方法，相当于fragment的resume
+     */
+    @Override
+    protected void onSupportVisible() {
+        //Fragment对用户可见时
+    }
 
     @Override
     public void onLeftViewClick(View v) {
@@ -106,11 +149,6 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
      */
     protected void onFragmentBackPressed() {
         getActivity().onBackPressed();
-    }
-
-    @Override
-    protected void onSupportVisible() {
-        //Fragment对用户可见时
     }
 
     @Override
