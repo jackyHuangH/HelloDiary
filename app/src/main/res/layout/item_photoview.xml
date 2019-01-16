@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.luck.picture.lib.photoview.PhotoView
+    <com.bm.library.PhotoView
         android:id="@+id/photoview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
@@ -17,8 +17,8 @@
         android:layout_gravity="center"
         android:visibility="visible"
         custom:max="100"
-        custom:ringProgress="0"
         custom:ringColor="@android:color/darker_gray"
+        custom:ringProgress="0"
         custom:ringProgressColor="@color/brightSkyBlue"
         custom:ringTextColor="@color/brightSkyBlue"
         custom:ringTextSize="16sp"

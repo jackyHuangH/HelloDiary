@@ -2,21 +2,21 @@ package cn.hzjdemo.hellodiary.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
+import com.bm.library.PhotoView;
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.luck.picture.lib.photoview.OnPhotoTapListener;
-import com.luck.picture.lib.photoview.PhotoView;
 
 import java.util.List;
 
@@ -54,16 +54,19 @@ public class BigImageAdapter2 extends PagerAdapter {
         return arg0 == arg1;
     }
 
+    @NonNull
     @Override
-    public View instantiateItem(ViewGroup container, final int position) {
+    public View instantiateItem(@NonNull ViewGroup container, final int position) {
         final Context context = container.getContext();
 
         final String imageUrl = mImageUrls.get(position);
 
         View view = LayoutInflater.from(context).inflate(R.layout.item_photoview, container, false);
-
-        PhotoView ivPic = (PhotoView) view.findViewById(R.id.photoview);
+        PhotoView photoView = (PhotoView) view.findViewById(R.id.photoview);
         final RingProgressBar progressBar = (RingProgressBar) view.findViewById(R.id.pb);
+
+        //开启缩放
+        photoView.enable();
 
         ProgressManager.getInstance().addResponseListener(imageUrl, new me.jessyan.progressmanager.ProgressListener() {
             @Override
@@ -98,14 +101,11 @@ public class BigImageAdapter2 extends PagerAdapter {
                         return false;
                     }
                 })
-                .into(ivPic);
+                .into(photoView);
 
-        ivPic.setOnPhotoTapListener(new OnPhotoTapListener() {
-            @Override
-            public void onPhotoTap(ImageView imageView, float v, float v1) {
-                if (mOnImageClickListener != null) {
-                    mOnImageClickListener.onImageClick();
-                }
+        photoView.setOnClickListener(v -> {
+            if (mOnImageClickListener != null) {
+                mOnImageClickListener.onImageClick();
             }
         });
 
@@ -126,10 +126,11 @@ public class BigImageAdapter2 extends PagerAdapter {
         if (photoView==null) {
             return;
         }
-
         //及时释放资源
-        photoView.destroyDrawingCache();
-        view.destroyDrawingCache();
+//        photoView.destroyDrawingCache();
+//        view.destroyDrawingCache();
+
+        Glide.get(container.getContext()).clearMemory();
 
         container.removeView(view);
     }

@@ -34,5 +34,5 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["glide_compiler"]
     implementation rootProject.ext.dependencies["glide_okhttp_integration"]
 
-    implementation rootProject.ext.dependencies["photoview_smooth"]
+    api rootProject.ext.dependencies["photoview_smooth"]
 }
