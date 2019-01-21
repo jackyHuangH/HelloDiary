@@ -1,6 +1,7 @@
 package cn.hzjdemo.hellodiary.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.support.v4.view.ViewPager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -15,13 +16,12 @@ import cn.hzjdemo.hellodiary.adapter.BigImageAdapter2;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
 import cn.hzjdemo.hellodiary.widgets.viewpager.BaseViewPager;
-import cn.hzjdemo.hellodiary.widgets.viewpager.NoPreloadViewPager;
 
 
 /**
  * 左右滑动显示图片
  */
-public class ShowPictureActivity extends BaseActivity implements NoPreloadViewPager.OnPageChangeListener {
+public class ShowPictureActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
     public static final String IMAGE_URLS = "imageUrls";
     public static final String CURRENT_POSITION = "currentPosition";
 
@@ -44,7 +44,7 @@ public class ShowPictureActivity extends BaseActivity implements NoPreloadViewPa
         }
 
         mViewPagerAdapter = new BigImageAdapter2(this, imageUrls);
-        viewPager.setOnPageChangeListener(this);
+        viewPager.addOnPageChangeListener(this);
         viewPager.setAdapter(mViewPagerAdapter);
         viewPager.setCurrentItem(currentPosition);
         mViewPagerAdapter.notifyDataSetChanged();

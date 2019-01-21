@@ -1,5 +1,6 @@
 package cn.hzjdemo.hellodiary.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -23,6 +24,10 @@ import java.util.List;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.widgets.RingProgressBar;
 import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.progressmanager.ProgressManager;
 import me.jessyan.progressmanager.body.ProgressInfo;
 
@@ -87,6 +92,7 @@ public class BigImageAdapter2 extends PagerAdapter {
                 .load(imageUrl)
                 .fitCenter()
                 .error(R.drawable.default_no_pic)
+                //必须设置成None才能显示进度条
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .listener(new RequestListener<Drawable>() {
                     @Override
@@ -122,16 +128,6 @@ public class BigImageAdapter2 extends PagerAdapter {
         if (view == null) {
             return;
         }
-        PhotoView photoView = (PhotoView) view.findViewById(R.id.photoview);
-        if (photoView==null) {
-            return;
-        }
-        //及时释放资源
-//        photoView.destroyDrawingCache();
-//        view.destroyDrawingCache();
-
-        Glide.get(container.getContext()).clearMemory();
-
         container.removeView(view);
     }
 
@@ -152,12 +148,25 @@ public class BigImageAdapter2 extends PagerAdapter {
     }
 
     //=============================================================destroy
+    @SuppressLint("CheckResult")
     public void destroy() {
-//        for (PhotoView photoView : mViewList) {
-//            photoView.destroyDrawingCache();
-//        }
-//        mViewList.clear();
-//        mViewList = null;
+        Observable.just(mContext)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        //清理内存缓存
+                        Glide.get(mContext).clearMemory();
+                    }
+                })
+                .subscribe(new Consumer<Context>() {
+                    @Override
+                    public void accept(Context context) throws Exception {
+                        //清理磁盘缓存
+                        Glide.get(context).clearDiskCache();
+                    }
+                });
+
     }
 
     //--------------------点击图片关闭--------------------

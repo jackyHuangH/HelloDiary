@@ -1,6 +1,7 @@
 package cn.hzjdemo.hellodiary.widgets.viewpager;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -10,7 +11,7 @@ import android.view.MotionEvent;
  * @author yuedong
  *
  */
-public class BaseViewPager extends NoPreloadViewPager {
+public class BaseViewPager extends ViewPager {
 	private boolean scrollable = true;
 
 	public BaseViewPager(Context context) {
