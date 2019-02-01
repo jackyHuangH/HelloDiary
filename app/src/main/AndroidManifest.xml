@@ -57,17 +57,6 @@
             android:theme="@style/MainTheme">
         </activity>
 
-        <!-- 7.0+调用相机,读取文件适配权限 -->
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="cn.hzjdemo.hellodiary.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
-        </provider>
-
         <activity
             android:name=".ui.activity.RaidDetailActivity"
             android:screenOrientation="portrait"
@@ -139,6 +128,29 @@
         </activity>
         <activity android:name=".ui.activity.TableActivity">
         </activity>
+
+        <!-- 7.0+调用相机,读取文件适配权限 -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="cn.hzjdemo.hellodiary.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
+        <!--桌面小部件广播配置-->
+        <receiver android:name=".appwidget.TestWidgetProvider">
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_widget_provider_test"/>
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="cn.hzjdemo.hellodiary.appwidget.action.CLICK"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
