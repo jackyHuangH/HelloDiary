@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>HTML样式</title>
+</head>
+<body>
+<!--div 布局-->
+
+<div id="container" style="width:500px">
+</div>
+
+<div id="header" style="background-color:#0094ff;">
+    <h1 style="margin-bottom:0;">主要的网页标题</h1>
+</div>
+
+<div id="menu" style="background-color:#ffd700;height:200px;width:100px;float:left">
+    <b>菜单</b><br/>
+    HTML<br/>
+    C++<br/>
+    JAVA
+</div>
+
+<div id="content" style="background-color:#eeeeee;height:200px;width:400px;float:left">
+    内容在这里
+</div>
+
+<div id="footer" style="background-color:#ffa500;clear:both;text-align:center">
+    版权 @jacky.com
+</div>
+
+<br/>
+<br/>
+<br/>
+
+<!--table 搭建布局-->
+<table width="500" border="0">
+    <tr>
+        <td colspan="2" style="background-color:#ffa500">
+            <h1>主要的网页标题2</h1>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="background-color：#0094ff;width:100px;">
+            <b>菜单</b><br/>
+            PHP<br/>
+            .NET<br/>
+            GO
+        </td>
+        <td style="background-color:#eeeeee;width:400px;height:200px;">
+            内容哈哈哈哈
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color:#ffd700;text-align:center" colspan="2">
+            版权 @zenchn.com
+        </td>
+    </tr>
+</table>
+
+<br/>
+<p>下面开始介绍表单：</p>
+<br/>
+
+<!--表单 form-->
+<form name="input" action="html_form_action" method="post">
+    姓名：<input type="text" style="background-color:#eeeeee;width:100px;" name="name"><br/>
+    年龄：<input type="number" style="width:50px" name="age">
+    密码：<input type="password" name="password"><br/>
+
+    单选框：<br/>
+    <input type="radio" name="性别" checked value="male">男
+    <input type="radio" name="性别" value="female">女<br/>
+    复选框：<br/>
+    <input type="checkbox" checked name="vehicle" value="car">有车
+    <input type="checkbox" name="property" value="house">有房<br/>
+    <input type="submit" name="提交"><br/>
+
+    下拉选择框：<br/>
+    请选择最中意的国家：<br/>
+    <select name="Please Choose Your Favorite Country!">
+        <option value="America">美国</option>
+        <option value="France">法国</option>
+        <option value="China" selected>中国</option>
+        <option value="British">英国</option>
+        <option value="German">德国</option>
+    </select><br/>
+    文本域：<br/>
+    <textarea rows="5" cols="20">我是一个文本域</textarea><br/>
+    自定义按钮：<br/>
+    <input type="button" value="我是按钮文字">
+</form>
+<br/>
+
+带边框的表单：<br/>
+<h3>发送邮件到指定邮箱</h3>
+<form action="someone@example.com" method="post" enctype="text/plain">
+    <fieldset>
+        <legend>Personal Information</legend>
+        手机号码：<input type="tel" name="phone" size="20"><br/>
+        邮箱：<input type="email" name="email"><br/>
+        邮件内容：<input type="text" name="content" size="10"><br/>
+        <input list="explore" name="浏览器">
+        <datalist id="explore">
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+            <option>E</option>
+        </datalist>
+        <input type="submit" name="提交">
+        <input type="reset" name="重置">
+    </fieldset>
+</form>
+
+
+<!--框架-->
+框架：<br/>
+<iframe src="day1.html" width="800" height="300" frameborder="1" name="iframe_one">
+</iframe>
+<p>点击此处将目标链接在指定框架中打开：<br/>
+    <a href="https://www.baidu.com/" target="iframe_one">百度一下</a>
+</p>
+
+<!--脚本-->
+<script>document.write("hello world&divide;")</script>
+<noscript>抱歉，你的浏览器不资瓷脚本</noscript>
+</body>
+
+</html>

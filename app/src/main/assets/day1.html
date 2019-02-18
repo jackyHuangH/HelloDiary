@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <!-- 定时刷新页面-->
+    <!--<meta http-equiv="refresh" content="5">-->
+    <title>我是页面标题啦啦啦</title>
+    <!--使用 <base> 定义页面中所有链接默认的链接目标地址 -->
+    <base href="D:/hzj_Demo/HelloDiaryNormal/HelloDiary/app/src/main/assets/">
+</head>
+
+<body>
+<h1><a id="C1">一级标题</a></h1>
+<h2>二级标题</h2>
+<h3>三级标题</h3>
+<h4>四级标题</h4>
+<h5>五级标题</h5>
+<h6>六级标题</h6>
+
+<p>----------------------------我是分割线--------------------------------------</p>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<p>我是一个段落，<b>下面</b>我要<i>换行了：</i><br/>想写啥就写啥哈哈哈哈或</p>
+<hr/>
+<br/>
+<!--链接-->
+<a href='https://github.com/jackyHuangH' target="_blank">点击跳转我的GitHub主页</a>
+<br/>
+<!--图片-->
+<br/>
+<img src="images/girl.png" width="72" height="128"/>
+
+<br/>
+<p>着重字体：<em>我是着重的部分</em><br/>
+    <strong>加重语气：</strong><br/>
+    <small><i>意大利斜体小号</i></small>
+</p>
+
+
+<code>
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    }
+</code><br/>
+
+<blockquote cite="http://www.worldwildlife.org/who/index.html">For 50 years, WWF has been protecting
+    the future of nature. The worlds leading conservation organization, WWF works in 100 countries
+    and is supported by 1.2 million members in the United States and close to 5 million globally.
+</blockquote>
+
+<a href="https://www.bilibili.com/" id="baidu"><img src="images/diary.jpg" border="5" width="50"
+                                                    height="50"/></a>
+<br/>
+
+<a href="#C1">回到一级标题</a>
+
+<br/>
+<br/>
+<p>来源于网络的图片：
+    <img src="http://www.runoob.com/images/logo.png" alt="smiley face" align="middle" width="150"
+         height="30"/>
+</p>
+
+<br/>
+
+<p>采用CSS浮动属性设置图片：<img src="http://pic17.nipic.com/20111021/8633866_210108284151_2.jpg"
+                      alt="net pic1" style="float:right-side" width="160" height="90"
+                      usemap="#planetMap"/>
+</p>
+
+<map name="planetMap">
+    <area shape="rect" coords="0,0,82,80" alt="左上角" href="https://github.com/">
+    <area shape="circle" coords="90,58,5" alt="百度老家" href="https://www.baidu.com/">
+</map>
+
+<br/>
+
+<!--表格-->
+<table border="1">
+    <caption>2018年第二学期二年级1班成绩单</caption>
+
+    <tr>
+        <th>姓名</th>
+        <td>张三</td>
+        <td>赵四</td>
+        <td>王五</td>
+        <td>赵六</td>
+    </tr>
+    <tr>
+        <th rowspan="2">年龄</th>
+        <td>19</td>
+        <td>25</td>
+        <td>18</td>
+        <td>30</td>
+    </tr>
+</table>
+
+<!--列表-->
+<br/>
+无序列表：
+<ul style="list-style-type:circle">
+    <li>列表第一项 古诗：
+        <ol>
+            <li>床前明月光</li>
+            <li>疑是地上霜</li>
+            <li>举头望明月</li>
+            <li>低头思故乡</li>
+        </ol>
+    </li>
+    <li>列表第二项</li>
+    <li>列表第三项</li>
+</ul>
+<br/>
+有序列表：type 默认是数字1234
+<ol type="A">
+    <li>道路千万条</li>
+    <li>安全第一条</li>
+    <li>行车不规范</li>
+    <li>亲人两行泪</li>
+</ol>
+<br/>
+自定义列表：dl
+<dl>
+    <dt>我向世界呼叫</dt>
+    <dd>AMANI</dd>
+</dl>
+</body>
+</html>
