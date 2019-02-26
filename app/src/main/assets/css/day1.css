@@ -11,7 +11,7 @@ background-position:left top right bottom;
 
 /*合并简写：*/
 body{
-color:red;
+color:orange;
 background: url("http://pic43.nipic.com/20140711/19187786_140828149528_2.jpg") no-repeat right top;
 margin-right:100px;
 font-size:100%;
@@ -20,6 +20,10 @@ font-size:100%;
 p{
 color:green;
 text-align:justify;
+}
+
+.test{
+background-color:yellow;
 }
 
 p.test{
@@ -101,6 +105,7 @@ list-style-image:url("http://image.biaobaiju.com/uploads/20180803/22/1533305025-
 }
 
 /*table 表格样式*/
+/*分组选择器*/
 table,th,td{
     /*text-align:center;*/
     vertical-align:top;
@@ -123,4 +128,28 @@ div{
     margin:30px;
     text-align:center;
     width:300px;
+    outline-style:dotted;
+    outline-color:red;
+    outline-width:thick
+}
+
+.box p{
+color:white;
+background-color:orange;
+}
+
+h2.hide{
+/*隐藏且占位*/
+/*visibility:hidden;*/
+/*隐藏不占位*/
+display:none;
+text-decoration:none;
+}
+
+li{
+display:inline;
+}
+
+.blockstyle{
+display:block;
 }
