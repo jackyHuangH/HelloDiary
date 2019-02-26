@@ -153,3 +153,51 @@ display:inline;
 .blockstyle{
 display:block;
 }
+
+/*position 定义元素位置*/
+ul.static{
+    position:static;
+    border:3px solid #73AD21;
+}
+
+p.fixed{
+position:fixed;
+top:26px;
+left:100px;
+}
+
+p.left{
+position:relative;
+right:20px;
+}
+
+p.right{
+position:relative;
+left:20px;
+}
+
+p.absolute{
+position:absolute;
+left:500px;
+top:300px;
+}
+
+p.sticky{
+position:sticky;
+bottom:5px;
+background-color:lightblue;
+border:3px solid blue;
+}
+
+.under{
+position:sticky;
+bottom:5px;
+z-index:1;
+}
+
+.clip{
+position:absolute;
+left:0px;
+top:10px;
+clip:rect(0px,0px,0px,0px);
+}
