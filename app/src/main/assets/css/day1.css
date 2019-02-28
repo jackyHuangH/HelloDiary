@@ -56,8 +56,8 @@ font-size:1.5em;/*50px/16=3.125em*/
 
 /*合并字体属性简写*/
 p.indentMix{
-color:lightblue;
-font:italic bold 20px/30px "华文行楷",serif;
+color:blue;
+font:italic bold 20px/30px "华文楷体",serif;
 }
 
 /*设置字重*/
@@ -74,7 +74,7 @@ p.thicker{
 font-weight:900;
 }
 
-h1{
+.h1{
 text-decoration:overline;
 }
 h2{
@@ -121,7 +121,7 @@ table,th,td{
 }
 
 /*css 盒子模型*/
-div{
+div.test{
     background-color:#efefef;
     padding:5px;
     border:3px solid green;
@@ -146,7 +146,7 @@ display:none;
 text-decoration:none;
 }
 
-li{
+li.inline{
 display:inline;
 }
 
@@ -155,12 +155,15 @@ display:block;
 }
 
 /*position 定义元素位置*/
-ul.static{
+.static{
     position:static;
     border:3px solid #73AD21;
+    margin:auto;
+    width:50%;
 }
 
 p.fixed{
+background-color:pink;
 position:fixed;
 top:26px;
 left:100px;
@@ -197,7 +200,78 @@ z-index:1;
 
 .clip{
 position:absolute;
-left:0px;
-top:10px;
-clip:rect(0px,0px,0px,0px);
+left:50px;
+z-index:-1;
+clip:rect(0px,320px,80px,0px);
 }
+
+
+/*overFlow: auto,hidden,scroll,visible(默认)*/
+.auto{
+overFlow:auto;
+width:150px;
+height:50px;
+background-color:lightblue;
+}
+
+/*float*/
+.float{
+float:right;
+border:dotted black 1px;
+padding:2px;
+margin:0px 10px 15px 15px;
+text-align:center;
+}
+
+.thumbnail{
+float:left;
+width:160px;
+height:90px;
+margin:5px;
+}
+
+/*元素对齐*/
+.firstletter:first-letter{
+color:red;
+font-size:xx-large;
+}
+.firstletter:first-line{
+color:pink;
+font-size:16px;
+}
+
+
+/*导航栏*/
+ul.navigator{
+list-style-type:none;
+margin:0px;
+padding:0px;
+width:200px;
+background-color:#f1f1f1;
+border:solid 1px black;
+}
+
+li{
+text-align:center;
+border-bottom:solid 1px black;
+}
+li:last-child{
+border-bottom:none;
+}
+
+li a{
+display:block;
+color:#000;
+padding:8px 16px;
+text-decoration:none;
+}
+li a:hover{
+background-color:#555;
+color:white;
+}
+li a:active{
+background-color:#4CAF50;
+color:white;
+}
+
+

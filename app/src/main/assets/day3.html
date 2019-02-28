@@ -25,7 +25,7 @@ text-align:left;
 </head>
 
 <body>
-<h1>超级无敌一标题</h1>
+<h1 class="h1">超级无敌一标题</h1>
 <h2>超级无敌二级标题</h2>
 <h3>超级无敌三级标题</h3>
 
@@ -100,7 +100,7 @@ text-align:left;
     </tr>
 </table>
 
-<div class="box">我是盒子里的真是内容<p>我是盒子里的段落</p></div>
+<div class="test">我是盒子里的真是内容<p>我是盒子里的段落</p></div>
 
 <h2 class="hide">我是一个被<span style="color:red;text-weight:bold;">hidden</span>的副标题</h2>
 <h2 style="text-decoration:none;color:pink;">我是一个被<span
@@ -111,10 +111,10 @@ text-align:left;
 
 <p>列表水平显示：</p>
 <ul class="static">
-    <li>香蕉</li>
-    <li>菠萝</li>
-    <li>苹果</li>
-    <li>西红柿</li>
+    <li class="inline">香蕉</li>
+    <li class="inline">菠萝</li>
+    <li class="inline">苹果</li>
+    <li class="inline">西红柿</li>
 </ul>
 
 <p class="fixed">我的位置是<span style="color:red;text-align:top">fixed</span>修饰的</p>
@@ -125,11 +125,49 @@ text-align:left;
 <p class="sticky" style="color:blue;">我的位置是<span style="color:red;text-align:top">sticky</span>修饰的
 </p>
 
-<img src="http://pic.58pic.com/58pic/15/68/59/71X58PICNjx_1024.jpg" alt="tree" width="100px"
+<img src="http://img.bimg.126.net/photo/31kQlCGP44-34Q5yxvoqmw==/5770237022569104952.jpg" alt="tree"
+     width="100px"
      height="60px" class="under">
 <br/>
-<img src="http://pic9.nipic.com/20100824/2531170_082435310724_2.jpg" alt="bird" width="200px"
-     height="160px" class="">
+<img src="http://pic9.nipic.com/20100824/2531170_082435310724_2.jpg" alt="bird" width="320px"
+     height="180px" class="clip">
+
+<br/>
+<h1 style="top:20px;">OverFlow属性</h1>
+<p>如果元素中的内容超出了给定的宽度和高度属性，overflow 属性可以确定是否显示滚动条等行为。</p>
+<div class="auto">菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+    菜鸟教程 -- 学的不仅是技术，更是梦想！！！菜鸟教程 -- 学的不仅是技术，更是梦想！！！菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+</div>
+
+
+<p>淘宝网是亚太地区较大的网络零售、商圈，
+<div class="float">
+    <img src="http://pic9.nipic.com/20100824/2531170_082435310724_2.jpg"
+         alt="bird" width="320px"
+         height="180px"><br/>
+    乘风破浪
+</div>
+由阿里巴巴集团在2003年5月创立。淘宝网是中国深受欢迎的网购零售平台，拥有近5亿的注册用户数，
+每天有超过6000万的固定访客，同时每天的在线商品数已经超过了8亿件，平均每分钟售出4.8万件商品。</p>
+
+
+<h3>图片调整库</h3>
+<p class="firstletter">试着调整窗口,看看当图片没有足够的空间会发生什么<br/>我是第二行文字内容红红火火恍恍惚惚</p>
+<img src="images/pic1.jpg" class="thumbnail">
+<img src="images/pic2.jpg" class="thumbnail">
+<img src="images/pic3.jpg" class="thumbnail">
+<img src="images/pic4.jpg" class="thumbnail">
+<img src="images/pic5.jpg" class="thumbnail">
+<br/>
+<h4 style="clear:both;">导航栏</h4>
+<!--导航栏-->
+<ul class="navigator">
+    <li><a class="active" href="#home">首页</a></li>
+    <li><a href="#shopping">购物</a></li>
+    <li><a href="#cart">购物车</a></li>
+    <li><a href="#mine">个人中心</a></li>
+</ul>
+
 
 </body>
 </html>
