@@ -35,8 +35,6 @@
 #picasso
 -dontwarn com.squareup.okhttp.**
 
-# for DexGuard only
--keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 
 # banner 的混淆代码
 -keep class com.youth.banner.** {
