@@ -1,0 +1,75 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 23
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    api 'com.android.support:appcompat-v7:23.4.0'
+    api 'com.android.support:recyclerview-v7:23.4.0'
+}
+//
+//ext {
+//    publishedGroupId = 'com.ezreal'
+//    artifact = 'treeviewlib'
+//    libraryVersion = '1.0.0'
+//
+//    libraryDescription = 'Android TreeView, based on RecyclerView package, ' +
+//            'support node radio or multiple choice, support for custom node text size, color,' +
+//            ' height and color of the spacer line, etc.'
+//
+//    siteUrl = 'https://github.com/Enjoylone1y/MutiSelectTreeView'
+//    gitUrl = 'https://github.com/Enjoylone1y/MutiSelectTreeView.git'
+//
+//    developerId = 'ezreallib'
+//    developerName = 'Ezreal'
+//    developerEmail = 'ezreal3852@gmail.com'
+//
+//    licenseName = 'The Apache Software License, Version 2.0'
+//    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//    allLicenses = ["Apache-2.0"]
+//}
+//
+//
+////将代码上传至 jCenter 的代码
+//apply plugin: 'com.novoda.bintray-release'
+//
+//task javadoc(type: Javadoc) {
+//    options.encoding "UTF-8"
+//    options.charSet 'UTF-8'
+//}
+//
+//task sourcesJar(type: Jar) {
+//    from android.sourceSets.main.java.srcDirs
+//    classifier = 'sources'
+//}
+//
+//artifacts {
+//    archives sourcesJar
+//}
+//
+//publish {
+//    userOrg = developerId
+//    groupId = publishedGroupId
+//    artifactId = artifact
+//    publishVersion = libraryVersion
+//    desc = libraryDescription
+//    website = siteUrl
+//}
+
+
+
+
