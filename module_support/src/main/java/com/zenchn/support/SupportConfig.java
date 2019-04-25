@@ -7,9 +7,9 @@ import android.os.Environment;
  * 描    述：
  * 修订记录：
  */
-public class GlobalConfig {
+public class SupportConfig {
 
-    public static final String DEFAULT_TAG = "huangzj";
+    public static final String DEFAULT_TAG = "zenchn";
 
     // #crash 是否收集报错日志
     public static final boolean isReport = true;

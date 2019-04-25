@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="title_bar_default_height">45dp</dimen>
     <dimen name="setting_button_default_height">45dp</dimen>
     <dimen name="entering_layout_default_height">45dp</dimen>
     <dimen name="entering_layout_default_item_text_size">15sp</dimen>

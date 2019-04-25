@@ -10,7 +10,6 @@ import java.util.List;
 
 /**
  * 管理fragment切换的manager
- * @author HZJ
  */
 public class HFragmentManager {
     // 管理类FragmentManager

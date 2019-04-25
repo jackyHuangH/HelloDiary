@@ -79,7 +79,7 @@ public class TitleBar extends ViewGroup {
 
         String titleBarCenterText = typedArray.getString(R.styleable.TitleBar_title_bar_center_text);
         mTitleBarCenterTextColor = typedArray.getColor(R.styleable.TitleBar_title_bar_center_text_color, ContextCompat.getColor(context, R.color.ios_black));
-        mTitleBarCenterTextSize = typedArray.getDimensionPixelOffset(R.styleable.TitleBar_title_bar_center_text_size, AndroidKit.Dimens.sp2px(19));
+        mTitleBarCenterTextSize = typedArray.getDimensionPixelOffset(R.styleable.TitleBar_title_bar_center_text_size, AndroidKit.Dimens.sp2px(18));
 
         mTitleBarLeftTextColor = typedArray.getColor(R.styleable.TitleBar_title_bar_left_text_color, ContextCompat.getColor(context, R.color.ios_black));
         mTitleBarLeftTextSize = typedArray.getDimensionPixelOffset(R.styleable.TitleBar_title_bar_left_text_size, AndroidKit.Dimens.sp2px(16));
@@ -92,7 +92,7 @@ public class TitleBar extends ViewGroup {
         mTitleBarLeftClickPadding = typedArray.getDimensionPixelOffset(R.styleable.TitleBar_title_bar_left_click_padding, AndroidKit.Dimens.dp2px(20));
         mTitleBarRightClickPadding = typedArray.getDimensionPixelOffset(R.styleable.TitleBar_title_bar_right_click_padding, AndroidKit.Dimens.dp2px(15));
 
-        int titleBarDefaultBgColor = typedArray.getColor(R.styleable.TitleBar_title_bar_default_bg_color, ContextCompat.getColor(context, R.color.ios_white));
+        int titleBarDefaultBgColor = typedArray.getColor(R.styleable.TitleBar_title_bar_default_bg_color, ContextCompat.getColor(context, R.color.white));
 
         boolean titleBarDefault = typedArray.getBoolean(R.styleable.TitleBar_title_bar_default, true);
 
@@ -107,7 +107,7 @@ public class TitleBar extends ViewGroup {
 
         if (titleBarDefault) {
             if (titleBarLeftIconDrawable == null) {
-                titleBarLeftIconDrawable = ContextCompat.getDrawable(context, R.drawable.ic_back_black);
+                titleBarLeftIconDrawable = ContextCompat.getDrawable(context, R.drawable.ic_back_blue);
             }
             Drawable backBackground = ContextCompat.getDrawable(context, R.drawable.selector_titlebar_back);
             leftView(ViewFactory.getImageButton(context, titleBarLeftIconDrawable, backBackground));
@@ -200,8 +200,6 @@ public class TitleBar extends ViewGroup {
             case MeasureSpec.UNSPECIFIED:
                 result = AndroidKit.Dimens.getScreenWidth();
                 break;
-            default:
-                break;
         }
         return result;
     }
@@ -220,8 +218,6 @@ public class TitleBar extends ViewGroup {
             case MeasureSpec.AT_MOST:
             case MeasureSpec.UNSPECIFIED:
                 result = getViewMaxHeight();
-                break;
-            default:
                 break;
         }
         return result;
@@ -361,9 +357,8 @@ public class TitleBar extends ViewGroup {
      * @return
      */
     private TitleBar leftView(@NonNull View customLeftView) {
-        if (mLeftView != null) {
+        if (mLeftView != null)
             removeView(mLeftView);
-        }
         customLeftView.setPadding(mTitleBarLeftClickPadding, 0, mTitleBarLeftClickPadding, 0);
         addView(customLeftView);
         mLeftView = customLeftView;

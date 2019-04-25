@@ -3,11 +3,8 @@ package com.zenchn.support.base;
 import android.app.Application;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
-import android.view.View;
 
-import com.zenchn.support.R;
 import com.zenchn.support.dafault.DefaultUncaughtHandler;
-import com.zenchn.support.widget.tips.SuperToast;
 
 
 /**
@@ -34,15 +31,6 @@ public abstract class AbstractApplicationKit implements IApplicationKit, ICrashC
     @Override
     public void initSetting() {
         initCrashHandler();
-        initToastStyle();
-    }
-
-    /**
-     * 初始化toast样式
-     */
-    protected void initToastStyle() {
-        View toastView = View.inflate(application, R.layout.library_toast_ios_style_simple, null);
-        SuperToast.setCustomToastView(toastView);
     }
 
     /**

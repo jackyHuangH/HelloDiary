@@ -10,7 +10,7 @@ import android.os.Process;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.zenchn.support.GlobalConfig;
+import com.zenchn.support.SupportConfig;
 import com.zenchn.support.base.ICrashCallback;
 import com.zenchn.support.base.ICrashConfig;
 import com.zenchn.support.utils.StringUtils;
@@ -168,7 +168,7 @@ public final class DefaultUncaughtHandler implements UncaughtExceptionHandler {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            crashTime = new SimpleDateFormat(GlobalConfig.FILE_DATE_FORMAT, Locale.CHINA).format(new Date(current));
+            crashTime = new SimpleDateFormat(SupportConfig.FILE_DATE_FORMAT, Locale.CHINA).format(new Date(current));
         }
         return crashTime;
     }

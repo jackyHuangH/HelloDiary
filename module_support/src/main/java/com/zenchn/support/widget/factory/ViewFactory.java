@@ -29,8 +29,7 @@ public class ViewFactory {
         return getTextView(context, text, ColorStateList.valueOf(color), textSize, backgroundDrawable);
     }
 
-    public static TextView getTextView(@NonNull Context context, @Nullable String text, @NonNull ColorStateList color,
-                                       int textSize, @Nullable Drawable backgroundDrawable) {
+    public static TextView getTextView(@NonNull Context context, @Nullable String text, @NonNull ColorStateList color, int textSize, @Nullable Drawable backgroundDrawable) {
         TextView tv = new TextView(context);
         tv.setGravity(Gravity.CENTER);
         if (!TextUtils.isEmpty(text)) {
@@ -39,10 +38,29 @@ public class ViewFactory {
         tv.setTextColor(color);
         tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         if (backgroundDrawable != null) {
-            tv.setBackground(backgroundDrawable);
+            tv.setBackgroundDrawable(backgroundDrawable);
         }
         return tv;
     }
+
+//    public static Button getTextButton(@NonNull Context context, @Nullable String text, @ColorInt int color, int textSize) {
+//        return getTextButton(context, text, color, textSize, null);
+//    }
+//
+//    public static Button getTextButton(@NonNull Context context, @Nullable String text, @ColorInt int color, int textSize, @Nullable Drawable backgroundDrawable) {
+//        return getTextButton(context, text, ColorStateList.valueOf(color), textSize, backgroundDrawable);
+//    }
+//
+//    public static Button getTextButton(@NonNull Context context, @Nullable String text, @NonNull ColorStateList color, int textSize, @Nullable Drawable backgroundDrawable) {
+//        Button bt = new Button(context);
+//        bt.setGravity(Gravity.CENTER);
+//        if (!TextUtils.isEmpty(text))
+//            bt.setText(text);
+//        bt.setTextColor(color);
+//        bt.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+//        bt.setBackgroundDrawable(backgroundDrawable);
+//        return bt;
+//    }
 
     public static ImageView getImageView(@NonNull Context context, @NonNull Drawable nextIcon) {
         ImageView iv = new ImageView(context);
@@ -67,22 +85,4 @@ public class ViewFactory {
         return ib;
     }
 
-    //    public static Button getTextButton(@NonNull Context context, @Nullable String text, @ColorInt int color, int textSize) {
-//        return getTextButton(context, text, color, textSize, null);
-//    }
-//
-//    public static Button getTextButton(@NonNull Context context, @Nullable String text, @ColorInt int color, int textSize, @Nullable Drawable backgroundDrawable) {
-//        return getTextButton(context, text, ColorStateList.valueOf(color), textSize, backgroundDrawable);
-//    }
-//
-//    public static Button getTextButton(@NonNull Context context, @Nullable String text, @NonNull ColorStateList color, int textSize, @Nullable Drawable backgroundDrawable) {
-//        Button bt = new Button(context);
-//        bt.setGravity(Gravity.CENTER);
-//        if (!TextUtils.isEmpty(text))
-//            bt.setText(text);
-//        bt.setTextColor(color);
-//        bt.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-//        bt.setBackgroundDrawable(backgroundDrawable);
-//        return bt;
-//    }
 }

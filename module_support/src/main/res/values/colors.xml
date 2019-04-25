@@ -3,8 +3,8 @@
 
     <color name="toast_background">#30000000</color>
     <!--<color name="toast_background">#3FFFFFFF</color>-->
-    <color name="ios_blue">#38ADFF</color>
-    <color name="ios_black">#18181A</color>
+    <color name="ios_blue">#2975E6</color>
+    <color name="ios_black">#000000</color>
     <color name="ios_white">#ffffff</color>
     <color name="ios_stroke_tint">#E4E4E4</color>
     <color name="ios_darker_gray">#AAAAAA</color>

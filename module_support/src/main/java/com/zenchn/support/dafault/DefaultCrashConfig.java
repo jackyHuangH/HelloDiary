@@ -1,7 +1,7 @@
 package com.zenchn.support.dafault;
 
 
-import com.zenchn.support.GlobalConfig;
+import com.zenchn.support.SupportConfig;
 import com.zenchn.support.base.ICrashConfig;
 
 import java.io.File;
@@ -15,27 +15,27 @@ public class DefaultCrashConfig implements ICrashConfig {
 
     @Override
     public boolean getReportMode() {
-        return GlobalConfig.isReport;
+        return SupportConfig.isReport;
     }
 
     @Override
     public String getFilePath() {
-        return GlobalConfig.FILE_PATH;
+        return SupportConfig.FILE_PATH;
     }
 
     @Override
     public String getFileNamePrefix() {
-        return GlobalConfig.FILE_NAME_PREFIX;
+        return SupportConfig.FILE_NAME_PREFIX;
     }
 
     @Override
     public String getDateFormat() {
-        return GlobalConfig.FILE_DATE_FORMAT;
+        return SupportConfig.FILE_DATE_FORMAT;
     }
 
     @Override
     public String getFileNameSuffix() {
-        return GlobalConfig.FILE_NAME_SUFFIX;
+        return SupportConfig.FILE_NAME_SUFFIX;
     }
 
     @Override
