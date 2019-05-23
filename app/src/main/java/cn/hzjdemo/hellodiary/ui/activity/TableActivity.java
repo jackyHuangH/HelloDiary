@@ -52,7 +52,7 @@ public class TableActivity extends BaseActivity {
         Random random = new Random();
         for (int i = 0; i < size; i++) {
             TableInspectEntity entity = new TableInspectEntity();
-            entity.setDate(JavaKit.Date.getYmdhms(System.currentTimeMillis()));
+            entity.setDate(JavaKit.DateKit.getYmdhms(System.currentTimeMillis()));
             entity.setNum1((double) random.nextInt(20));
             entity.setNum2((double) random.nextInt(34));
             entity.setNum3((double) random.nextInt(49));

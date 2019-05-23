@@ -1,6 +1,7 @@
 package com.zenchn.apilib.base;
 
 
+import android.app.Application;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -18,14 +19,15 @@ import okhttp3.ResponseBody;
  * 修订记录：
  */
 
-public class ApiManager {
+public final class ApiManager {
     private static final String API_AUTH_MESSAGE_KEY = "error_description";
     private static final String API_MESSAGE_KEY = "message";
-    private static final int API_SUCCESS_STATUS_CODE = 1;//成功 默认 1，其他情况另定
+    /***成功 0，其他情况另定***/
+    private static final int API_SUCCESS_STATUS_CODE = 0;
 
-    public static void init(String baseUrl) {
+    public static void init(String baseUrl, Application application) {
         RetrofitManager.getInstance()
-                .initConfig(CustomRetrofitProvider.getInstance(baseUrl));
+                .initConfig(CustomRetrofitProvider.getInstance(baseUrl, application));
     }
 
 
@@ -46,7 +48,7 @@ public class ApiManager {
      * @return
      */
     public static boolean isApiSuccess(@NonNull HttpResultModel httpResultModel) {
-        return httpResultModel.success != null && httpResultModel.success && isApiSuccess(httpResultModel.statusCode);
+        return isApiSuccess(httpResultModel.statusCode);
     }
 
     /**

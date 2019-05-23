@@ -7,8 +7,14 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.CountDownTimer;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
@@ -61,12 +67,6 @@ public class LoginActivity extends BaseActivity {
     Button btLoginNow;
     @BindView(R.id.bt_login_out)
     Button btLoginOut;
-    @BindView(R.id.iv_wb_login)
-    ImageView ivWbLogin;
-    @BindView(R.id.iv_wx_login)
-    ImageView ivWxLogin;
-    @BindView(R.id.iv_qq_login)
-    ImageView ivQqLogin;
     @BindView(R.id.ll_root)
     LinearLayout llRoot;
     @BindView(R.id.tvLayout_phone)
@@ -267,17 +267,47 @@ public class LoginActivity extends BaseActivity {
                 loadImage();
             }
             break;
-            case R.id.iv_wb_login: {//微博登录
+            case R.id.iv_wb_login: {//通知音
+                ringNotice();
             }
             break;
-            case R.id.iv_wx_login: {//微信登录
+            case R.id.iv_wx_login: {//震动
+                vibrate();
             }
             break;
-            case R.id.iv_qq_login: {//QQ登录
+            case R.id.iv_qq_login: {//备用
             }
             break;
             default:
                 break;
+        }
+    }
+
+    /**
+     * 响铃
+     */
+    private void ringNotice() {
+        Context applicationContext = getApplicationContext();
+        //播放系统提示音
+        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Ringtone rt = RingtoneManager.getRingtone(applicationContext, uri);
+        rt.play();
+
+    }
+
+    /**
+     * 震动
+     */
+    private void vibrate() {
+        Context applicationContext = getApplicationContext();
+        //开启振动
+        Vibrator vibrator = (Vibrator) applicationContext.getSystemService(Context.VIBRATOR_SERVICE);
+        //创建一次性振动
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            VibrationEffect vibrationEffect = VibrationEffect.createOneShot(800, VibrationEffect.DEFAULT_AMPLITUDE);
+            vibrator.vibrate(vibrationEffect);
+        } else {
+            vibrator.vibrate(800);
         }
     }
 

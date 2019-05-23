@@ -52,7 +52,7 @@ public class FileModelImpl implements FileModel {
                         PackageInfo packageInfo = AndroidKit.Package.getPackageInfo(application);
                         int currentVersion = packageInfo.versionCode;
                         int preVersion = ACacheModelImpl.getAppVersionCode();
-                        if (currentVersion == preVersion && JavaKit.File.isFileExist(dbFile)) {
+                        if (currentVersion == preVersion && JavaKit.FileKit.isFileExists(dbFile)) {
                             String encrypt = CodecKit.MD5.encrypt(dbFile);
                             String areaDbMD5Code = ACacheModelImpl.getAreaDbMD5Code();
                             if (StringUtils.equals(encrypt, areaDbMD5Code)) {
@@ -68,7 +68,7 @@ public class FileModelImpl implements FileModel {
                         }
                         boolean isUpZipSuccess = GZIPUtils.unZipDB(open, packageName, Constants.AREA_DB_NAME);
                         if (isUpZipSuccess) {
-                            if (JavaKit.File.isFileExist(dbFile)) {
+                            if (JavaKit.FileKit.isFileExists(dbFile)) {
                                 String encrypt = CodecKit.MD5.encrypt(dbFile);
                                 ACacheModelImpl.saveAreaDbMD5Code(encrypt);
                                 ACacheModelImpl.saveAppVersionCode(currentVersion);

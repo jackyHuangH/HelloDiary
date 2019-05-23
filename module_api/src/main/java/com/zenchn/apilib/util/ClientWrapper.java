@@ -1,6 +1,5 @@
 package com.zenchn.apilib.util;
 
-import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Build;
@@ -11,12 +10,11 @@ import com.zenchn.apilib.entity.LoginInfoEntity;
 import java.util.Locale;
 
 /**
- * 描    述：设备信息工具类
+ * 作    者：wangr on 2017/6/15 21:27
+ * 描    述：
  * 修订记录：
- *
- * @author HZJ
  */
-public class DeviceUtils {
+public class ClientWrapper {
 
     /**
      * 用户登陆令牌授权时获取用户信息(获取令牌)
@@ -33,18 +31,6 @@ public class DeviceUtils {
         return loginInfo;
     }
 
-    /**
-     * 获取设备型号
-     *
-     * @return
-     */
-    public static String getMobileModel() {
-        String model = Build.MODEL;
-        model = model.trim();
-        return model;
-    }
-
-    @SuppressLint("HardwareIds")
     private static String getAndroidId(Context context) {
         try {
             context = context.getApplicationContext();
@@ -61,7 +47,7 @@ public class DeviceUtils {
      * @return the version name of device's system
      */
     public static String getSDKVersionName() {
-        return Build.VERSION.RELEASE;
+        return android.os.Build.VERSION.RELEASE;
     }
 
     /**
@@ -70,7 +56,7 @@ public class DeviceUtils {
      * @return version code of device's system
      */
     public static int getSDKVersionCode() {
-        return Build.VERSION.SDK_INT;
+        return android.os.Build.VERSION.SDK_INT;
     }
 
 //    private static String getUniqueId(Context context) {

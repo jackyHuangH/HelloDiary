@@ -172,7 +172,7 @@ public class ApplicationKit extends AbstractApplicationKit implements ActivityLi
     }
 
     private void initApiManager() {
-        ApiManager.init(GlobalConfig.BASE_REQUEST_HTTP_HOST);
+        ApiManager.init(GlobalConfig.BASE_REQUEST_HTTP_HOST,getApplication());
     }
 
     /**

@@ -50,7 +50,8 @@ public final class ApiExceptionHandler {
      */
     public static void handleApiAuthException(@NonNull Throwable throwable, @NonNull String defaultErrorMsg, ApiFailureCallback callback) {
         if (callback != null) {
-            if (throwable instanceof HttpException && ApiGlobeConfig.ResponseCode.CODE_401 == ((HttpException) throwable).code()) {//授权失效
+            if (throwable instanceof HttpException && ApiGlobeConfig.ResponseCode.CODE_401 == ((HttpException) throwable).code()) {
+                //授权失效
                 callback.onApiGrantRefuse();
             } else {
                 String errMessage = obtainApiAuthExceptionMessage(throwable, defaultErrorMsg);

@@ -3,26 +3,41 @@ package com.zenchn.apilib.entity;
 import java.io.Serializable;
 
 /**
- *
  * @author HZJ
  */
 
 public class UserInfoEntity implements Serializable {
 
     private static final long serialVersionUID = 4075623417052041363L;
+
+
     /**
-     * realName : 张三
-     * sex : true
-     * tel : 13844556677
-     * email : abc@zenchn.com
-     * portraitPath :
+     * username : 13675890723
+     * realName : 黄
+     * inspectHouseTotal : 0
+     * inspectExecuteTotal : 0
+     * inspectAdoptTotal : 0
+     * inspectNonAdoptTotal : 0
+     * inspectOrgName : 瑞邦
+     * inspectAdoptPercentage : 0
      */
 
+    private String username;
     private String realName;
-    private Boolean sex;
-    private String tel;
-    private String email;
-    private String portraitPath;
+    private Integer inspectHouseTotal;
+    private Integer inspectExecuteTotal;
+    private Integer inspectAdoptTotal;
+    private Integer inspectNonAdoptTotal;
+    private String inspectOrgName;
+    private Float inspectAdoptPercentage;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getRealName() {
         return realName;
@@ -32,46 +47,65 @@ public class UserInfoEntity implements Serializable {
         this.realName = realName;
     }
 
-    public Boolean getSex() {
-        return sex;
+    public Integer getInspectHouseTotal() {
+        return inspectHouseTotal;
     }
 
-    public void setSex(Boolean sex) {
-        this.sex = sex;
+    public void setInspectHouseTotal(Integer inspectHouseTotal) {
+        this.inspectHouseTotal = inspectHouseTotal;
     }
 
-    public String getTel() {
-        return tel;
+    public Integer getInspectExecuteTotal() {
+        return inspectExecuteTotal;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setInspectExecuteTotal(Integer inspectExecuteTotal) {
+        this.inspectExecuteTotal = inspectExecuteTotal;
     }
 
-    public String getEmail() {
-        return email;
+    public Integer getInspectAdoptTotal() {
+        return inspectAdoptTotal;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setInspectAdoptTotal(Integer inspectAdoptTotal) {
+        this.inspectAdoptTotal = inspectAdoptTotal;
     }
 
-    public String getPortraitPath() {
-        return portraitPath;
+    public Integer getInspectNonAdoptTotal() {
+        return inspectNonAdoptTotal;
     }
 
-    public void setPortraitPath(String portraitPath) {
-        this.portraitPath = portraitPath;
+    public void setInspectNonAdoptTotal(Integer inspectNonAdoptTotal) {
+        this.inspectNonAdoptTotal = inspectNonAdoptTotal;
+    }
+
+    public String getInspectOrgName() {
+        return inspectOrgName;
+    }
+
+    public void setInspectOrgName(String inspectOrgName) {
+        this.inspectOrgName = inspectOrgName;
+    }
+
+    public Float getInspectAdoptPercentage() {
+        return inspectAdoptPercentage;
+    }
+
+    public void setInspectAdoptPercentage(Float inspectAdoptPercentage) {
+        this.inspectAdoptPercentage = inspectAdoptPercentage;
     }
 
     @Override
     public String toString() {
         return "UserInfoEntity{" +
-                "realName='" + realName + '\'' +
-                ", sex=" + sex +
-                ", tel=" + tel +
-                ", email='" + email + '\'' +
-                ", portraitPath='" + portraitPath + '\'' +
+                "username='" + username + '\'' +
+                ", realName='" + realName + '\'' +
+                ", inspectHouseTotal=" + inspectHouseTotal +
+                ", inspectExecuteTotal=" + inspectExecuteTotal +
+                ", inspectAdoptTotal=" + inspectAdoptTotal +
+                ", inspectNonAdoptTotal=" + inspectNonAdoptTotal +
+                ", inspectOrgName='" + inspectOrgName + '\'' +
+                ", inspectAdoptPercentage=" + inspectAdoptPercentage +
                 '}';
     }
 }

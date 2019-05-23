@@ -15,10 +15,11 @@ import android.view.animation.TranslateAnimation;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.zenchn.support.widget.dialog.DialogMaster;
+
 import java.util.Locale;
 
 import cn.hzjdemo.hellodiary.R;
-import com.zenchn.support.widget.dialog.DialogMaster;
 
 /**
  * Created by Hzj on 2017/8/24.
@@ -86,7 +87,7 @@ public class CommonPayWayPop {
                     .setLayout(R.layout.pop_pay_way)
                     .setLayoutInit(new DialogMaster.Builder.WindowLayoutInit() {
                         @Override
-                        public void OnWindowLayoutInit(View rootView) {
+                        public void onWindowLayoutInit(View rootView) {
                             //要支付的金额
                             tvToPayMoney = (TextView) rootView.findViewById(R.id.tv_to_pay_money);
                             //微信支付勾选框

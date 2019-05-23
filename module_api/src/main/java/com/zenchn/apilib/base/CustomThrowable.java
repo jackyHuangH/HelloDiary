@@ -6,7 +6,7 @@ package com.zenchn.apilib.base;
  * 修订记录：
  */
 
-public class CustomThrowable extends Exception {
+public final class CustomThrowable extends Exception {
 
     public CustomThrowable(String message) {
         super(message);

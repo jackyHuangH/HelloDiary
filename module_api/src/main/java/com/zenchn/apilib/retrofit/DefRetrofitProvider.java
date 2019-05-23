@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
 import com.zenchn.apilib.BuildConfig;
-import com.zenchn.apilib.retrofit.interceptor.TokenHeaderInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -47,18 +46,19 @@ final class DefRetrofitProvider implements IRetrofitProvider {
                     .connectTimeout(15, TimeUnit.SECONDS)
                     .readTimeout(20, TimeUnit.SECONDS)
                     .writeTimeout(20, TimeUnit.SECONDS)
-                    .retryOnConnectionFailure(true);//错误重连
+                    .retryOnConnectionFailure(true);
 
             // 增加log拦截器
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+
             // 开发模式记录整个body，否则只记录基本信息如返回200，http协议版本等
             if (BuildConfig.DEBUG) {
                 loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             } else {
                 loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
             }
-            builder.addInterceptor(loggingInterceptor)
-                    .addNetworkInterceptor(new TokenHeaderInterceptor());
+            builder.addInterceptor(loggingInterceptor);
+
             OkHttpClient okHttpClient = builder.build();
 
             return new Retrofit.Builder()

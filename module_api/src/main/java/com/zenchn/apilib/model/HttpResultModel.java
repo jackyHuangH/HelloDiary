@@ -3,20 +3,30 @@ package com.zenchn.apilib.model;
 import com.alibaba.fastjson.annotation.JSONField;
 
 /**
- * 作    者：wangr on 2017/8/28 14:53
- * 描    述：
+ * 描    述：基本返回数据模型
  * 修订记录：
+ *
+ * @author HZJ
  */
-
-
 public class HttpResultModel<T> {
 
-    @JSONField(name = "success")
-    public Boolean success;//True or false  是否成功
+    /***访问URL***/
+    @JSONField(name = "path")
+    public String path;
+
+    /***statusCode为0时请求成功，其他情况另定***/
     @JSONField(name = "statusCode")
-    public Integer statusCode;//成功 默认 1，其他情况另定
+    public Integer statusCode;
+
     @JSONField(name = "message")
     public String message;
+
+    @JSONField(name = "timestamp")
+    public String timestamp;
+
+    @JSONField(name = "success")
+    public Boolean success;
+
     @JSONField(name = "data")
     public T data;
 
@@ -24,9 +34,10 @@ public class HttpResultModel<T> {
     @Override
     public String toString() {
         return "HttpResultModel{" +
-                "success=" + success +
+                "path='" + path + '\'' +
                 ", statusCode=" + statusCode +
                 ", message='" + message + '\'' +
+                ", timestamp='" + timestamp + '\'' +
                 ", data=" + data +
                 '}';
     }

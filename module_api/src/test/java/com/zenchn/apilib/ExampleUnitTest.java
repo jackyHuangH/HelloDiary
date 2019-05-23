@@ -1,4 +1,4 @@
-package cn.zenchn.apilib;
+package com.zenchn.apilib;
 
 import org.junit.Test;
 

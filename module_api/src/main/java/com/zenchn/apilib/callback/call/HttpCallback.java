@@ -35,7 +35,7 @@ public abstract class HttpCallback<T extends HttpResultModel<? extends Object>> 
                 if (body.data != null) {
                     LoggerKit.d(body.data.toString());
                 }
-                onResponseResult((body.success && (body.statusCode == 1)), body, body.message);
+                onResponseResult((body.statusCode == 200), body, body.message);
             } else if (response.code() == 401) {//令牌失效
                 onApiGrantRefuse();
             } else {//访问错误

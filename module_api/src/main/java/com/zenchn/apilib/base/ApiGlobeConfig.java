@@ -1,20 +1,28 @@
 package com.zenchn.apilib.base;
 
 /**
- * 作    者：wangr on 2018/8/14 15:12
  * 描    述：
  * 修订记录：
+ *
+ * @author HZJ
  */
 
 public interface ApiGlobeConfig {
 
     String CLIENT_ID = "00000000000000000000000000000001";
-    String CLIENT_SECRET = "zdzc";
+    String CLIENT_SECRET = "inspect_house_app";
     String GRANT_TYPE = "password";
     String REFRESH_TYPE = "refresh_token";
+    String DEVICE_TYPE_ANDROID = "Android";
+    String ACCESS_TOKEN = "access-token";
+    String APP_DEVICE_ID = "app-device-id";
+    String APP_DEVICE_NAME = "app-device-name";
+    String APP_DEVICE_TYPE = "app-device-type";
 
     int MAX_RETRY_COUNT = 3;
 
+    //用户可登录权限
+    String USER_AUTHORITY_KEY_LOGIN = "*";
 
     interface ResponseCode {
 

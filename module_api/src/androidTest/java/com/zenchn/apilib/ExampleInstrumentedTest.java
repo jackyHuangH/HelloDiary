@@ -1,4 +1,4 @@
-package cn.zenchn.apilib;
+package com.zenchn.apilib;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

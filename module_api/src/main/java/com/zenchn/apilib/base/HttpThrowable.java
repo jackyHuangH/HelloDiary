@@ -17,7 +17,7 @@ import retrofit2.Response;
  * 修订记录：
  */
 
-public class HttpThrowable {
+public final class HttpThrowable {
 
     private static final int UNAUTHORIZED = 401;
 //    private static final int FORBIDDEN = 403;

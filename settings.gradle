@@ -1,1 +1,1 @@
-include ':app', ':module_api', ':picbrowserlib', ':treeviewlib', ':module_support'
+include ':app', ':picbrowserlib', ':treeviewlib', ':module_support', ':module_api'

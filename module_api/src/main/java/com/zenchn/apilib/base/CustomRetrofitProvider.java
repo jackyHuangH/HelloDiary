@@ -1,11 +1,12 @@
 package com.zenchn.apilib.base;
 
+import android.app.Application;
 import android.support.annotation.NonNull;
 
+import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
 import com.zenchn.apilib.BuildConfig;
 import com.zenchn.apilib.retrofit.IRetrofitProvider;
-import com.zenchn.apilib.retrofit.interceptor.AddParamsInterceptor;
-import com.zenchn.apilib.retrofit.interceptor.TokenHeaderInterceptor;
+import com.zenchn.apilib.retrofit.intercepter.HeaderInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,7 +14,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
@@ -23,15 +23,17 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  * record：
  */
 
-public class CustomRetrofitProvider implements IRetrofitProvider {
+public final class CustomRetrofitProvider implements IRetrofitProvider {
     private static String BASE_URL;
+    private static Application sApplication;
 
-    private CustomRetrofitProvider(String baseUrl) {
+    private CustomRetrofitProvider(String baseUrl, Application application) {
         BASE_URL = baseUrl;
+        sApplication = application;
     }
 
-    static CustomRetrofitProvider getInstance(@NonNull String baseUrl) {
-        return new CustomRetrofitProvider(baseUrl);
+    static CustomRetrofitProvider getInstance(@NonNull String baseUrl, Application application) {
+        return new CustomRetrofitProvider(baseUrl, application);
     }
 
     @Override
@@ -61,16 +63,14 @@ public class CustomRetrofitProvider implements IRetrofitProvider {
             }
 
             builder.addInterceptor(loggingInterceptor)
-                    .addNetworkInterceptor(new TokenHeaderInterceptor())
-                    .addNetworkInterceptor(new AddParamsInterceptor());
+                    .addNetworkInterceptor(new HeaderInterceptor(sApplication));
 
             OkHttpClient okHttpClient = builder.build();
             return (new Retrofit.Builder())
                     .baseUrl(CustomRetrofitProvider.BASE_URL)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(ScalarsConverterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
-//                    .addConverterFactory(FastJsonConverterFactory.create())
+                    .addConverterFactory(new Retrofit2ConverterFactory())
                     .client(okHttpClient)
                     .build();
         }
