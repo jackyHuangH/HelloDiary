@@ -14,9 +14,9 @@ import io.reactivex.Observable;
  * 修订记录：
  */
 
-public class ContextModelImpl {
+public class ContextModel {
 
-    private ContextModelImpl() {
+    private ContextModel() {
     }
 
     @NonNull

@@ -41,7 +41,7 @@ public class FileModelImpl implements FileModel {
 
     @Override
     public void copyDBToApp(@Nullable final CopyDBCallback callback) {
-        ContextModelImpl.getContextObservable()
+        ContextModel.getContextObservable()
                 .map(new Function<Application, Boolean>() {
                     @Override
                     public Boolean apply(Application application) {

@@ -47,6 +47,7 @@ import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
 import cn.hzjdemo.hellodiary.widgets.test.SquareImageView;
+import cn.hzjdemo.hellodiary.wrapper.NotifyWrapper;
 import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 import cn.hzjdemo.hellodiary.wrapper.glide.glideprogress.ProgressInterceptor;
 import cn.hzjdemo.hellodiary.wrapper.glide.glideprogress.ProgressListener;
@@ -275,7 +276,8 @@ public class LoginActivity extends BaseActivity {
                 vibrate();
             }
             break;
-            case R.id.iv_qq_login: {//备用
+            case R.id.iv_qq_login: {//测试通知
+                NotifyWrapper.sendSimpleNotification(RaidDetailActivity.class,"消息标题","消息内容哈哈哈哈");
             }
             break;
             default:

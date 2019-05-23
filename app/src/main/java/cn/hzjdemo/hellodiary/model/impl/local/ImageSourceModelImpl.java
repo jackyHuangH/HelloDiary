@@ -57,7 +57,7 @@ public class ImageSourceModelImpl {
                     realFile = (File) source;
                     break;
                 case ImageSourceType.URI:
-                    Context applicationContext = ContextModelImpl.getApplicationContext();
+                    Context applicationContext = ContextModel.getApplicationContext();
                     String realFilePath = UriUtils.getRealFilePath(applicationContext, (Uri) source);
                     if (realFilePath != null) {
                         realFile = new File(realFilePath);
