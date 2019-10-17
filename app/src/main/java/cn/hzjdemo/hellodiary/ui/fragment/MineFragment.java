@@ -101,7 +101,7 @@ public class MineFragment extends BaseFragment {
     }
 
     @Override
-    protected void lazyLoad() {
+    protected void onLazyLoad() {
 
     }
 
@@ -163,6 +163,14 @@ public class MineFragment extends BaseFragment {
     public void onViewClicked() {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * 测试BToast
+     */
+    @OnClick(R.id.bt_show_btoast)
+    public void onShowToastClicked() {
+
     }
 
     @Nullable

@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class TimeUtils {
     public static boolean getIsExpires(String expires) {
@@ -36,64 +37,66 @@ public class TimeUtils {
 
     /**
      * 格式化录制视频的时间 mm:ss
+     *
      * @param duration
      * @return
      */
     public static String getMinSecTime(Long duration) {
-        SimpleDateFormat format = new SimpleDateFormat("mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("mm:ss", Locale.CHINA);
         Date date = new Date(duration);
         return format.format(date);
     }
 
 
     public static String getTime(String time) {
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.CHINA);
         Date date = new Date(Long.parseLong(time + "000"));
         return format.format(date);
     }
 
     public static String getDateByFormat(long time, String _format) {
-        SimpleDateFormat format = new SimpleDateFormat(_format);
+        SimpleDateFormat format = new SimpleDateFormat(_format, Locale.CHINA);
         Date date = new Date(time * 1000);
         return format.format(date);
     }
 
     public static String getRegistrationTime(String time) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.CHINA);
         Date date = new Date(Long.parseLong(time + "000"));
         return format.format(date);
     }
 
     public static String getTimeDate(long time) {
-        SimpleDateFormat format = new SimpleDateFormat("MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd", Locale.CHINA);
         Date date = new Date(Long.parseLong(time + "000"));
         return format.format(date);
     }
 
     /**
      * 返回 yyyy-MM-dd 格式日期
+     *
      * @param time
      * @return
      */
     public static String getTime(long time) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         Date date = new Date(Long.parseLong(time + "000"));
         return format.format(date);
     }
 
     public static String getDate(long time) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         Date date = new Date(Long.parseLong(time + "000"));
         return format.format(date);
     }
 
     public static String toDay() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         return format.format(new Date());
     }
 
     public static String getTime() {
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.CHINA);
         return format.format(new Date());
     }
 
@@ -143,12 +146,13 @@ public class TimeUtils {
 
     /**
      * 获取小时
+     *
      * @return
      */
     public static int getNowHour() {
         int hour = 0;
         try {
-            SimpleDateFormat formatHour = new SimpleDateFormat("HH");
+            SimpleDateFormat formatHour = new SimpleDateFormat("HH", Locale.CHINA);
             hour = Integer.valueOf(formatHour.format(new Date()));
         } catch (Exception e) {
             e.printStackTrace();
@@ -157,16 +161,16 @@ public class TimeUtils {
     }
 
 
-
     /**
      * 把标准格式yyyy-MM-dd HH:mm日期转成时间戳,单位秒
+     *
      * @param time
      * @return long
      */
     public static long getTimeToTimeStamp(String time) {
         long timeStamp = 0;
         try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
             Date date = format.parse(time);
             timeStamp = date.getTime();
         } catch (ParseException e) {
@@ -184,7 +188,7 @@ public class TimeUtils {
      * @throws ParseException
      */
     public static int daysBetween(Date smdate, Date bdate) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         smdate = sdf.parse(sdf.format(smdate));
         bdate = sdf.parse(sdf.format(bdate));
         Calendar cal = Calendar.getInstance();
@@ -199,10 +203,11 @@ public class TimeUtils {
 
     /**
      * 将倒计时的时间格式化成分:秒"mm:ss"的格式
+     *
      * @param millisInfuture 剩余倒计时时长,单位:毫秒
      * @return
      */
-    public static String formatCountTimer(long millisInfuture){
+    public static String formatCountTimer(long millisInfuture) {
         String secondStr = "";
         String minStr = "";
         long remainTime = millisInfuture / 1000;
@@ -219,7 +224,7 @@ public class TimeUtils {
         } else {
             minStr = min + "";
         }
-        return minStr+":"+secondStr;
+        return minStr + ":" + secondStr;
     }
 
 }

@@ -7,6 +7,9 @@ import android.view.WindowManager;
 import com.gyf.immersionbar.ImmersionBar;
 import com.gyf.immersionbar.OnKeyboardListener;
 import com.zenchn.support.base.AbstractFragment;
+import com.zenchn.support.fragmentutil.BackHandlerHelper;
+import com.zenchn.support.fragmentutil.FragmentBackHandler;
+import com.zenchn.support.kit.AndroidKit;
 import com.zenchn.support.utils.StringUtils;
 import com.zenchn.support.widget.TitleBar;
 
@@ -14,6 +17,7 @@ import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.app.ApplicationKit;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.basepresenter.BasePresenterImpl;
@@ -26,10 +30,10 @@ import me.jessyan.autosize.AutoSizeConfig;
  * desc  ：fragment 抽象基类，继承此fragment即可
  * record：
  */
-public abstract class BaseFragment<P extends BasePresenterImpl> extends AbstractFragment implements BaseView, TitleBar.OnLeftClickListener {
+public abstract class BaseFragment<P extends BasePresenterImpl> extends AbstractFragment implements BaseView, FragmentBackHandler,
+        TitleBar.OnLeftClickListener {
 
     protected ImmersionBar mImmersionBar;
-
     /**
      * 视图是否加载完毕
      */
@@ -38,31 +42,31 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
      * 视图是否第一次展现
      */
     private boolean mFirstTimeVisible = false;
-
     @Inject
     protected P mPresenter;
 
     @Override
     protected void initInstanceState(Bundle savedInstanceState) {
-        super.initInstanceState(savedInstanceState);
-        //如果要在Fragment单独使用沉浸式，请在onSupportVisible实现沉浸式
-        if (isStatusBarEnabled()) {
-            initStatusBar();
-        }
-
-        //初始化依赖注入
+        //初始化依赖注入,在initWidget()前调用
         AppComponent applicationComponent = ApplicationKit.getApplicationComponent();
         componentInject(applicationComponent);
-
+        //添加lifecycle绑定
+        if (mPresenter != null) {
+            getLifecycle().addObserver(mPresenter);
+        }
+        super.initInstanceState(savedInstanceState);
         //今日头条屏幕适配方案配置
         AutoSizeConfig.getInstance().setCustomFragment(true);
     }
 
+    /**
+     * Viewpager+Fragment 每次对用户可见时，可调用此方法，相当于fragment的resume
+     */
     @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden && mImmersionBar != null) {
-            mImmersionBar.init();
+    public void onSupportVisible() {
+        //如果要在Fragment单独使用沉浸式，请在onSupportVisible实现沉浸式
+        if (isStatusBarEnabled()) {
+            initStatusBar();
         }
     }
 
@@ -85,8 +89,8 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
         mImmersionBar = ImmersionBar.with(this);
         mImmersionBar
                 .fitsSystemWindows(true)
-                .statusBarColor(android.R.color.white)
-                .statusBarDarkFont(true, 0.2f);
+                .statusBarColor(R.color.white)
+                .statusBarDarkFont(true);
 
         //是否需要监听键盘
         if (addOnKeyboardListener() != null) {
@@ -101,6 +105,14 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
 
     protected OnKeyboardListener addOnKeyboardListener() {
         return null;
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden && mImmersionBar != null) {
+            mImmersionBar.init();
+        }
     }
 
     @Override
@@ -120,7 +132,7 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
 
     private void lazyLoadDataIfPrepared() {
         if (getUserVisibleHint() && mIsViewPrepare && !mFirstTimeVisible) {
-            lazyLoad();
+            onLazyLoad();
             mFirstTimeVisible = true;
         }
     }
@@ -128,14 +140,7 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
     /**
      * 懒加载
      */
-    protected abstract void lazyLoad();
-
-    /**
-     * Viewpager+Fragment 每次对用户可见时，可调用此方法，相当于fragment的resume
-     */
-    @Override
-    protected void onSupportVisible() {
-        //Fragment对用户可见时
+    protected void onLazyLoad() {
     }
 
     @Override
@@ -147,9 +152,11 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
      * 模拟activity的onBackPressed()事件
      * 方便fragment 调用
      */
-    protected void onFragmentBackPressed() {
-        getActivity().onBackPressed();
+    @Override
+    public boolean onFragmentBackPressed() {
+        return BackHandlerHelper.handleBackPress(this);
     }
+
 
     @Override
     public void onApiGrantRefuse() {
@@ -168,12 +175,9 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
         showMessage(msg);
     }
 
-
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (mPresenter != null) {
-            mPresenter.onDestroy();
-        }
+    public void onPause() {
+        AndroidKit.Keyboard.hideSoftInput(getActivity());
+        super.onPause();
     }
 }

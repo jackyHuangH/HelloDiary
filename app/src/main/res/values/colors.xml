@@ -6,14 +6,8 @@
 
     <color name="translation">#00000000</color>
     <color name="windowBg">#ffffffff</color>
-    <color name="pureBlack">#ff000000</color>
-    <color name="themePink">#ff8585</color>
-    <color name="themeBlue">#3694c7</color>
-    <color name="lightBlack">#55000000</color>
-    <color name="lightGray">#f5f5f5</color>
     <color name="color_abb1b6">#abb1b6</color>
-    <color name="color_232323">#232323</color>
-    <color name="color_8290AF">#8290af</color>
+
 
     <!--color base-->
     <color name="black">#000000</color>
@@ -39,14 +33,10 @@
     <color name="cloudyBlue90">#e5C7C3D9</color>
     <color name="peach">#FFBF80</color>
     <color name="brightSkyBlue">#2CBBF5</color>
-    <color name="dodgerBlueThree">#5A9EFC</color>
     <color name="coolGreen">#42CD58</color>
 
     <color name="steelGreyTwo">#7E7F83</color>
     <color name="whiteFourteen">#F8F8F8</color>
-    <color name="darkGrey">#2D2F31</color>
-    <color name="darkGreyTwo">#252525</color>
-    <color name="sunnyYellow">#FFF21D</color>
     <color name="pinkishGrey">#c5c5c5</color>
     <color name="pinkishGreyTwo">#BEBEBE</color>
     <color name="greyishThree">#a5a5a5</color>
@@ -131,23 +121,6 @@
     <!-- InputBox hint color-->
     <color name="color_d5d5d5">#D5D5D5</color>
     <color name="color_d3d3d3">#d3d3d3</color>
-
-    <color name="green_base">#FF00EE00</color>
-    <color name="blue_base">#0000ff</color>
-    <color name="yellow_base">#ffbb33</color>
-    <color name="red_base">#ff0000</color>
-    <color name="color_ff9a56">#ff9a56</color>
-    <color name="color_188bff">#188bff</color>
-    <color name="color_fb5656">#fb5656</color>
-    <color name="color_fb7777">#fb7777</color>
-    <color name="color_dddddd">#dddddd</color>
-    <color name="color_ffff4444">#ffff4444</color>
-    <color name="color_80e0f0">#80e0f0</color>
-    <color name="color_ccffffff">#ccffffff</color>
-    <color name="color_ffffff">#ffffff</color>
-    <color name="color_47474B">#47474B</color>
-    <color name="color_38ADFF">#38ADFF</color>
-    <color name="color_7D7D7D">#7d7d7d</color>
 
     <!--15%透明度的白色-->
     <color name="white15">#26ffffff</color>

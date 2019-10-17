@@ -115,7 +115,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     @Override
-    protected void lazyLoad() {
+    protected void onLazyLoad() {
         initData();
     }
 

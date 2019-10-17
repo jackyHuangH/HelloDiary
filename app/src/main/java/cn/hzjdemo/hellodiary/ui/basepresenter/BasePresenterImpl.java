@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.zenchn.apilib.callback.rx.RxApiCallback;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 import cn.hzjdemo.hellodiary.ui.base.BaseView;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -25,7 +27,6 @@ public abstract class BasePresenterImpl<V extends BaseView> implements IPresente
 
     public BasePresenterImpl(V view) {
         this.mView = view;
-        onStart();
     }
 
     @Override
@@ -34,14 +35,19 @@ public abstract class BasePresenterImpl<V extends BaseView> implements IPresente
     }
 
     @Override
-    public void onStart() {
+    public void onCreate(LifecycleOwner owner) {
         //do something
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy(LifecycleOwner owner) {
         mView = null;
-        unDispose();
+        releaseDisposable();
+    }
+
+    @Override
+    public void onLifecycleChanged(LifecycleOwner owner, Lifecycle.Event event) {
+        Log.d(TAG, "onLifecycleChanged:" + event.name());
     }
 
     @Override
@@ -53,16 +59,16 @@ public abstract class BasePresenterImpl<V extends BaseView> implements IPresente
     }
 
     @Override
-    public void onApiFailure(String err_msg) {
+    public void onApiFailure(String errMsg) {
         if (null != mView) {
             mView.hideProgress();
-            mView.onApiFailure(err_msg);
+            mView.onApiFailure(errMsg);
         }
     }
 
     /**
      * 将 {@link Disposable} 添加到 {@link CompositeDisposable} 中统一管理
-     * 可在 { Activity#onDestroy()} 中使用 {@link #unDispose()} 停止正在执行的 RxJava 任务,避免内存泄漏
+     * 可在 { Activity#onDestroy()} 中使用 {@link #releaseDisposable()} 停止正在执行的 RxJava 任务,避免内存泄漏
      *
      * @param disposable
      */
@@ -80,7 +86,7 @@ public abstract class BasePresenterImpl<V extends BaseView> implements IPresente
     /**
      * 停止集合中正在执行的 RxJava 任务
      */
-    public void unDispose() {
+    public void releaseDisposable() {
         if (mCompositeDisposable != null) {
             //保证 Activity 结束时取消所有正在执行的订阅
             mCompositeDisposable.clear();

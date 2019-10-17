@@ -254,7 +254,7 @@ public class ShowOrderFragment extends BaseFragment {
     }
 
     @Override
-    protected void lazyLoad() {
+    protected void onLazyLoad() {
         initData();
     }
 

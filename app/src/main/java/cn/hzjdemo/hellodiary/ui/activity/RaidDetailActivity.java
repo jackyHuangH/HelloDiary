@@ -401,9 +401,9 @@ public class RaidDetailActivity extends BaseActivity {
                 initStatusBar();
             } else if (y <= bannerHeight) {
                 alpha = (float) y / (bannerHeight / 3);
-                if (alpha>=0.8F){
+                if (alpha >= 0.8F) {
                     mStatusBarWhiteFont = false;
-                    mIbtBack.setImageResource(R.drawable.ic_back);
+                    mIbtBack.setImageResource(R.drawable.ic_back_black);
                     mIbtRight.setImageResource(R.drawable.top_share_black);
                     initStatusBar();
                 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_root"
     android:layout_width="match_parent"
@@ -18,7 +17,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_centerInParent="true"
-            android:src="@mipmap/ic_launcher_round"/>
+            android:src="@mipmap/ic_launcher_round" />
 
         <TextView
             android:id="@+id/tv_user_name"
@@ -33,197 +32,220 @@
             android:shadowRadius="20"
             android:textColor="@color/white"
             android:textSize="14sp"
-            tools:text="小怪瘦"/>
+            tools:text="小怪瘦" />
 
         <TextView
             android:id="@+id/btn_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="27dp"
+            android:layout_marginRight="10dp"
             android:gravity="center"
             android:padding="5dp"
             android:text="@string/message"
             android:textColor="@color/white"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
-    <!--我的晒单-->
-    <LinearLayout
-        android:id="@+id/ll_my_show_order"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:background="@drawable/bg_stroke_grey"
-        android:gravity="center_vertical"
-        android:paddingLeft="15dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/mine_shaidan"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="19dp"
-            android:text="@string/my_show_order"
-            android:textColor="@color/charcoalGreyTwo"
-            android:textSize="14sp"/>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_weight="1"/>
+            <!--我的晒单-->
+            <LinearLayout
+                android:id="@+id/ll_my_show_order"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:background="@drawable/bg_stroke_grey"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/arrow_right"/>
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mine_shaidan" />
 
-    <LinearLayout
-        android:id="@+id/ll_my_raid_record"
-        android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:background="@drawable/bg_stroke_grey"
-        android:gravity="center_vertical"
-        android:paddingLeft="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="19dp"
+                    android:text="@string/my_show_order"
+                    android:textColor="@color/charcoalGreyTwo"
+                    android:textSize="14sp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/mine_group_buy"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_weight="1" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="19dp"
-            android:text="@string/group_buy_records"
-            android:textColor="@color/charcoalGreyTwo"
-            android:textSize="14sp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_weight="1"/>
+            <LinearLayout
+                android:id="@+id/ll_my_raid_record"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:background="@drawable/bg_stroke_grey"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/arrow_right"/>
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mine_group_buy" />
 
-    <LinearLayout
-        android:id="@+id/ll_my_prize_record"
-        android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:background="@drawable/bg_stroke_grey"
-        android:gravity="center_vertical"
-        android:paddingLeft="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="19dp"
+                    android:text="@string/group_buy_records"
+                    android:textColor="@color/charcoalGreyTwo"
+                    android:textSize="14sp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/mine_zhongjiang"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_weight="1" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="19dp"
-            android:text="@string/buy_record"
-            android:textColor="@color/charcoalGreyTwo"
-            android:textSize="14sp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_weight="1"/>
+            <LinearLayout
+                android:id="@+id/ll_my_prize_record"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:background="@drawable/bg_stroke_grey"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/arrow_right"/>
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mine_zhongjiang" />
 
-    <LinearLayout
-        android:id="@+id/ll_mine_introduce"
-        android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:layout_marginTop="10.5dp"
-        android:background="@drawable/bg_stroke_grey"
-        android:gravity="center_vertical"
-        android:paddingLeft="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="19dp"
+                    android:text="@string/buy_record"
+                    android:textColor="@color/charcoalGreyTwo"
+                    android:textSize="14sp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/mine_tuijian"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_weight="1" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="19dp"
-            android:text="@string/introduce_for_gift"
-            android:textColor="@color/charcoalGreyTwo"
-            android:textSize="14sp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_weight="1"/>
+            <LinearLayout
+                android:id="@+id/ll_mine_introduce"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginTop="10.5dp"
+                android:background="@drawable/bg_stroke_grey"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/arrow_right"/>
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mine_tuijian" />
 
-    <LinearLayout
-        android:id="@+id/ll_raid_rules"
-        android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:background="@drawable/bg_stroke_grey"
-        android:gravity="center_vertical"
-        android:paddingLeft="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="19dp"
+                    android:text="@string/introduce_for_gift"
+                    android:textColor="@color/charcoalGreyTwo"
+                    android:textSize="14sp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/mine_group_rule"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_weight="1" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="19dp"
-            android:text="@string/group_buy_rule_str"
-            android:textColor="@color/charcoalGreyTwo"
-            android:textSize="14sp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_weight="1"/>
+            <LinearLayout
+                android:id="@+id/ll_raid_rules"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:background="@drawable/bg_stroke_grey"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/arrow_right"/>
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mine_group_rule" />
 
-    <Button
-        android:id="@+id/bt_go_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:background="@drawable/bg_bt_mango_four"
-        android:text="去登录"
-        android:textColor="@color/white"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="19dp"
+                    android:text="@string/group_buy_rule_str"
+                    android:textColor="@color/charcoalGreyTwo"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/bt_go_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_bt_mango_four"
+                android:text="去登录"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/bt_show_btoast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_bt_mango_four"
+                android:text="show BToast"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

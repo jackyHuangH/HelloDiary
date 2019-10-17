@@ -32,7 +32,6 @@ import cn.hzjdemo.hellodiary.ui.basepresenter.BasePresenterImpl;
  */
 public abstract class BaseActivity<P extends BasePresenterImpl> extends AbstractAppCompatActivity implements BaseView, TitleBar.OnLeftClickListener {
 
-    protected static final int PAGE_SIZE = 10;
     protected ImmersionBar mImmersionBar;
 
     @Inject
@@ -44,7 +43,10 @@ public abstract class BaseActivity<P extends BasePresenterImpl> extends Abstract
         super.onCreate(savedInstanceState);
         AppComponent applicationComponent = ApplicationKit.getApplicationComponent();
         componentInject(applicationComponent);
-
+        //添加lifecycle绑定
+        if (mPresenter != null) {
+            getLifecycle().addObserver(mPresenter);
+        }
         initInstanceState(savedInstanceState);
         if (savedInstanceState == null) {
             initWidget();
@@ -131,13 +133,5 @@ public abstract class BaseActivity<P extends BasePresenterImpl> extends Abstract
     protected void onPause() {
         AndroidKit.Keyboard.hideSoftInput(this);
         super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (mPresenter != null) {
-            mPresenter.onDestroy();
-        }
-        super.onDestroy();
     }
 }
