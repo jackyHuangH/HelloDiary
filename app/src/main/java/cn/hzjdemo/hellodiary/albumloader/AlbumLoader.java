@@ -4,7 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.v4.content.CursorLoader;
+
+import androidx.loader.content.CursorLoader;
 
 /**
  * 作   者： by Hzj on 2017/12/11/011.

@@ -8,16 +8,16 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import cn.hzjdemo.hellodiary.R;
 
 /**
  * @author:Hzj
  * @date :2018/3/21/021
- * desc  ：
+ * desc  ：环形进度条
  * record：
  */
 

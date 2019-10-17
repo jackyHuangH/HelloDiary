@@ -8,11 +8,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;
-import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * Created by Hzj on 2017/8/15.
@@ -52,7 +53,7 @@ public class HomeHotGridAdaper extends BaseAdapter {
             holder = (HomeHotViewHolder) convertView.getTag();
         }
 
-        GlideApp.with(mContext)
+        Glide.with(mContext)
                 .load(Constants.imgUrls[position%5])
                 .centerCrop()
                 .into(holder.ivHomeHot);

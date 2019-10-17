@@ -1,10 +1,11 @@
 package cn.hzjdemo.hellodiary.widgets.recyclerview;
 
 import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 作   者： by Hzj on 2017/12/13/013.

@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
-//apply plugin: 'kotlin-android'
-//apply plugin: 'kotlin-android-extensions'//扩展插件，无需findViewById,直接引用布局文件的id即可
-//apply plugin: 'kotlin-kapt'  //kapt3插件
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'//扩展插件，无需findViewById,直接引用布局文件的id即可
+apply plugin: 'kotlin-kapt'  //kapt3插件
 apply from: 'dependence.gradle'
 
 android {
@@ -90,17 +90,6 @@ android {
         flatDir {
             dirs 'libs' //this way we can find the .aar file in libs folder
         }
-    }
-
-    //PictureSelector rxjava冲突解决
-    packagingOptions {
-        exclude 'META-INF/rxjava.properties'
-
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
     }
 }
 

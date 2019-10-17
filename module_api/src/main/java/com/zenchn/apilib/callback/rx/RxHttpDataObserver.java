@@ -1,8 +1,8 @@
 package com.zenchn.apilib.callback.rx;
 
+import androidx.annotation.Nullable;
 import com.zenchn.apilib.callback.ApiExceptionHandler;
 import com.zenchn.apilib.callback.ApiFailureCallback;
-
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -81,6 +81,6 @@ public abstract class RxHttpDataObserver<T> implements Observer<T>, ApiFailureCa
         onHttpResponseResult(false, null, errMsg);
     }
 
-    protected abstract void onHttpResponseResult(boolean success, T data, String msg);
+    protected abstract void onHttpResponseResult(boolean success, @Nullable T data, @Nullable String msg);
 
 }

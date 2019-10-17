@@ -7,26 +7,18 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.support.annotation.RequiresPermission;
 import android.telephony.TelephonyManager;
 import android.text.format.Formatter;
 import android.util.Log;
+import androidx.annotation.RequiresPermission;
 
 import java.lang.reflect.Method;
-import java.net.InetAddress;
-import java.net.InterfaceAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 
-import static android.Manifest.permission.ACCESS_NETWORK_STATE;
-import static android.Manifest.permission.ACCESS_WIFI_STATE;
-import static android.Manifest.permission.CHANGE_WIFI_STATE;
-import static android.Manifest.permission.INTERNET;
-import static android.Manifest.permission.MODIFY_PHONE_STATE;
+import static android.Manifest.permission.*;
 import static android.content.Context.WIFI_SERVICE;
 
 /**
@@ -62,13 +54,15 @@ public class NetworkUtils {
     }
 
     /**
+     * 网络是否可用
+     * <p>
      * Return whether network is connected.
      * <p>Must hold {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
      *
      * @return {@code true}: connected<br>{@code false}: disconnected
      */
     @RequiresPermission(ACCESS_NETWORK_STATE)
-    public static boolean isConnected(Context context) {
+    public static boolean isNetworkAvailable(Context context) {
         NetworkInfo info = getActiveNetworkInfo(context);
         return info != null && info.isConnected();
     }

@@ -1,5 +1,7 @@
 package com.zenchn.apilib.callback.rx;
 
+import androidx.annotation.Nullable;
+
 /**
  * 作    者：wangr on 2018/8/6 10:35
  * 描    述：rxjava 无数据 boolean结果处理
@@ -25,5 +27,5 @@ public abstract class RxHttpResultObserver extends RxHttpDataObserver<Object> {
         onHttpBooleanResult(success, msg);
     }
 
-    protected abstract void onHttpBooleanResult(boolean success, String msg);
+    protected abstract void onHttpBooleanResult(boolean success, @Nullable String msg);
 }

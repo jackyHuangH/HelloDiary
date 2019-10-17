@@ -2,19 +2,16 @@ package com.zenchn.support.base;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.zenchn.support.dafault.DefaultUiController;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import com.zenchn.support.dafault.DefaultUiController;
 
 /**
  * 作   者： by Hzj on 2017/12/13/013.
@@ -81,7 +78,6 @@ public abstract class AbstractFragment extends Fragment implements IActivity {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.d("AbsFragment", "setUserVisibleHint->isVisibleToUser:" + isVisibleToUser);
         if (rootView == null) {
             return;
         }
@@ -109,7 +105,7 @@ public abstract class AbstractFragment extends Fragment implements IActivity {
     protected abstract void onSupportVisible();
 
     protected IUiController getDefaultUiController(Context context) {
-        return new DefaultUiController(context);
+        return new DefaultUiController(context,this);
     }
 
     @Override
@@ -123,13 +119,6 @@ public abstract class AbstractFragment extends Fragment implements IActivity {
     public void showProgress(@Nullable CharSequence msg) {
         if (mUiController != null) {
             mUiController.showProgress(msg);
-        }
-    }
-
-    @Override
-    public void updateProgress(int progress, int max) {
-        if (mUiController != null) {
-            mUiController.updateProgress(progress, max);
         }
     }
 

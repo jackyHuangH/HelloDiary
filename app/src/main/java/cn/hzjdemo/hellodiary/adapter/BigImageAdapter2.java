@@ -3,9 +3,6 @@ package cn.hzjdemo.hellodiary.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +18,11 @@ import com.bumptech.glide.request.target.Target;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.PagerAdapter;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.widgets.RingProgressBar;
-import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -33,7 +32,7 @@ import me.jessyan.progressmanager.body.ProgressInfo;
 
 /**
  * 作   者： by Hzj on 2017/12/18/018.
- * 描   述：
+ * 描   述：显示图片加载进度的图片预览
  * 修订记录：
  */
 
@@ -87,7 +86,7 @@ public class BigImageAdapter2 extends PagerAdapter {
             }
         });
 
-        GlideApp
+        Glide
                 .with(context)
                 .load(imageUrl)
                 .fitCenter()

@@ -66,7 +66,7 @@ public class DialogMaster {
 
         private int gravity = Gravity.CENTER;
         //dialog外部黑暗度
-        private float dimAmount=0.3f;
+        private float dimAmount = 0.3f;
 
         private DialogInterface.OnDismissListener mDismissListener;
 
@@ -131,13 +131,16 @@ public class DialogMaster {
         public DialogMaster create() {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
             final AlertDialog dialog = builder.create();
+            if (this.context == null) {
+                throw new IllegalStateException("you must call setContext(ctx) first!!!");
+            }
             final View contentView = LayoutInflater.from(this.context).inflate(this.layout, null);
 
             if (this.layoutInit != null) {
                 layoutInit.onWindowLayoutInit(contentView);
             }
 
-            for (int i = 0; i < listeners.size(); i++) {
+            for (int i = 0, size = listeners.size(); i < size; i++) {
                 int viewId = listeners.keyAt(i);
                 View item = contentView.findViewById(viewId);
                 item.setOnClickListener(this.listeners.get(viewId));
@@ -159,7 +162,7 @@ public class DialogMaster {
             mask.mDialogHeight = this.dialogHeight;
             mask.mGravity = this.gravity;
             mask.mContentView = contentView;
-            mask.mDimAmount =dimAmount;
+            mask.mDimAmount = dimAmount;
 
             return mask;
         }
@@ -193,7 +196,7 @@ public class DialogMaster {
             //设置dialog的宽高为屏幕的宽高
             WindowManager.LayoutParams lp = window.getAttributes();
             //设置背景黑暗度
-            lp.dimAmount=mDimAmount;
+            lp.dimAmount = mDimAmount;
             lp.width = mDialogWidth;
             lp.height = mDialogHeight;
             window.setAttributes(lp);

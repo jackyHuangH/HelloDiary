@@ -2,16 +2,14 @@ package com.zenchn.apilib.base;
 
 
 import android.app.Application;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.alibaba.fastjson.JSONObject;
 import com.zenchn.apilib.model.HttpResultModel;
 import com.zenchn.apilib.retrofit.RetrofitManager;
+import okhttp3.ResponseBody;
 
 import java.io.IOException;
-
-import okhttp3.ResponseBody;
 
 /**
  * 作    者：wangr on 2017/8/29 18:18
@@ -22,8 +20,8 @@ import okhttp3.ResponseBody;
 public final class ApiManager {
     private static final String API_AUTH_MESSAGE_KEY = "error_description";
     private static final String API_MESSAGE_KEY = "message";
-    /***成功 0，其他情况另定***/
-    private static final int API_SUCCESS_STATUS_CODE = 0;
+    /***成功 200，其他情况另定***/
+    private static final int API_SUCCESS_STATUS_CODE = 200;
 
     public static void init(String baseUrl, Application application) {
         RetrofitManager.getInstance()

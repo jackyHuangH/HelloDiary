@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
 import com.zenchn.support.kit.AndroidKit;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -14,7 +15,6 @@ import java.util.List;
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.entity.PhotoInfo;
-import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * Created by Hzj on 2017/8/21.
@@ -50,7 +50,7 @@ public class AddPicAdapter extends CommonAdapter<PhotoInfo> {
             holder.setVisible(R.id.iv_plus, false);
             holder.setVisible(R.id.iv_img, true);
 
-            GlideApp.with(mContext)
+            Glide.with(mContext)
                     .load(s)
                     .centerCrop()
                     .into(ivImg);

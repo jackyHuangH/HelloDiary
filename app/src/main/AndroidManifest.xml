@@ -131,7 +131,7 @@
 
         <!-- 7.0+调用相机,读取文件适配权限 -->
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="cn.hzjdemo.hellodiary.provider"
             android:exported="false"
             android:grantUriPermissions="true">

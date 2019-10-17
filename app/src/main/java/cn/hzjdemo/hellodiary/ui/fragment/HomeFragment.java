@@ -2,7 +2,6 @@ package cn.hzjdemo.hellodiary.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -12,7 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.gyf.barlibrary.ImmersionBar;
+import com.bumptech.glide.Glide;
+import com.gyf.immersionbar.ImmersionBar;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.zenchn.support.kit.AndroidKit;
@@ -30,6 +30,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.Simple
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import butterknife.BindColor;
 import butterknife.BindView;
 import cn.hzjdemo.hellodiary.Constants;
@@ -47,7 +48,6 @@ import cn.hzjdemo.hellodiary.widgets.GridViewForScrollView;
 import cn.hzjdemo.hellodiary.widgets.MarqueeView;
 import cn.hzjdemo.hellodiary.widgets.ObservableScrollView;
 import cn.hzjdemo.hellodiary.wrapper.glide.BannerImageLoader;
-import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * 首页
@@ -207,7 +207,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             TextView tv_quick_name = (TextView) quickView.findViewById(R.id.tv_name_home_quick);
             AutoSizeTextView tv_quick_price = (AutoSizeTextView) quickView.findViewById(R.id.tv_price_home_quick);
 
-            GlideApp.with(getActivity())
+            Glide.with(getActivity())
                     .load(Constants.imgUrls[i % 10])
                     .centerCrop()
                     .into(iv_quick);

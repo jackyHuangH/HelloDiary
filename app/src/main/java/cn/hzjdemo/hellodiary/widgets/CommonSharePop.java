@@ -192,7 +192,7 @@ public class CommonSharePop {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                sharePop.close();
+                sharePop.dismiss();
             }
         });
         if (null != popContainer)

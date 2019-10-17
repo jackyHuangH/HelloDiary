@@ -1,19 +1,19 @@
 package cn.hzjdemo.hellodiary.ui.base;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.gyf.barlibrary.ImmersionBar;
-import com.gyf.barlibrary.OnKeyboardListener;
+import com.gyf.immersionbar.ImmersionBar;
+import com.gyf.immersionbar.OnKeyboardListener;
 import com.zenchn.support.base.AbstractFragment;
 import com.zenchn.support.utils.StringUtils;
 import com.zenchn.support.widget.TitleBar;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import cn.hzjdemo.hellodiary.app.ApplicationKit;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.basepresenter.BasePresenterImpl;
@@ -174,9 +174,6 @@ public abstract class BaseFragment<P extends BasePresenterImpl> extends Abstract
         super.onDestroyView();
         if (mPresenter != null) {
             mPresenter.onDestroy();
-        }
-        if (mImmersionBar != null) {
-            mImmersionBar.destroy();
         }
     }
 }

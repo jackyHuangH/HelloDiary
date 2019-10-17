@@ -6,11 +6,8 @@ import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -30,7 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gyf.barlibrary.ImmersionBar;
+import com.gyf.immersionbar.ImmersionBar;
 import com.youth.banner.Banner;
 import com.zenchn.support.router.Router;
 import com.zenchn.support.widget.dialog.PopupMaster;
@@ -40,9 +37,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindColor;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;
@@ -373,13 +371,13 @@ public class RaidDetailActivity extends BaseActivity {
                     public void onClick(View v) {
                         //todo 立即支付
                         ConfirmOrderActivity.launch(RaidDetailActivity.this);
-                        raidPopMaster.close();
+                        raidPopMaster.dismiss();
                     }
                 })
                 .setItemClickListener(R.id.btn_turn_off, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        raidPopMaster.close();
+                        raidPopMaster.dismiss();
                     }
                 })
                 .setDismissListener(new PopupWindow.OnDismissListener() {

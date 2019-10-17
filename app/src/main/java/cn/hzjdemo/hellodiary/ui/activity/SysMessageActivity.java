@@ -3,8 +3,6 @@ package cn.hzjdemo.hellodiary.ui.activity;
 import android.database.Cursor;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.widget.LinearLayout;
 
@@ -18,6 +16,8 @@ import com.zhy.adapter.recyclerview.wrapper.EmptyWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;

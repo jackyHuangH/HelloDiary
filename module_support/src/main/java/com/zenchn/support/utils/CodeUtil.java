@@ -34,4 +34,18 @@ public class CodeUtil {
         return false;
     }
 
+    /**
+     * 1.判断字符串是否仅为数字:
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isNumeric(String str) {
+        for (int i = str.length(); --i >= 0; ) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

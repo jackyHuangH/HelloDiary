@@ -85,12 +85,12 @@ public class ACache {
 
     /**
      * Provides a means to save a cached file before the data are available.
-     * Since writing about the file is complete, and its close method is called,
+     * Since writing about the file is complete, and its dismiss method is called,
      * its contents will be registered in the cache. Example of use:
      * <p/>
      * ACache cache = new ACache(this) try { OutputStream stream =
      * cache.put("myFileName") stream.write("some bytes".getBytes()); // now
-     * update cache! stream.close(); } catch(FileNotFoundException e){
+     * update cache! stream.dismiss(); } catch(FileNotFoundException e){
      * e.printStackTrace() }
      */
     class xFileOutputStream extends FileOutputStream {

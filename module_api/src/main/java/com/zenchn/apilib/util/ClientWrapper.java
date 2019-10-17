@@ -59,27 +59,4 @@ public class ClientWrapper {
         return android.os.Build.VERSION.SDK_INT;
     }
 
-//    private static String getUniqueId(Context context) {
-//        try {
-//            context = context.getApplicationContext();
-//            ContentResolver contentResolver = context.getContentResolver();
-//            TelephonyManager telephonyMgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-//            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-//                String IMEI = "";
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                    IMEI = telephonyMgr.getImei();
-//                } else {
-//                    IMEI = telephonyMgr.getDeviceId();
-//                }
-//                String simSerialNumber = telephonyMgr.getSimSerialNumber();
-//                String androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID);
-//                UUID deviceUuid = new UUID(androidId.hashCode(), ((long) IMEI.hashCode() << 32) | simSerialNumber.hashCode());
-//                return deviceUuid.toString();
-//            } else {
-//                return null;
-//            }
-//        } catch (Exception e) {
-//            return null;
-//        }
-//    }
 }

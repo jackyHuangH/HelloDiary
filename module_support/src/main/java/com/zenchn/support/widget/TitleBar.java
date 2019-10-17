@@ -4,13 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -19,6 +12,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 
 import com.zenchn.support.R;
 import com.zenchn.support.kit.AndroidKit;
@@ -42,6 +43,10 @@ public class TitleBar extends ViewGroup {
     private int mTitleBarCenterTextSize;
     private int mTitleBarRightTextColor;
     private int mTitleBarRightTextSize;
+    /**
+     * 是否显示左边返回按钮，默认true
+     */
+    private boolean mTitleBarLeftViewVisible;
     private int mTitleBarLeftTextColor;
     private int mTitleBarLeftTextSize;
 
@@ -79,12 +84,13 @@ public class TitleBar extends ViewGroup {
 
         String titleBarCenterText = typedArray.getString(R.styleable.TitleBar_title_bar_center_text);
         mTitleBarCenterTextColor = typedArray.getColor(R.styleable.TitleBar_title_bar_center_text_color, ContextCompat.getColor(context, R.color.ios_black));
-        mTitleBarCenterTextSize = typedArray.getDimensionPixelOffset(R.styleable.TitleBar_title_bar_center_text_size, AndroidKit.Dimens.sp2px(18));
+        mTitleBarCenterTextSize = typedArray.getDimensionPixelOffset(R.styleable.TitleBar_title_bar_center_text_size, AndroidKit.Dimens.sp2px(19));
 
+        mTitleBarLeftViewVisible = typedArray.getBoolean(R.styleable.TitleBar_title_bar_left_view_visible, true);
         mTitleBarLeftTextColor = typedArray.getColor(R.styleable.TitleBar_title_bar_left_text_color, ContextCompat.getColor(context, R.color.ios_black));
         mTitleBarLeftTextSize = typedArray.getDimensionPixelOffset(R.styleable.TitleBar_title_bar_left_text_size, AndroidKit.Dimens.sp2px(16));
 
-        mTitleBarRightTextColor = typedArray.getColor(R.styleable.TitleBar_title_bar_right_text_color, ContextCompat.getColor(context, R.color.ios_black));
+        mTitleBarRightTextColor = typedArray.getColor(R.styleable.TitleBar_title_bar_right_text_color, ContextCompat.getColor(context, R.color.ios_blue));
         mTitleBarRightTextSize = typedArray.getDimensionPixelOffset(R.styleable.TitleBar_title_bar_right_text_size, AndroidKit.Dimens.sp2px(16));
         String titleBarRightText = typedArray.getString(R.styleable.TitleBar_title_bar_right_text);
 
@@ -97,7 +103,7 @@ public class TitleBar extends ViewGroup {
         boolean titleBarDefault = typedArray.getBoolean(R.styleable.TitleBar_title_bar_default, true);
 
         mTitleBarSeparateColor = typedArray.getColor(R.styleable.TitleBar_title_bar_separate_color, ContextCompat.getColor(context, R.color.color_cfcfcf));
-        mTitleBarSeparateHeight = typedArray.getDimensionPixelOffset(R.styleable.TitleBar_title_bar_separate_height, AndroidKit.Dimens.dp2px(1));
+        mTitleBarSeparateHeight = typedArray.getDimensionPixelOffset(R.styleable.TitleBar_title_bar_separate_height, AndroidKit.Dimens.dp2px(0.5F));
 
         typedArray.recycle();
 
@@ -109,8 +115,12 @@ public class TitleBar extends ViewGroup {
             if (titleBarLeftIconDrawable == null) {
                 titleBarLeftIconDrawable = ContextCompat.getDrawable(context, R.drawable.ic_back_blue);
             }
-            Drawable backBackground = ContextCompat.getDrawable(context, R.drawable.selector_titlebar_back);
-            leftView(ViewFactory.getImageButton(context, titleBarLeftIconDrawable, backBackground));
+            if (mTitleBarLeftViewVisible) {
+                //波纹点击背景效果
+                Drawable rippleDrawable = ContextCompat.getDrawable(context, R.drawable.ripple_bg_title_bar);
+                leftView(ViewFactory.getImageButton(context, titleBarLeftIconDrawable, rippleDrawable));
+            }
+
             titleText(titleBarCenterText);
             if (!TextUtils.isEmpty(titleBarRightText)) {
                 rightText(titleBarRightText);
@@ -281,6 +291,7 @@ public class TitleBar extends ViewGroup {
 
     public TitleBar leftVisible(boolean isLeftVisible) {
         if (mLeftView != null) {
+            mTitleBarLeftViewVisible=isLeftVisible;
             mLeftView.setVisibility(isLeftVisible ? View.VISIBLE : View.GONE);
         }
         return this;
@@ -357,8 +368,9 @@ public class TitleBar extends ViewGroup {
      * @return
      */
     private TitleBar leftView(@NonNull View customLeftView) {
-        if (mLeftView != null)
+        if (mLeftView != null) {
             removeView(mLeftView);
+        }
         customLeftView.setPadding(mTitleBarLeftClickPadding, 0, mTitleBarLeftClickPadding, 0);
         addView(customLeftView);
         mLeftView = customLeftView;

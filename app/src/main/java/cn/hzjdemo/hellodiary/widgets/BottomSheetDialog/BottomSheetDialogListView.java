@@ -2,13 +2,14 @@ package cn.hzjdemo.hellodiary.widgets.BottomSheetDialog;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 /**
  * author:Hzj

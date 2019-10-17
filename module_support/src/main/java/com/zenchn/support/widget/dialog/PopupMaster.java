@@ -4,15 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**
@@ -41,11 +39,11 @@ public class PopupMaster {
 
         private Context context;
         private int layout;
-        private boolean focusable = false;
+        private boolean focusable = true;
         private boolean outSideTouchable = true;
 
-        private int width = ViewGroup.LayoutParams.MATCH_PARENT;
-        private int height = ViewGroup.LayoutParams.MATCH_PARENT;
+        private int width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        private int height = ViewGroup.LayoutParams.WRAP_CONTENT;
 
         private int x = 0;
         private int y = 0;
@@ -56,11 +54,11 @@ public class PopupMaster {
 
         private Handler handler;
 
-        private PopupWindow.OnDismissListener dl;
+        private PopupWindow.OnDismissListener mDismissListener;
 
-        private Map<Integer, View.OnClickListener> listeners = new HashMap<>();
+        private SparseArray<View.OnClickListener> listeners = new SparseArray<>();
 
-        private View.OnTouchListener l;
+        private View.OnTouchListener mTouchListener;
 
         public Builder setLayout(int id) {
             this.layout = id;
@@ -113,12 +111,12 @@ public class PopupMaster {
         }
 
         public Builder setTouchListener(View.OnTouchListener listener) {
-            this.l = listener;
+            this.mTouchListener = listener;
             return this;
         }
 
         public Builder setDismissListener(PopupWindow.OnDismissListener dl) {
-            this.dl = dl;
+            this.mDismissListener = dl;
             return this;
         }
 
@@ -139,25 +137,28 @@ public class PopupMaster {
 
         public PopupMaster create() {
             final NougatPopWindow popupWindow = new NougatPopWindow();
-            final View content = LayoutInflater.from(this.context).inflate(this.layout, null);
+            if (this.context == null) {
+                throw new IllegalStateException("you must call setContext(ctx) first!!!");
+            }
+            final View contentView = LayoutInflater.from(this.context).inflate(this.layout, null);
 
             if (this.layoutInit != null) {
-                layoutInit.OnWindowLayoutInit(content);
+                layoutInit.OnWindowLayoutInit(contentView);
             }
 
-            for (Integer id : listeners.keySet()) {
-                View item = content.findViewById(id);
-                item.setOnClickListener(this.listeners.get(id));
+            for (int i = 0, size = listeners.size(); i < size; i++) {
+                int viewId = listeners.keyAt(i);
+                View item = contentView.findViewById(viewId);
+                item.setOnClickListener(this.listeners.get(viewId));
             }
-
-            content.setOnClickListener(new View.OnClickListener() {
+            contentView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    popupWindow.dismiss();
                 }
             });
 
-            popupWindow.setContentView(content);
+            popupWindow.setContentView(contentView);
             popupWindow.setTouchable(true);
             popupWindow.setWidth(this.width);
             popupWindow.setHeight(this.height);
@@ -165,15 +166,15 @@ public class PopupMaster {
             popupWindow.setBackgroundDrawable(new BitmapDrawable());
             popupWindow.setOutsideTouchable(this.outSideTouchable);
 
-            if (animateId > 0)
+            if (animateId > 0) {
                 popupWindow.setAnimationStyle(animateId);
-
-            if (dl != null)
-                popupWindow.setOnDismissListener(dl);
-
-            if (this.l != null)
-                popupWindow.setTouchInterceptor(l);
-            else
+            }
+            if (mDismissListener != null) {
+                popupWindow.setOnDismissListener(mDismissListener);
+            }
+            if (this.mTouchListener != null) {
+                popupWindow.setTouchInterceptor(mTouchListener);
+            } else {
                 popupWindow.setTouchInterceptor(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
@@ -181,7 +182,7 @@ public class PopupMaster {
                         return false;
                     }
                 });
-
+            }
             PopupMaster mask = new PopupMaster();
             mask.popupWindow = popupWindow;
             mask.x = this.x;
@@ -214,7 +215,7 @@ public class PopupMaster {
         if (popupWindow != null && !popupWindow.isShowing()) {
             int[] location = new int[2];
             view.getLocationOnScreen(location);
-            popupWindow.showAtLocation(view, gravity, location[0], location[1] + view.getHeight() + 60);
+            popupWindow.showAtLocation(view, gravity, location[0], location[1] + view.getHeight());
             popupWindow.update();//一定要调用,否则无效
         }
     }
@@ -222,6 +223,7 @@ public class PopupMaster {
     public void showAsDropDown(View view, int xoff, int yoff, int gravity) {
         if (popupWindow != null && !popupWindow.isShowing()) {
             popupWindow.showAsDropDown(view, xoff, yoff, gravity);
+            popupWindow.update();
         }
     }
 
@@ -235,8 +237,9 @@ public class PopupMaster {
         return popupWindow.isShowing();
     }
 
-    public void close() {
-        if (popupWindow != null)
+    public void dismiss() {
+        if (popupWindow != null) {
             popupWindow.dismiss();
+        }
     }
 }

@@ -1,24 +1,25 @@
 package com.zenchn.support.base;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 import android.view.View;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.lifecycle.LifecycleOwner;
 import com.zenchn.support.dafault.DefaultUiController;
 import com.zenchn.support.widget.tips.SuperSnackBar;
 
 
 /**
- * 作    者：wangr on 2017/4/27 14:56
- * 描    述：
+ * 描    述：使用SnackBar 代替Toast
  * 修订记录：
+ *
+ * @author HZJ
  */
 
 public abstract class AbstractUiController extends DefaultUiController {
 
-    public AbstractUiController(@NonNull Context mContext) {
-        super(mContext);
+    public AbstractUiController(Context mContext, LifecycleOwner lifecycleOwner) {
+        super(mContext, lifecycleOwner);
     }
 
     @Override
@@ -31,7 +32,7 @@ public abstract class AbstractUiController extends DefaultUiController {
 
     @Override
     public void showResMessage(@StringRes int resId) {
-        showMessage(mContext.getString(resId));
+        showMessage(getMContext().getString(resId));
     }
 
     /**

@@ -1,10 +1,10 @@
-package com.zenchn.support.managers;
+package com.zenchn.support.fragmentutil;
 
-import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.List;
 
@@ -30,9 +30,9 @@ public class HFragmentManager {
 
     /**
      * 添加Fragment
-     * 此方法必须先调用
+     * 此方法必须先调用,参数可为多个，默认只显示第一个fragment，第二个参数以后作为预加载
      */
-    public void add(Fragment fragment) {
+    public void add(Fragment... fragment) {
         if (fragment == null) {
             throw new IllegalStateException("you must call add(Fragment fragment) first!");
         }
@@ -40,7 +40,18 @@ public class HFragmentManager {
         // 开启事物
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         // 第一个参数是Fragment的容器id，需要添加的Fragment
-        fragmentTransaction.add(mContainerViewId, fragment);
+        for (Fragment f : fragment) {
+            fragmentTransaction.add(mContainerViewId, f);
+        }
+        //默认显示第一个，后面的隐藏
+        for (int i = 0; i < fragment.length; i++) {
+            Fragment f = fragment[i];
+            if (i == 0) {
+                fragmentTransaction.show(f);
+            } else {
+                fragmentTransaction.hide(f);
+            }
+        }
         // 一定要commit
         fragmentTransaction.commit();
     }
@@ -48,7 +59,7 @@ public class HFragmentManager {
     /**
      * 切换显示Fragment
      */
-    public void switchFragment(Fragment fragment) {
+    public void switchFragment(Fragment newFragment) {
         // 开启事物
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
@@ -59,10 +70,10 @@ public class HFragmentManager {
         }
 
         // 2.如果容器里面没有我们就添加，否则显示
-        if (!childFragments.contains(fragment)) {
-            fragmentTransaction.add(mContainerViewId, fragment);
+        if (!childFragments.contains(newFragment)) {
+            fragmentTransaction.add(mContainerViewId, newFragment);
         } else {
-            fragmentTransaction.show(fragment);
+            fragmentTransaction.show(newFragment);
         }
 
         // 替换Fragment

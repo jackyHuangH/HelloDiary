@@ -3,9 +3,6 @@ package com.zenchn.picbrowserlib.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -15,6 +12,10 @@ import com.zenchn.picbrowserlib.pojo.ImageSourceInfo;
 import com.zenchn.picbrowserlib.widget.BaseViewPager;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
 
 
 /**

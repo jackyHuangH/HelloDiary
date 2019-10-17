@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -18,7 +19,6 @@ import cn.hzjdemo.hellodiary.bean.ShowOrderBean;
 import cn.hzjdemo.hellodiary.ui.activity.ShowPictureActivity;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.MultiImageView;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.entity.PhotoInfo;
-import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * Created by Hzj on 2017/8/18.
@@ -68,7 +68,7 @@ public class ShowOrderAdapter extends CommonAdapter<ShowOrderBean> {
         //加载圆形头像
         ImageView ivUserHead = holder.getView(R.id.iv_order_user_head);
 
-        GlideApp.with(mContext)
+        Glide.with(mContext)
                 .load(Constants.imgUrls[3])
                 .transform(new CircleCrop())
                 .placeholder(R.mipmap.ic_launcher_round)

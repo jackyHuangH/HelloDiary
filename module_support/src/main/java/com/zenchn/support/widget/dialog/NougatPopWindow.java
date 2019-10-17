@@ -49,7 +49,7 @@ public class NougatPopWindow extends PopupWindow {
 
     @Override
     public void showAsDropDown(View anchor) {
-        if(Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Rect rect = new Rect();
             anchor.getGlobalVisibleRect(rect);
             int h = anchor.getResources().getDisplayMetrics().heightPixels - rect.bottom;

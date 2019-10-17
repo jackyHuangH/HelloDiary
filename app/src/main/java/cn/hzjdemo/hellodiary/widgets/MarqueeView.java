@@ -3,7 +3,6 @@ package cn.hzjdemo.hellodiary.widgets;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
-import android.support.annotation.AnimRes;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -20,6 +19,7 @@ import com.zenchn.support.kit.AndroidKit;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.AnimRes;
 import cn.hzjdemo.hellodiary.R;
 
 /**

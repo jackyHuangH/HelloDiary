@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
 import com.zenchn.support.kit.AndroidKit;
@@ -27,7 +28,6 @@ import cn.hzjdemo.hellodiary.bean.TakeAddressBean;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
 import cn.hzjdemo.hellodiary.wrapper.glide.CircleTransform;
-import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * 我的资料
@@ -77,7 +77,7 @@ public class UserInfoActivity extends BaseActivity {
         mTitleBar.titleText(getString(R.string.my_info_str))
                 .setOnLeftClickListener(this);
 
-        RequestBuilder<Bitmap> requestBuilder = GlideApp.with(UserInfoActivity.this)
+        RequestBuilder<Bitmap> requestBuilder = Glide.with(UserInfoActivity.this)
                 .asBitmap()
                 .load(R.drawable.default_no_pic)
                 .placeholder(R.drawable.default_no_pic)
@@ -146,14 +146,14 @@ public class UserInfoActivity extends BaseActivity {
                                 showMessage( "昵称不能为空");
                             } else {
                                 tvNickname.setText(inputNick);
-                                nickPop.close();
+                                nickPop.dismiss();
                             }
                         }
                     })
                     .setItemClickListener(R.id.btn_cancel, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            nickPop.close();
+                            nickPop.dismiss();
                         }
                     })
                     .setDismissListener(new PopupWindow.OnDismissListener() {

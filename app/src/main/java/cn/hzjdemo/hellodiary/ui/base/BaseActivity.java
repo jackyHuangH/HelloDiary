@@ -1,28 +1,28 @@
 package cn.hzjdemo.hellodiary.ui.base;
 
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.gyf.barlibrary.ImmersionBar;
-import com.gyf.barlibrary.OnKeyboardListener;
+import com.gyf.immersionbar.ImmersionBar;
+import com.gyf.immersionbar.OnKeyboardListener;
 import com.zenchn.support.base.AbstractAppCompatActivity;
 import com.zenchn.support.base.IActivityLifecycle;
 import com.zenchn.support.base.IUiController;
 import com.zenchn.support.dafault.DefaultActivityLifecycle;
+import com.zenchn.support.dafault.DefaultUiController;
 import com.zenchn.support.kit.AndroidKit;
 import com.zenchn.support.utils.StringUtils;
 import com.zenchn.support.widget.TitleBar;
 
 import javax.inject.Inject;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import cn.hzjdemo.hellodiary.app.ApplicationKit;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.basepresenter.BasePresenterImpl;
-import cn.hzjdemo.hellodiary.wrapper.CustomUiController;
 
 /**
  * @author:Hzj
@@ -59,12 +59,8 @@ public abstract class BaseActivity<P extends BasePresenterImpl> extends Abstract
 
     @Override
     protected IUiController getDefaultUiController() {
-        return new CustomUiController(this) {
-            @Override
-            protected View getSnackBarParentView() {
-                return findViewById(getSnackBarParentIdRes());
-            }
-        };
+        return new DefaultUiController(this,this);
+
     }
 
     @IdRes
@@ -141,9 +137,6 @@ public abstract class BaseActivity<P extends BasePresenterImpl> extends Abstract
     protected void onDestroy() {
         if (mPresenter != null) {
             mPresenter.onDestroy();
-        }
-        if (mImmersionBar != null) {
-            mImmersionBar.destroy();
         }
         super.onDestroy();
     }

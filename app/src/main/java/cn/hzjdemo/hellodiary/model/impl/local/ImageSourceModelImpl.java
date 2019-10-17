@@ -2,14 +2,14 @@ package cn.hzjdemo.hellodiary.model.impl.local;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.zenchn.picbrowserlib.annotation.ImageSourceType;
 import com.zenchn.picbrowserlib.pojo.ImageSourceInfo;
 
 import java.io.File;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import cn.hzjdemo.hellodiary.util.UriUtils;
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;

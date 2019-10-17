@@ -1,20 +1,20 @@
 package cn.hzjdemo.hellodiary.widgets.wechatcicleimage;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.zenchn.support.kit.AndroidKit;
 
 import java.util.List;
 
+import androidx.core.content.ContextCompat;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.entity.PhotoInfo;
-import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * @author shoyu
@@ -216,7 +216,7 @@ public class MultiImageView extends LinearLayout {
         imageView.setOnClickListener(new ImageOnClickListener(position));
         imageView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.color_abb1b6));
 
-        GlideApp.with(getContext()).load(photoInfo.url).into(imageView);
+        Glide.with(getContext()).load(photoInfo.url).into(imageView);
 
         return imageView;
     }

@@ -14,7 +14,6 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -23,6 +22,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import androidx.annotation.NonNull;
 
 import java.util.List;
 
@@ -295,7 +295,7 @@ public class AndroidKit {
          * @param dpValue
          * @return
          */
-        public static int dp2px(int dpValue) {
+        public static int dp2px(float dpValue) {
             return Math.round(dpValue * DENSITY);
         }
 
@@ -305,7 +305,7 @@ public class AndroidKit {
          * @param pxValue
          * @return
          */
-        public static int px2dp(int pxValue) {
+        public static int px2dp(float pxValue) {
             return Math.round(pxValue / DENSITY);
         }
 

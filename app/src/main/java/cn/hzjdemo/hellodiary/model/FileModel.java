@@ -1,7 +1,7 @@
 package cn.hzjdemo.hellodiary.model;
 
-import android.support.annotation.NonNull;
 
+import androidx.annotation.NonNull;
 import cn.hzjdemo.hellodiary.model.callback.CopyDBCallback;
 
 

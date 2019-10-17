@@ -9,8 +9,8 @@ package com.zenchn.apilib.base;
 
 public interface ApiGlobeConfig {
 
-    String CLIENT_ID = "00000000000000000000000000000001";
-    String CLIENT_SECRET = "inspect_house_app";
+    String CLIENT_ID = "00000000000000000000000000000002";
+    String CLIENT_SECRET = "building_monitor_app";
     String GRANT_TYPE = "password";
     String REFRESH_TYPE = "refresh_token";
     String DEVICE_TYPE_ANDROID = "Android";

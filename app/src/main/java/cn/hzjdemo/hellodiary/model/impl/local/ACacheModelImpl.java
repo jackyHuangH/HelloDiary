@@ -1,9 +1,10 @@
 package cn.hzjdemo.hellodiary.model.impl.local;
 
-import android.support.annotation.Nullable;
 
 import com.zenchn.apilib.entity.LoginInfoEntity;
 import com.zenchn.support.cache.ACache;
+
+import androidx.annotation.Nullable;
 
 /**
  * 作    者：wangr on 2017/9/1 14:15

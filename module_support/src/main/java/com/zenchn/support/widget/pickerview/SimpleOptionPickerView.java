@@ -2,7 +2,6 @@ package com.zenchn.support.widget.pickerview;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.annotation.LayoutRes;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +19,8 @@ import com.contrarywind.view.WheelView;
 import com.zenchn.support.R;
 
 import java.util.List;
+
+import androidx.annotation.LayoutRes;
 
 
 /**
@@ -90,7 +91,8 @@ public class SimpleOptionPickerView extends BasePickerView implements View.OnCli
 
     private String mSource;
 
-    private OnOptionsSelectListener optionsSelectListener;
+    private OnOptionsSelectListener mOptionsSelectListener;
+    private OnPickerViewDismissListener mDismissListener;
 
     //构造方法
     public SimpleOptionPickerView(Builder builder) {
@@ -99,7 +101,8 @@ public class SimpleOptionPickerView extends BasePickerView implements View.OnCli
         mPickerOptions = new PickerOptions(PickerOptions.TYPE_PICKER_OPTIONS);
         mPickerOptions.context = builder.context;
 
-        this.optionsSelectListener = builder.optionsSelectListener;
+        this.mOptionsSelectListener = builder.optionsSelectListener;
+        this.mDismissListener = builder.dismissListener;
         this.Str_Submit = builder.Str_Submit;
         this.Str_Cancel = builder.Str_Cancel;
         this.Str_Title = builder.Str_Title;
@@ -155,6 +158,7 @@ public class SimpleOptionPickerView extends BasePickerView implements View.OnCli
         private CustomListener customListener;
         private Context context;
         private OnOptionsSelectListener optionsSelectListener;
+        private OnPickerViewDismissListener dismissListener;
 
         private String Str_Submit;//确定按钮文字
         private String Str_Cancel;//取消按钮文字
@@ -206,6 +210,11 @@ public class SimpleOptionPickerView extends BasePickerView implements View.OnCli
 
         public Builder setOptionsSelectListener(OnOptionsSelectListener optionsSelectListener) {
             this.optionsSelectListener = optionsSelectListener;
+            return this;
+        }
+
+        public Builder setPickerViewDismissListener(OnPickerViewDismissListener dismissListener) {
+            this.dismissListener = dismissListener;
             return this;
         }
 
@@ -554,23 +563,29 @@ public class SimpleOptionPickerView extends BasePickerView implements View.OnCli
         String tag = (String) v.getTag();
         if (tag.equals(TAG_SUBMIT)) {
             returnData();
+        } else if (tag.equals(TAG_CANCEL)) {
+            if (mDismissListener != null) {
+                mDismissListener.onPickerViewDismiss();
+            }
         }
         dismiss();
     }
 
     //抽离接口回调的方法
     public void returnData() {
-        if (optionsSelectListener != null) {
+        if (mOptionsSelectListener != null) {
             int[] optionsCurrentItems = wheelOptions.getCurrentItems();
-            optionsSelectListener.onOptionsSelect(optionsCurrentItems[0], optionsCurrentItems[1], optionsCurrentItems[2]);
+            mOptionsSelectListener.onOptionsSelect(optionsCurrentItems[0], optionsCurrentItems[1], optionsCurrentItems[2]);
         }
-
     }
 
     public interface OnOptionsSelectListener {
-
         void onOptionsSelect(int options1, int options2, int options3);
+    }
 
+    /***添加取消回调***/
+    public interface OnPickerViewDismissListener {
+        void onPickerViewDismiss();
     }
 
     @Override

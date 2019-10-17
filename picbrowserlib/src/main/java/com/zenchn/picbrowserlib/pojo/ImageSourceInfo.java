@@ -3,13 +3,14 @@ package com.zenchn.picbrowserlib.pojo;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.IntegerRes;
 
 import com.zenchn.picbrowserlib.annotation.ImageSourceType;
 import com.zenchn.picbrowserlib.util.URIUtil;
 
 import java.io.File;
 import java.io.Serializable;
+
+import androidx.annotation.IntegerRes;
 
 /**
  * 作    者：hzj on 2018/9/3 11:15

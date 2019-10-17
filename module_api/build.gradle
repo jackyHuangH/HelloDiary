@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -41,5 +43,6 @@ dependencies {
     api rootProject.ext.dependencies["retrofit_converter_scalars"]
     api rootProject.ext.dependencies["retrofit_rxjava2_adapter"]
     api rootProject.ext.dependencies["fastjson"]
+    api rootProject.ext.dependencies["kotlin_reflect"]
     testImplementation 'junit:junit:4.12'
 }

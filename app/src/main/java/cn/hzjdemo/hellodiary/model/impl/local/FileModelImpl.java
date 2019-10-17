@@ -2,7 +2,6 @@ package cn.hzjdemo.hellodiary.model.impl.local;
 
 import android.app.Application;
 import android.content.pm.PackageInfo;
-import android.support.annotation.Nullable;
 
 import com.zenchn.apilib.util.CodecKit;
 import com.zenchn.apilib.util.GZIPUtils;
@@ -14,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import androidx.annotation.Nullable;
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.model.FileModel;
 import cn.hzjdemo.hellodiary.model.callback.CopyDBCallback;

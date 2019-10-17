@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
@@ -25,6 +24,7 @@ import com.zenchn.support.widget.tips.SuperToast;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.GlobalConfig;
 import cn.hzjdemo.hellodiary.R;
@@ -47,7 +47,7 @@ public class ApplicationKit extends AbstractApplicationKit implements ActivityLi
     @Inject
     Lazy<DefaultActivityLifecycle> mLazyActivityLifecycle;
 
-    private static AppComponent mApplicationComponent;
+    private static AppComponent sAppComponent;
 
     private ApplicationKit() {
     }
@@ -103,15 +103,15 @@ public class ApplicationKit extends AbstractApplicationKit implements ActivityLi
      * 这里只初始化一次，保证了单例
      */
     private void setupInjector() {
-        mApplicationComponent = DaggerAppComponent
+        sAppComponent = DaggerAppComponent
                 .builder()
                 .appModule(new AppModule(this))
                 .build();
-        mApplicationComponent.inject(this);
+        sAppComponent.inject(this);
     }
 
     public static AppComponent getApplicationComponent() {
-        return mApplicationComponent;
+        return sAppComponent;
     }
 
     private void initUpdatePlugin() {

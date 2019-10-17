@@ -38,7 +38,7 @@
                 android:textSize="15sp"/>
 
             <!--动态添加图片-->
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rlv_add_pic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

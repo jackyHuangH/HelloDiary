@@ -1,6 +1,7 @@
 package com.zenchn.picbrowserlib.annotation;
 
-import android.support.annotation.IntDef;
+
+import androidx.annotation.IntDef;
 
 import static com.zenchn.picbrowserlib.annotation.ImageSourceType.FILE;
 import static com.zenchn.picbrowserlib.annotation.ImageSourceType.INVALID;

@@ -2,22 +2,23 @@
 <resources>
 
     <declare-styleable name="TitleBar">
-        <attr name="title_bar_left_icon" format="reference"/>
-        <attr name="title_bar_center_text" format="string"/>
-        <attr name="title_bar_center_text_color" format="color"/>
-        <attr name="title_bar_center_text_size" format="dimension"/>
-        <attr name="title_bar_left_text_color" format="color"/>
-        <attr name="title_bar_left_text_size" format="dimension"/>
-        <attr name="title_bar_right_text" format="string"/>
-        <attr name="title_bar_right_text_color" format="color"/>
-        <attr name="title_bar_right_text_size" format="dimension"/>
-        <attr name="title_bar_left_click_padding" format="dimension"/>
-        <attr name="title_bar_right_click_padding" format="dimension"/>
-        <attr name="title_bar_top_and_bottom_margin" format="dimension"/>
-        <attr name="title_bar_separate_color" format="color"/>
-        <attr name="title_bar_separate_height" format="dimension"/>
-        <attr name="title_bar_default" format="boolean"/>
-        <attr name="title_bar_default_bg_color" format="color"/>
+        <attr name="title_bar_left_icon" format="reference" />
+        <attr name="title_bar_center_text" format="string" />
+        <attr name="title_bar_center_text_color" format="color" />
+        <attr name="title_bar_center_text_size" format="dimension" />
+        <attr name="title_bar_left_view_visible" format="boolean" />
+        <attr name="title_bar_left_text_color" format="color" />
+        <attr name="title_bar_left_text_size" format="dimension" />
+        <attr name="title_bar_right_text" format="string" />
+        <attr name="title_bar_right_text_color" format="color" />
+        <attr name="title_bar_right_text_size" format="dimension" />
+        <attr name="title_bar_left_click_padding" format="dimension" />
+        <attr name="title_bar_right_click_padding" format="dimension" />
+        <attr name="title_bar_top_and_bottom_margin" format="dimension" />
+        <attr name="title_bar_separate_color" format="color" />
+        <attr name="title_bar_separate_height" format="dimension" />
+        <attr name="title_bar_default" format="boolean" />
+        <attr name="title_bar_default_bg_color" format="color" />
     </declare-styleable>
 
 
@@ -162,6 +163,26 @@
             <enum name="STROKE" value="0"/>
             <enum name="FILL" value="1"/>
         </attr>
+    </declare-styleable>
+
+    <!--    SegmentView-->
+    <declare-styleable name="SegmentView">
+        <!-- 字体大小 -->
+        <attr name="android:textSize" />
+        <!-- "|" 分隔的文本 -->
+        <attr name="svTexts" format="string" />
+        <!-- 主色, 用于边框, 分隔线, 选中项的背景, 未选中项的文本 -->
+        <attr name="svMainColor" format="color" />
+        <!-- 补色, 用于未选中项的背景, 选中项的文本, 默认 #ffffff -->
+        <attr name="svSubColor" format="color" />
+        <!-- 边框, 分隔线 的宽度 -->
+        <attr name="svStrokeWidth" format="dimension" />
+        <!-- 圆角大小 -->
+        <attr name="svCornerRadius" format="dimension" />
+        <!-- item 左右的边距 -->
+        <attr name="svHPadding" format="dimension" />
+        <!-- item 上下的边距 -->
+        <attr name="svVPadding" format="dimension" />
     </declare-styleable>
 
 </resources>

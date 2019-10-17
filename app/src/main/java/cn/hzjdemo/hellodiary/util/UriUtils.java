@@ -7,9 +7,10 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 
 import java.io.File;
+
+import androidx.annotation.Nullable;
 
 /**
  * 作    者：wangr on 2017/9/3 20:23

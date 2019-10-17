@@ -1,7 +1,6 @@
 package cn.hzjdemo.hellodiary.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +9,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.widgets.zhihu.ZhiHuAdImageView;
-import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * Created by Hzj on 2017/8/22.
@@ -61,13 +62,13 @@ public class BuyRecordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (holder instanceof NormalViewHolder) {
             ((NormalViewHolder) holder).mBtnConfirmReceived.setVisibility(position % 2 == 0 ? View.VISIBLE : View.GONE);
             ((NormalViewHolder) holder).mTvOrderGoodName.setText(s);
-            GlideApp.with(context)
+            Glide.with(context)
                     .load(Constants.imgUrls[position%4])
                     .placeholder(R.drawable.default_no_pic)
                     .centerCrop()
                     .into(((NormalViewHolder) holder).mIvGoodPic);
         } else if (holder instanceof ZhiHuViewHolder) {
-            GlideApp.with(context)
+            Glide.with(context)
                     .load(Constants.imgUrls[4])
                     .into(((ZhiHuViewHolder) holder).zhIv);
         }

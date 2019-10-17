@@ -14,8 +14,8 @@ public class HttpResultModel<T> {
     @JSONField(name = "path")
     public String path;
 
-    /***statusCode为0时请求成功，其他情况另定***/
-    @JSONField(name = "statusCode")
+    /***成功200，其他情况另定***/
+    @JSONField(name = "status")
     public Integer statusCode;
 
     @JSONField(name = "message")
@@ -23,9 +23,6 @@ public class HttpResultModel<T> {
 
     @JSONField(name = "timestamp")
     public String timestamp;
-
-    @JSONField(name = "success")
-    public Boolean success;
 
     @JSONField(name = "data")
     public T data;

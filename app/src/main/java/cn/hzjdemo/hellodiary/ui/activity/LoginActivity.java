@@ -15,8 +15,6 @@ import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -32,13 +30,15 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.material.textfield.TextInputLayout;
 import com.zenchn.support.router.Router;
 import com.zenchn.support.widget.TitleBar;
 
+import androidx.annotation.NonNull;
 import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -48,7 +48,6 @@ import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
 import cn.hzjdemo.hellodiary.widgets.test.SquareImageView;
 import cn.hzjdemo.hellodiary.wrapper.NotifyWrapper;
-import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 import cn.hzjdemo.hellodiary.wrapper.glide.glideprogress.ProgressInterceptor;
 import cn.hzjdemo.hellodiary.wrapper.glide.glideprogress.ProgressListener;
 
@@ -234,7 +233,7 @@ public class LoginActivity extends BaseActivity {
      */
     private void loadImage() {
 
-        GlideApp.with(this)
+        Glide.with(this)
                 .load(mImgUrl)
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)

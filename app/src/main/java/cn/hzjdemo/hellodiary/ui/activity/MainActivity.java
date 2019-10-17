@@ -1,15 +1,15 @@
 package cn.hzjdemo.hellodiary.ui.activity;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
 import android.widget.FrameLayout;
 
-import com.zenchn.support.managers.HFragmentManager;
+import com.zenchn.support.fragmentutil.HFragmentManager;
 import com.zenchn.support.router.Router;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;

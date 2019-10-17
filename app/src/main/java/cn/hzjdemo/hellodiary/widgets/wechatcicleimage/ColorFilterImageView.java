@@ -3,11 +3,12 @@ package cn.hzjdemo.hellodiary.widgets.wechatcicleimage;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 /**
  * @author hnclca

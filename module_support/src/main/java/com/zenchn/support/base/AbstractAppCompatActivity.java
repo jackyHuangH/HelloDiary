@@ -1,17 +1,15 @@
 package com.zenchn.support.base;
 
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v7.app.AppCompatActivity;
 import android.view.InflateException;
-
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+import butterknife.ButterKnife;
 import com.zenchn.support.R;
 import com.zenchn.support.dafault.DefaultUiController;
-
-import butterknife.ButterKnife;
 
 
 /**
@@ -112,7 +110,7 @@ public abstract class AbstractAppCompatActivity extends AppCompatActivity implem
     protected abstract IActivityLifecycle getDefaultActivityLifecycle();
 
     protected IUiController getDefaultUiController() {
-        return new DefaultUiController(this);
+        return new DefaultUiController(this,this);
     }
 
     @Override
@@ -130,13 +128,6 @@ public abstract class AbstractAppCompatActivity extends AppCompatActivity implem
     public void showProgress(@Nullable CharSequence msg) {
         if (mUiController != null) {
             mUiController.showProgress(msg);
-        }
-    }
-
-    @Override
-    public void updateProgress(int progress, int max) {
-        if (mUiController != null) {
-            mUiController.updateProgress(progress, max);
         }
     }
 

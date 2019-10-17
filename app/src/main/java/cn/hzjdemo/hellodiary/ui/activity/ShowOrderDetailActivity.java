@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
 import com.zenchn.picbrowserlib.pojo.ImageSourceInfo;
@@ -30,7 +31,6 @@ import cn.hzjdemo.hellodiary.widgets.CommonSharePop;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.MultiImageView;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.entity.PhotoInfo;
 import cn.hzjdemo.hellodiary.wrapper.glide.CircleTransform;
-import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * Created by Hzj on 2017/8/21.
@@ -96,7 +96,7 @@ public class ShowOrderDetailActivity extends BaseActivity {
                     }
                 });
         //加载圆形头像
-        RequestBuilder<Bitmap> bmRequestBuilder = GlideApp.with(this)
+        RequestBuilder<Bitmap> bmRequestBuilder = Glide.with(this)
                 .asBitmap()
                 .load(Constants.imgUrls[6])
                 .placeholder(R.mipmap.ic_launcher)

@@ -1,6 +1,5 @@
 package cn.hzjdemo.hellodiary.util;
 
-import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -13,6 +12,8 @@ import com.zenchn.support.widget.enteringlayout.EnteringLayout;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import androidx.annotation.NonNull;
 
 /**
  * 作    者：wangr on 2017/8/28 11:25

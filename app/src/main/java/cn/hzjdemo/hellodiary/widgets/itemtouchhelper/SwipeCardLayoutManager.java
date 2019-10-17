@@ -1,14 +1,15 @@
 package cn.hzjdemo.hellodiary.widgets.itemtouchhelper;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * 作   者： by Hzj on 2017/12/8/008.
- * 描   述：
+ * 描   述：滑动层叠效果
  * 修订记录：
  */
 

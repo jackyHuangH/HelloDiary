@@ -1,11 +1,12 @@
 package cn.hzjdemo.hellodiary.widgets.itemtouchhelper;
 
 import android.graphics.Canvas;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import java.util.List;
+
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static cn.hzjdemo.hellodiary.widgets.itemtouchhelper.CardConfig.MAX_SHOW_COUNT;
 import static cn.hzjdemo.hellodiary.widgets.itemtouchhelper.CardConfig.SCALE_GAP;

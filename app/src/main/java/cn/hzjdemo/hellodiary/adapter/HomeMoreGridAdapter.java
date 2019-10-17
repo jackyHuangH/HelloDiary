@@ -9,12 +9,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.widgets.AutoSizeTextView;
-import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * Created by Hzj on 2017/8/15.
@@ -54,7 +55,7 @@ public class HomeMoreGridAdapter extends BaseAdapter {
             holder = (HomeMoreViewHolder) convertView.getTag();
         }
 
-        GlideApp.with(context)
+        Glide.with(context)
                 .load(Constants.imgUrls[position%10])
                 .centerCrop()
                 .into(holder.ivHomeMore);

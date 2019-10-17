@@ -1,15 +1,15 @@
 package cn.hzjdemo.hellodiary.ui.activity;
 
 import android.annotation.SuppressLint;
-import android.support.v4.view.ViewPager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.gyf.barlibrary.BarHide;
-import com.gyf.barlibrary.ImmersionBar;
+import com.gyf.immersionbar.BarHide;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.List;
 
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.adapter.BigImageAdapter2;

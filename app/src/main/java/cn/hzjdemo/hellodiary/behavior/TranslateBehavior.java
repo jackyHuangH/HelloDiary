@@ -2,11 +2,12 @@ package cn.hzjdemo.hellodiary.behavior;
 
 
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.ScrollView;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 /**
  * 作   者： by Hzj on 2017/12/7/007.

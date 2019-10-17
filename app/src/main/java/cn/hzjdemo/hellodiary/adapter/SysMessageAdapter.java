@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -12,7 +13,6 @@ import java.util.List;
 
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.bean.MessageEntity;
-import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * Created by Hzj on 2017/8/23.
@@ -44,9 +44,8 @@ public class SysMessageAdapter extends CommonAdapter<MessageEntity> {
         ImageView ivMessage = holder.getView(R.id.iv_message);
 
 
-        GlideApp
+        Glide
                 .with(mContext)
-                .asBitmap()
                 .load(item.imgUrl)
                 .centerCrop()
                 .placeholder(R.drawable.default_no_pic)

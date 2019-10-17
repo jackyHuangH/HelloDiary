@@ -3,6 +3,7 @@ package cn.hzjdemo.hellodiary.adapter;
 import android.content.Context;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -10,7 +11,6 @@ import java.util.List;
 
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;
-import cn.hzjdemo.hellodiary.wrapper.glide.GlideApp;
 
 /**
  * Created by Hzj on 2017/8/22.
@@ -29,7 +29,7 @@ public class GroupBuyRecordAdapter extends CommonAdapter<String>{
     protected void convert(ViewHolder holder, String s, int position) {
         holder.setVisible(R.id.rl_take_prize,can_take_prize);
         holder.setText(R.id.tv_raid_good_name,s);
-        GlideApp.with(mContext)
+        Glide.with(mContext)
                 .load(Constants.imgUrls[2])
                 .placeholder(R.mipmap.ic_launcher)
                 .centerCrop()

@@ -24,7 +24,7 @@ public interface UserService {
     /**
      * 描    述：获取用户信息
      */
-    @GET("my/staffInfo")
+    @GET("my/accountInfo")
     Observable<HttpResultModel<UserInfoEntity>> getUserInfo(@Header(ApiGlobeConfig.ACCESS_TOKEN) String accessToken);
 
 
