@@ -7,6 +7,17 @@
     <title>我是页面标题啦啦啦</title>
     <!--使用 <base> 定义页面中所有链接默认的链接目标地址 -->
     <base href="D:/hzj_Demo/HelloDiaryNormal/HelloDiary/app/src/main/assets/">
+    <!-- head 中的javaScript -->
+    <script type="text/javascript">
+    function changeText(){
+        //查找元素
+        x=document.getElementById('paragraph_1');
+        //替换文字
+        x.innerHTML="芒种。。。。";
+        x.style.color="#f00";
+    }
+
+    </script>
 </head>
 
 <body>
@@ -20,21 +31,26 @@
 <p>----------------------------我是分割线--------------------------------------</p>
 <br/>
 <br/>
+<p>JavaScript 直接输出：</p>
+<script type="text/javascript">document.write("<h1>我是超级标题</h1>")</script>
+<script>document.write("<p>这是一个段落：Life is like a box of chocalate,you nener know what...</p>")
+
+
+
+</script>
+<br/>
+<p id="paragraph_1">沙漠骆驼</p>
+<button type="button" onclick="changeText()">点我替换上面文字</button>
 <br/>
 <br/>
+<script>alert("hello script")</script>
+<button type="button" onclick="alert('欢迎光临！')">点我有惊喜哦！</button>
 <br/>
 <br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+<!--把js文件放在外面调用-->
+<script src="myScript.js"></script>
+<p id="p2">我问问外面的js</p>
+<button type="button" onclick="tellMe()">帮我问问外界JS</button>
 
 <p>我是一个段落，<b>下面</b>我要<i>换行了：</i><br/>想写啥就写啥哈哈哈哈或</p>
 <hr/>
@@ -143,4 +159,5 @@
     <dd>AMANI</dd>
 </dl>
 </body>
+
 </html>
