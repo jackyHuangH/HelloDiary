@@ -2,6 +2,7 @@
 <resources>
 
     <color name="toast_background">#30000000</color>
+    <color name="transparent">#00000000</color>
     <!--<color name="toast_background">#3FFFFFFF</color>-->
     <color name="ios_blue">#2975E6</color>
     <color name="ios_black">#000000</color>

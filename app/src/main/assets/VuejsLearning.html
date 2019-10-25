@@ -1,0 +1,166 @@
+<!DocType html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>学习Vue.js</title>
+</head>
+<!-- 引入Vue,开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="list">
+    <ol>
+        <li v-for="todo in todos">
+            {{todo.text}}
+        </li>
+    </ol>
+</div>
+
+<div id="bt1">
+    <p>{{msg}}</p>
+    <button v-on:click="reverseMsg">点我翻转消息</button>
+</div>
+<div id="ip-1">
+    <span v-once>这个值不会改变{{oligay}}</span>
+</div>
+
+<div id="example">
+    <p>Original:{{text}}</p>
+    <p>Computed reverse:{{reverseText}}{{now}}</p>
+</div>
+
+<div v-if="Math.random() > 0.5">
+    Now you see me
+</div>
+<div v-else>
+    Now you don't
+    <span v-show="false">我显示了吗</span>
+</div>
+    
+<ul id="ul-1">
+    <li v-for="(item ,index) of items">{{index}}---{{item.text}}</li>
+</ul>
+
+<ul id="ul-2">
+    <li v-for="(value,key,index) in object">{{index}}-{{key}}:{{value}}</li>
+</ul>
+
+<div id="bt-1">
+    <button @click="counter+=1">点我+1</button>
+    <p>The button has been clicked {{counter}} times</p>
+</div>
+<br/>
+<div id="ip-2"> 
+    <!-- 表单输入绑定 -->
+    <input  v-model="msge" placeholder="input something" >
+    <p>Look what have you input: {{ msge }} </p>
+</div>
+
+
+</html>
+
+<script>
+
+    var ip2=new Vue({
+        el:"#ip-2",
+        data:{
+            msge:null
+        }
+    })
+
+    var bt1=new Vue({
+        el:"#bt-1",
+        data:{
+            counter:0
+        }
+    })
+
+
+    //你也可以用 v-for 通过一个对象的属性来迭代 
+    var list2=new Vue({
+        el:"#ul-2",
+        data:{
+            object:{
+                name:"jacky",
+                age:26,
+                sex:"man"
+            }
+        }
+    })
+
+    var list1=new Vue({
+        el:"#ul-1",
+        data:{
+            items:[
+                {text:"java"},
+                {text:"kollin"},
+                {text:"php"},
+            ]   
+        }
+    })
+
+
+    var ex=new Vue({
+        el:"#example",
+        data:{
+            text:"i love you"
+        },
+        computed:{
+            //计算属性的getter,有缓存作用
+            reverseText:function(){
+                return this.text.split('').reverse().join('')
+            },
+            now:function(){
+                return Date.now()
+            }
+        }
+    })
+
+    var app1=new Vue({
+        el:"#list",
+        data:{
+            todos:[
+                {text:"Java"},
+                {text:"Kotlin"},
+                {text:"Vue"},
+            ]
+        }
+    })
+
+    var app2=new Vue({
+        el:"#bt1",
+        data:{
+            msg:"国立武汉大学"
+        },
+        methods:{
+            //方法里没有缓存，每次调用都会执行一次
+            reverseMsg:function(){
+               this.msg= this.msg.split("").reverse().join("")
+            }
+        }
+    })
+
+    // 我们的数据对象
+    var data={a:1}
+    // 该对象被加入到一个 Vue 实例中
+    var vm=new Vue({
+        data:data
+    })
+    //获取实例上的属性
+    vm.a=data.a
+    console.log(vm.a)
+
+    //设置属性也会影响到原始数据
+    vm.a=4
+    console.log(data.a)
+
+    // ……反之亦然
+    data.a = 3
+    vm.a // => 3
+
+    var app3=new Vue({
+        el:"#ip-1",
+        data:{
+            oligay:"哈哈哈哈"
+        }
+    })
+</script>

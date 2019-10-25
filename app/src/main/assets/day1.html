@@ -17,6 +17,16 @@
         x.style.color="#f00";
     }
 
+
+
+
+
+
+
+
+
+
+
     </script>
 </head>
 
@@ -33,7 +43,13 @@
 <br/>
 <p>JavaScript 直接输出：</p>
 <script type="text/javascript">document.write("<h1>我是超级标题</h1>")</script>
-<script>document.write("<p>这是一个段落：Life is like a box of chocalate,you nener know what...</p>")
+<script>document.write("<p>这是一个段落：Life is like a box of chocalate,\
+you nener know what...</p>")
+
+
+
+
+
 
 
 
@@ -51,9 +67,86 @@
 <script src="myScript.js"></script>
 <p id="p2">我问问外面的js</p>
 <button type="button" onclick="tellMe()">帮我问问外界JS</button>
+<p id="p3">我是大脸猫</p>
 
 <p>我是一个段落，<b>下面</b>我要<i>换行了：</i><br/>想写啥就写啥哈哈哈哈或</p>
 <hr/>
+<br/>
+<script>
+var a=5;
+b=9;
+var c=a+b;
+var d=16+"hello";
+var d=50;
+var e,f,g=1;
+console.log("c===="+c);
+document.write(d+"<br/>");
+document.write(e+"<br/>");
+document.write(f+"<br/>");
+document.write(g+"<br/>");
+<!--js数组-->
+var cars=new Array();
+cars[0]="奔迟";
+cars[1]="宝骏";
+cars[2]="凯迪拉特";
+cars[3]="宝时捷";
+cars[4]="陆虎";
+document.write("cars:"+cars+"<br/>");
+//js对象
+var person={id:0,name:"小明",age:10,
+    //对象的方法
+    fullInfo:function(){
+        //函数中未用var声明的变量也属于可配置全局属性
+        global=6666;
+
+        return this.name+" "+this.age;
+    }
+};
+document.write("小明的age："+person.age+"<br/>");
+document.write("小明的id："+person["id"]+"<br/>");
+//不加括号输出函数表达式
+document.write("小明："+person.fullInfo+"<br/>");
+document.write("小明："+person.fullInfo()+"<br/>");
+//当您声明新变量时，可以使用关键词 "new" 来声明其类型：
+var jack=new String;//声明变量Jack为String 类型
+jack=26;
+debugger;
+var tom=new String("cat");//tom是String类型的对象
+document.write(typeof tom);
+document.write("<br/>");
+document.write(jack);
+document.write("<br/>");
+document.write(Date());
+
+//向未声明的 JavaScript 变量分配值
+//非严格模式下给未声明变量赋值创建的全局变量，是全局对象的可配置属性，可以删除。
+var x=9;//不可配置全局属性，无法删除
+y=777;//没有使用var声明，就是可配置的全局属性，在函数中没有用var声明的也是全局属性，可以删除
+
+console.log(this.x);
+console.log(window.x);
+console.log(global);
+console.log(window.global);
+
+delete x;
+console.log(x);
+
+delete y;
+console.log(delete y);
+console.log(y);//已经删除，报错变量未定义
+
+
+
+</script>
+<br/>
+<br/>
+<br/>
+<hr/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <br/>
 <!--链接-->
 <a href='https://github.com/jackyHuangH' target="_blank">点击跳转我的GitHub主页</a>

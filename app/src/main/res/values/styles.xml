@@ -7,6 +7,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/whiteThirteen</item>
+        <!--  mddialog theme      -->
+        <item name="md_corner_radius">16dp</item>
+<!--        <item name="md_background_color">@color/color_dfdfdf</item>-->
     </style>
 
     <style name="TransparentTheme" parent="AppTheme">

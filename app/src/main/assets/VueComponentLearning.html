@@ -1,0 +1,47 @@
+<!DocType html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Vue组件学习</title>
+</head>
+<!-- 引入Vue,开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<body>
+	<div id="component-demo">
+		<!-- 使用自定义组件 -->
+		<button-counter></button-counter>
+	</div>
+
+	<div id="prop-demo">
+		<blog-post title="Java"></blog-post>
+		<blog-post title="Php"></blog-post>
+		<blog-post title="Python"></blog-post>
+	</div>
+</body>
+</html>
+
+<script>
+	//定义一个组件,button-counter
+	Vue.component('button-counter',{
+		data:function(){
+			return{
+				counter:0
+			}
+		},
+		template:'<button v-on:click="counter++">click me {{counter}} times</button>'
+	})
+
+	new Vue({
+		el:"#component-demo"
+	})
+
+	//prop向子组件传递数据,定义成属性
+	Vue.component('blog-post',{
+		props:['title'],
+		template:'<h3>{{title}}</h3>'
+	})
+
+	new Vue({el:"#prop-demo"})
+</script>
