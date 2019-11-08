@@ -84,6 +84,7 @@ h3{
 text-decoration:underline;
 }
 
+/*伪类选择器*/
 /*link样式*/
 a.linkstyle:link,visited{
       display:block;
@@ -216,11 +217,11 @@ background-color:lightblue;
 
 /*float*/
 .float{
-float:right;
-border:dotted black 1px;
-padding:2px;
-margin:0px 10px 15px 15px;
-text-align:center;
+  float:right;
+  border:dotted black 5px;
+  padding:2px;
+  margin:0px 10px 15px 15px;
+  text-align:center;
 }
 
 .thumbnail{
@@ -247,31 +248,57 @@ list-style-type:none;
 margin:0px;
 padding:0px;
 width:200px;
+display: block;
 background-color:#f1f1f1;
 border:solid 1px black;
 }
 
-li{
+.navigator li{
 text-align:center;
 border-bottom:solid 1px black;
 }
-li:last-child{
+ .navigator li:last-child{
 border-bottom:none;
 }
 
-li a{
+ .navigator li a{
 display:block;
 color:#000;
 padding:8px 16px;
 text-decoration:none;
 }
-li a:hover{
+.navigator li a:hover{
 background-color:#555;
 color:white;
 }
-li a:active{
+.navigator li a:active{
 background-color:#4CAF50;
 color:white;
 }
 
+.footer{
+    padding: 10px 0 30px 0;
+}
 
+/*行高练习*/
+.lineheight p{
+  white-space: pre;/*显示换行*/
+}
+
+p.lh-small{
+  line-height: 90%;
+}
+
+p.lh-big{
+  line-height: 200%;
+}
+
+/*页脚*/
+.footer p{
+  color: #aaaaaa;
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+  font-style: italic;
+  text-transform: uppercase;
+}
