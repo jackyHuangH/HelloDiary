@@ -6,13 +6,15 @@ import android.widget.TextView;
 
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
+import com.zenchn.picbrowserlib.adapter.BigImageProgressAdapter;
+import com.zenchn.picbrowserlib.pojo.ImageSourceInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import cn.hzjdemo.hellodiary.R;
-import cn.hzjdemo.hellodiary.adapter.BigImageAdapter2;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
 import cn.hzjdemo.hellodiary.widgets.viewpager.BaseViewPager;
@@ -33,7 +35,7 @@ public class ShowPictureActivity extends BaseActivity implements ViewPager.OnPag
     FrameLayout mViewPagerLayout;
 
     private int currentPosition = 0; //当前位置
-    private BigImageAdapter2 mViewPagerAdapter;
+    private BigImageProgressAdapter mViewPagerAdapter;
     private List<String> imageUrls;
 
     @SuppressLint("NewApi")
@@ -42,15 +44,21 @@ public class ShowPictureActivity extends BaseActivity implements ViewPager.OnPag
             imageUrls = getIntent().getStringArrayListExtra(IMAGE_URLS);
             currentPosition = getIntent().getIntExtra(CURRENT_POSITION, 0);
         }
+        ArrayList<ImageSourceInfo> list = new ArrayList<>();
+        ImageSourceInfo info;
+        for (String imageUrl : imageUrls) {
+            info = new ImageSourceInfo(imageUrl, true);
+            list.add(info);
+        }
 
-        mViewPagerAdapter = new BigImageAdapter2(this, imageUrls);
+        mViewPagerAdapter = new BigImageProgressAdapter(this, list);
         viewPager.addOnPageChangeListener(this);
         viewPager.setAdapter(mViewPagerAdapter);
         viewPager.setCurrentItem(currentPosition);
         mViewPagerAdapter.notifyDataSetChanged();
         tvIndex.setText((currentPosition + 1) + "/" + imageUrls.size());
 
-        mViewPagerAdapter.setOnImageClickListener(new BigImageAdapter2.OnImageClickListener() {
+        mViewPagerAdapter.setOnImageClickListener(new BigImageProgressAdapter.OnImageClickListener() {
             @Override
             public void onImageClick() {
                 onBackPressed();

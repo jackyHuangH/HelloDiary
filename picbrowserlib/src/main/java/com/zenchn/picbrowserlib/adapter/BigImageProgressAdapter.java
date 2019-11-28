@@ -1,4 +1,4 @@
-package cn.hzjdemo.hellodiary.adapter;
+package com.zenchn.picbrowserlib.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,35 +15,34 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.zenchn.picbrowserlib.R;
+import com.zenchn.picbrowserlib.annotation.ImageSourceType;
+import com.zenchn.picbrowserlib.pojo.ImageSourceInfo;
+import com.zenchn.picbrowserlib.widget.RingProgressBar;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
-import cn.hzjdemo.hellodiary.R;
-import cn.hzjdemo.hellodiary.widgets.RingProgressBar;
-import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
+import me.jessyan.progressmanager.ProgressListener;
 import me.jessyan.progressmanager.ProgressManager;
 import me.jessyan.progressmanager.body.ProgressInfo;
 
 /**
  * 作   者： by Hzj on 2017/12/18/018.
- * 描   述：显示图片加载进度的图片预览
+ * 描   述：显示图片加载进度的图片预览,网络图片显示进度，本地图片不显示
  * 修订记录：
  */
 
-public class BigImageAdapter2 extends PagerAdapter {
+public class BigImageProgressAdapter extends PagerAdapter {
     private static final String TAG = "BigImageAdapter";
 
-    private List<String> mImageUrls;
+    private List<ImageSourceInfo> mImageUrls;
     private Context mContext;
     private int mChildCount;
 
-    public BigImageAdapter2(Context context, List<String> imageUrls) {
+    public BigImageProgressAdapter(Context context, List<ImageSourceInfo> imageUrls) {
         this.mImageUrls = imageUrls;
         this.mContext = context;
     }
@@ -62,8 +61,7 @@ public class BigImageAdapter2 extends PagerAdapter {
     @Override
     public View instantiateItem(@NonNull ViewGroup container, final int position) {
         final Context context = container.getContext();
-
-        final String imageUrl = mImageUrls.get(position);
+        final ImageSourceInfo imageSourceInfo = mImageUrls.get(position);
 
         View view = LayoutInflater.from(context).inflate(R.layout.item_photoview, container, false);
         PhotoView photoView = (PhotoView) view.findViewById(R.id.photoview);
@@ -72,23 +70,27 @@ public class BigImageAdapter2 extends PagerAdapter {
         //开启缩放
         photoView.enable();
 
-        ProgressManager.getInstance().addResponseListener(imageUrl, new me.jessyan.progressmanager.ProgressListener() {
-            @Override
-            public void onProgress(ProgressInfo progressInfo) {
-                progressBar.setProgress(progressInfo.getPercent());
-                Log.d(TAG, "图片加载进度: " + progressInfo.getPercent());
-            }
+        if (imageSourceInfo.getSourceType() == ImageSourceType.URL) {
+            //网络图片显示加载进度
+            progressBar.setVisibility(View.VISIBLE);
+            ProgressManager.getInstance().addResponseListener((String) imageSourceInfo.getSource(), new ProgressListener() {
+                @Override
+                public void onProgress(ProgressInfo progressInfo) {
+                    progressBar.setProgress(progressInfo.getPercent());
+                    Log.d(TAG, "图片加载进度: " + progressInfo.getPercent());
+                }
 
-            @Override
-            public void onError(long id, Exception e) {
-                progressBar.setVisibility(View.GONE);
-                Log.d(TAG, "图片加载失败: " + e.toString());
-            }
-        });
+                @Override
+                public void onError(long id, Exception e) {
+                    progressBar.setVisibility(View.GONE);
+                    Log.d(TAG, "图片加载失败: " + e.toString());
+                }
+            });
+        }
 
         Glide
                 .with(context)
-                .load(imageUrl)
+                .load(imageSourceInfo.getSource())
                 .fitCenter()
                 .error(R.drawable.default_no_pic)
                 //必须设置成None才能显示进度条
@@ -149,23 +151,17 @@ public class BigImageAdapter2 extends PagerAdapter {
     //=============================================================destroy
     @SuppressLint("CheckResult")
     public void destroy() {
-        Observable.just(mContext)
-                .subscribeOn(Schedulers.io())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        //清理内存缓存
-                        Glide.get(mContext).clearMemory();
-                    }
-                })
-                .subscribe(new Consumer<Context>() {
-                    @Override
-                    public void accept(Context context) throws Exception {
-                        //清理磁盘缓存
-                        Glide.get(context).clearDiskCache();
-                    }
-                });
-
+        //清理内存缓存
+        Glide.get(mContext).clearMemory();
+        //开子线程清理
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                //清理磁盘缓存
+                Glide.get(mContext).clearDiskCache();
+            }
+        }.start();
     }
 
     //--------------------点击图片关闭--------------------

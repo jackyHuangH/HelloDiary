@@ -4,6 +4,6 @@
     android:initialLayout="@layout/app_widget_test"
     android:minWidth="100dp"
     android:minHeight="100dp"
-    android:previewImage="@drawable/photo_default"
+    android:previewImage="@drawable/default_no_pic"
     android:updatePeriodMillis="3000"
     />

@@ -69,8 +69,8 @@ public class BigImageBrowserAdapter extends PagerAdapter {
         RequestOptions requestOptions = new RequestOptions()
                 .fitCenter()
                 .dontAnimate()
-                .error(R.drawable.photo_default)
-                .placeholder(R.drawable.photo_default)
+                .error(R.drawable.default_no_pic)
+                .placeholder(R.drawable.default_no_pic)
                 //禁用内存缓存，避免oom
                 .skipMemoryCache(true)
                 //跳过磁盘缓存

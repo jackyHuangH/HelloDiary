@@ -83,17 +83,14 @@ public class ProgressResponseBody extends ResponseBody {
             Log.d(TAG, "download progress is " + progress);
             Log.d(TAG, "currentProgress is " + currentProgress);
 
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    if (listener != null && currentProgress <= progress) {
-                        //主线程回调
-                        listener.onProgress(progress);
-                    }
-                    currentProgress = progress;
-                    if (listener != null && currentProgress >= 100) {
-                        listener = null;
-                    }
+            mHandler.post(() -> {
+                if (listener != null && currentProgress <= progress) {
+                    //主线程回调
+                    listener.onProgress(progress);
+                }
+                currentProgress = progress;
+                if (listener != null && currentProgress >= 100) {
+                    listener = null;
                 }
             });
             return bytesRead;

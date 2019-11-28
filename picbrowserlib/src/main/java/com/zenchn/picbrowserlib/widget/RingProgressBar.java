@@ -1,4 +1,4 @@
-package cn.hzjdemo.hellodiary.widgets;
+package com.zenchn.picbrowserlib.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,8 +11,9 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.zenchn.picbrowserlib.R;
+
 import androidx.annotation.Nullable;
-import cn.hzjdemo.hellodiary.R;
 
 /**
  * @author:Hzj

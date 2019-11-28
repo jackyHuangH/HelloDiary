@@ -14,6 +14,12 @@ android {
 
     }
 
+    //支持java 8 lambdas
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -34,5 +40,6 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["glide_compiler"]
     implementation rootProject.ext.dependencies["glide_okhttp_integration"]
 
-    api rootProject.ext.dependencies["photoview_smooth"]
+    implementation rootProject.ext.dependencies["photoview_smooth"]
+    implementation rootProject.ext.dependencies["progressmanager"]
 }
