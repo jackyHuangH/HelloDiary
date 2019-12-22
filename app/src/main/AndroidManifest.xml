@@ -91,7 +91,7 @@
             android:name=".ui.activity.ShowOrderDetailActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.activity.ShowPictureActivity"
+            android:name=".ui.photoviewer.ShowPictureProgressActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.PassAnnounceActivity"

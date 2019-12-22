@@ -137,9 +137,9 @@ public class ShowOrderDetailActivity extends BaseActivity {
         ninePics.setOnItemClickListener(new MultiImageView.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Intent intent = new Intent(ShowOrderDetailActivity.this, ShowPictureActivity.class);
-//                intent.putStringArrayListExtra(ShowPictureActivity.IMAGE_URLS, imageUrls);
-//                intent.putExtra(ShowPictureActivity.CURRENT_POSITION, position);
+//                Intent intent = new Intent(ShowOrderDetailActivity.this, ShowPictureProgressActivity.class);
+//                intent.putStringArrayListExtra(ShowPictureProgressActivity.IMAGE_URLS, imageUrls);
+//                intent.putExtra(ShowPictureProgressActivity.CURRENT_POSITION, position);
 //                startActivity(intent);
                 PictureBrowseActivity.launch(ShowOrderDetailActivity.this, imageSourceInfoArrayList, position);
             }

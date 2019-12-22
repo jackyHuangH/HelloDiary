@@ -26,6 +26,7 @@ import cn.hzjdemo.hellodiary.adapter.itemDecoration.GridSpaceItemDecoration;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
 import cn.hzjdemo.hellodiary.ui.base.BaseActivity;
 import cn.hzjdemo.hellodiary.ui.fragment.PromptDialogFragment;
+import cn.hzjdemo.hellodiary.ui.photoviewer.ShowPictureProgressActivity;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.entity.PhotoInfo;
 
 /**
@@ -81,7 +82,7 @@ public class SendOrderActivity extends BaseActivity {
 
                 } else {
                     // 预览图片
-                    Intent intent = new Intent(SendOrderActivity.this, ShowPictureActivity.class);
+                    Intent intent = new Intent(SendOrderActivity.this, ShowPictureProgressActivity.class);
                     ArrayList<String> imgInfo = new ArrayList<>();
                     for (int i = 0; i < addPicList.size(); i++) {
                         String bigImageUrl = addPicList.get(i).url;
@@ -89,8 +90,8 @@ public class SendOrderActivity extends BaseActivity {
                             imgInfo.add(addPicList.get(i).url);
                         }
                     }
-                    intent.putStringArrayListExtra(ShowPictureActivity.IMAGE_URLS, imgInfo);
-                    intent.putExtra(ShowPictureActivity.CURRENT_POSITION, position);
+                    intent.putStringArrayListExtra(ShowPictureProgressActivity.IMAGE_URLS, imgInfo);
+                    intent.putExtra(ShowPictureProgressActivity.CURRENT_POSITION, position);
                     startActivityForResult(intent, IMAGE_PREVIEW);
                 }
             }

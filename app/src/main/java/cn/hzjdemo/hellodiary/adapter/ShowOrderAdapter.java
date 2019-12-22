@@ -1,12 +1,13 @@
 package cn.hzjdemo.hellodiary.adapter;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.zenchn.picbrowserlib.pojo.ImageSourceInfo;
+import com.zenchn.picbrowserlib.ui.PictureBrowseActivity;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -16,7 +17,6 @@ import java.util.List;
 import cn.hzjdemo.hellodiary.Constants;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.bean.ShowOrderBean;
-import cn.hzjdemo.hellodiary.ui.activity.ShowPictureActivity;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.MultiImageView;
 import cn.hzjdemo.hellodiary.widgets.wechatcicleimage.entity.PhotoInfo;
 
@@ -43,22 +43,27 @@ public class ShowOrderAdapter extends CommonAdapter<ShowOrderBean> {
             MultiImageView nineLayout = holder.getView(R.id.gl_order_pics);
             final ArrayList<PhotoInfo> imageInfoList = new ArrayList<>();
             final List<String> imageDetails = showOrderBean.urlList;
-            if (imageDetails != null) {
-                for (String imageDetail : imageDetails) {
-                    PhotoInfo info = new PhotoInfo();
-                    info.url = imageDetail;//预览大图
-                    imageInfoList.add(info);
-                }
+            if (imageDetails == null) {
+                return;
             }
+            for (String imageDetail : imageDetails) {
+                PhotoInfo info = new PhotoInfo();
+                info.url = imageDetail;//预览大图
+                imageInfoList.add(info);
+            }
+            final ArrayList<ImageSourceInfo> imageSourceInfoArrayList = new ArrayList<>();
+            for (String url : imageDetails) {
+                ImageSourceInfo imageSourceInfo = new ImageSourceInfo(url, true);
+                imageSourceInfoArrayList.add(imageSourceInfo);
+            }
+
             nineLayout.setList(imageInfoList);
-            nineLayout.setOnItemClickListener(new MultiImageView.OnItemClickListener() {
-                @Override
-                public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(mContext, ShowPictureActivity.class);
-                    intent.putStringArrayListExtra(ShowPictureActivity.IMAGE_URLS, (ArrayList<String>) imageDetails);
-                    intent.putExtra(ShowPictureActivity.CURRENT_POSITION, position);
-                    mContext.startActivity(intent);
-                }
+            nineLayout.setOnItemClickListener((view, position1) -> {
+                /*Intent intent = new Intent(mContext, ShowPictureProgressActivity.class);
+                intent.putStringArrayListExtra(ShowPictureProgressActivity.IMAGE_URLS, (ArrayList<String>) imageDetails);
+                intent.putExtra(ShowPictureProgressActivity.CURRENT_POSITION, position1);
+                mContext.startActivity(intent);*/
+                PictureBrowseActivity.launch((Activity) mContext, imageSourceInfoArrayList, position);
             });
         } else {
             //没图片

@@ -1,15 +1,13 @@
 package com.zenchn.picbrowserlib.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.bm.library.PhotoView;
 import com.bumptech.glide.Glide;
@@ -20,9 +18,6 @@ import com.zenchn.picbrowserlib.pojo.ImageSourceInfo;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.PagerAdapter;
 
 /**
  * 作   者： by Hzj on 2017/12/18/018.
@@ -71,8 +66,6 @@ public class BigImageBrowserAdapter extends PagerAdapter {
                 .dontAnimate()
                 .error(R.drawable.default_no_pic)
                 .placeholder(R.drawable.default_no_pic)
-                //禁用内存缓存，避免oom
-                .skipMemoryCache(true)
                 //跳过磁盘缓存
                 .diskCacheStrategy(DiskCacheStrategy.NONE);
         Glide
@@ -81,12 +74,9 @@ public class BigImageBrowserAdapter extends PagerAdapter {
                 .apply(requestOptions)
                 .into(photoView);
 
-        photoView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnImageClickListener != null) {
-                    mOnImageClickListener.onImageClick();
-                }
+        photoView.setOnClickListener(v -> {
+            if (mOnImageClickListener != null) {
+                mOnImageClickListener.onImageClick();
             }
         });
 
@@ -105,22 +95,6 @@ public class BigImageBrowserAdapter extends PagerAdapter {
         if (photoView == null) {
             return;
         }
-
-        //及时释放资源
-        photoView.destroyDrawingCache();
-        Drawable drawable = photoView.getDrawable();
-        if (drawable instanceof BitmapDrawable) {
-            Bitmap bmp = ((BitmapDrawable) drawable).getBitmap();
-            if (bmp != null && !bmp.isRecycled()) {
-                ((ImageView) photoView).setImageBitmap(null);
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
-                    bmp.recycle();
-                }
-                bmp = null;
-                Log.d(TAG, "destroyItem: 我执行了");
-            }
-        }
-
         container.removeView(photoView);
     }
 
@@ -138,6 +112,13 @@ public class BigImageBrowserAdapter extends PagerAdapter {
             return POSITION_NONE;
         }
         return super.getItemPosition(object);
+    }
+
+    //---------------------------------Activity ondestroy调用释放资源-----------------
+    @SuppressLint("CheckResult")
+    public void destroy() {
+        //清理内存缓存
+        Glide.get(mContext).clearMemory();
     }
 
     //--------------------点击图片关闭--------------------

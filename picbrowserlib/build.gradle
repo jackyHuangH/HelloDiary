@@ -41,5 +41,6 @@ dependencies {
     implementation rootProject.ext.dependencies["glide_okhttp_integration"]
 
     implementation rootProject.ext.dependencies["photoview_smooth"]
-    implementation rootProject.ext.dependencies["progressmanager"]
+    api rootProject.ext.dependencies["subscaleImageView"]
+    api rootProject.ext.dependencies["progressmanager"]
 }

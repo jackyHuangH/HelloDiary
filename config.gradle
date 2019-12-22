@@ -118,6 +118,8 @@ ext {
             "eventbus"                  : 'org.greenrobot:eventbus:3.1.1',
 
             "photoview_smooth"          : "com.bm.photoview:library:1.4.1",
+            "subscaleImageView"         : 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0',
+
             "Android_Pickerview"        : 'com.contrarywind:Android-PickerView:4.1.8',
             //结合rxjava2使用
             "rxpermissions"             : "com.github.tbruyelle:rxpermissions:0.10.2",

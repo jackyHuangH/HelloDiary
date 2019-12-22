@@ -1,8 +1,12 @@
-package cn.hzjdemo.hellodiary.ui.activity;
+package cn.hzjdemo.hellodiary.ui.photoviewer;
 
 import android.annotation.SuppressLint;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
@@ -12,7 +16,6 @@ import com.zenchn.picbrowserlib.pojo.ImageSourceInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import cn.hzjdemo.hellodiary.R;
 import cn.hzjdemo.hellodiary.di.component.AppComponent;
@@ -23,7 +26,7 @@ import cn.hzjdemo.hellodiary.widgets.viewpager.BaseViewPager;
 /**
  * 左右滑动显示图片
  */
-public class ShowPictureActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
+public class ShowPictureProgressActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
     public static final String IMAGE_URLS = "imageUrls";
     public static final String CURRENT_POSITION = "currentPosition";
 
@@ -50,6 +53,7 @@ public class ShowPictureActivity extends BaseActivity implements ViewPager.OnPag
             info = new ImageSourceInfo(imageUrl, true);
             list.add(info);
         }
+        /* setUpPager(list);*/
 
         mViewPagerAdapter = new BigImageProgressAdapter(this, list);
         viewPager.addOnPageChangeListener(this);
@@ -58,12 +62,25 @@ public class ShowPictureActivity extends BaseActivity implements ViewPager.OnPag
         mViewPagerAdapter.notifyDataSetChanged();
         tvIndex.setText((currentPosition + 1) + "/" + imageUrls.size());
 
-        mViewPagerAdapter.setOnImageClickListener(new BigImageProgressAdapter.OnImageClickListener() {
+        mViewPagerAdapter.setOnImageClickListener(() -> onBackPressed());
+    }
+
+    private void setUpPager(ArrayList<ImageSourceInfo> list) {
+        FragmentStatePagerAdapter adapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {
             @Override
-            public void onImageClick() {
-                onBackPressed();
+            public Fragment getItem(int i) {
+                final ImageSourceInfo image = list.get(i);
+                return PhotoViewFragment.newInstance(image);
             }
-        });
+
+            @Override
+            public int getCount() {
+                return list.size();
+            }
+        };
+
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem((currentPosition >= list.size() || currentPosition <= 0) ? 0 : currentPosition);
     }
 
     @Override
